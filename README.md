@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+💻 Samaa Admin Dashboard (سماع)
+Samaa is an AI-powered audio recognition platform—essentially "Shazam for the Quran." It allows users to upload or record an audio snippet of a Quranic recitation and instantly identifies the Qari (reciter) with high accuracy using a custom Machine Learning ensemble model.
 
-## Getting Started
+This repository houses the Admin Dashboard, built with Next.js (App Router) and TypeScript. It acts as the central control room for the Samaa ecosystem.
 
-First, run the development server:
+🏗️ Architecture & Responsibilities
+This web application operates as the primary management interface within our 4-part microservice architecture. Rather than serving the end-user directly, it empowers administrators to orchestrate the platform's data:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+    Data Management (CRUD): Provides a secure, graphical interface to create, read, update, and delete Qari (reciter) profiles, biographies, and metadata.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    Asset Orchestration: Manages the upload and organization of reciter images and foundational audio tracks directly to the Express backend.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+    Analytics & Monitoring: Tracks user discovery histories, AI prediction confidence scores, and trending reciters synced from the PostgreSQL database.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    Ecosystem Seeding: Populates the backend with the critical, structured data that the React Native mobile client and Python AI engine rely on to function seamlessly.
 
-## Learn More
+🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+    Framework: Next.js 15 (App Router)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    Language: TypeScript
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    Styling: Tailwind CSS
 
-## Deploy on Vercel
+    UI Components: shadcn/ui & Radix UI Primitives
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    Forms & Validation: React Hook Form & Zod
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    Data Fetching: Axios
