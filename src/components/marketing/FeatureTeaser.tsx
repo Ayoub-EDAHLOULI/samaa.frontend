@@ -69,7 +69,7 @@ export default function FeatureTeaser() {
 
   return (
     /* Dark section — contrasts with the light HowItWorks above */
-    <section id="features" className="bg-[#070E1B] py-28">
+    <section id="features" className="bg-white dark:bg-[#070E1B] py-28">
       <div ref={ref} className="max-w-7xl mx-auto px-6 lg:px-8">
 
         {/* Heading */}
@@ -80,29 +80,29 @@ export default function FeatureTeaser() {
           className="max-w-xl mb-16"
         >
           <p className="text-sky-500 text-xs font-semibold tracking-widest uppercase mb-3">Features</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-snug">
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4 leading-snug">
             Built for the Muslim listener
           </h2>
-          <p className="text-white/40 text-base leading-relaxed">
+          <p className="text-slate-500 dark:text-white/40 text-base leading-relaxed">
             Every detail designed to deepen your relationship with the Quran.
           </p>
         </motion.div>
 
         {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-100 dark:bg-white/5 rounded-2xl overflow-hidden mb-12">
           {features.map((f, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: i * 0.07 }}
-              className="bg-[#070E1B] p-7 group hover:bg-white/2 transition-colors duration-300"
+              className="bg-white dark:bg-[#070E1B] p-7 group hover:bg-slate-50 dark:hover:bg-white/2 transition-colors duration-300"
             >
-              <div className="w-9 h-9 rounded-lg border border-white/8 flex items-center justify-center text-white/40 group-hover:text-sky-400 group-hover:border-sky-500/25 transition-all duration-300 mb-5">
+              <div className="w-9 h-9 rounded-lg border border-slate-100 dark:border-white/8 flex items-center justify-center text-slate-400 dark:text-white/40 group-hover:text-sky-500 group-hover:border-sky-200 dark:group-hover:text-sky-400 dark:group-hover:border-sky-500/25 transition-all duration-300 mb-5">
                 {f.icon}
               </div>
-              <h3 className="text-white font-semibold mb-2">{f.title}</h3>
-              <p className="text-white/40 text-sm leading-relaxed">{f.description}</p>
+              <h3 className="text-slate-900 dark:text-white font-semibold mb-2">{f.title}</h3>
+              <p className="text-slate-500 dark:text-white/40 text-sm leading-relaxed">{f.description}</p>
             </motion.div>
           ))}
         </div>
@@ -114,7 +114,7 @@ export default function FeatureTeaser() {
         >
           <Link
             href="/features"
-            className="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 text-sm font-medium transition-colors"
+            className="inline-flex items-center gap-2 text-sky-500 hover:text-sky-600 dark:text-sky-400 dark:hover:text-sky-300 text-sm font-medium transition-colors"
           >
             Explore all features
             <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">

@@ -23,7 +23,7 @@ function PhoneMockup() {
       <div className="absolute -inset-8 rounded-full bg-sky-500/8 blur-3xl" />
 
       {/* Shell */}
-      <div className="relative rounded-[40px] border border-white/10 bg-[#0D1525] shadow-2xl overflow-hidden">
+      <div className="relative rounded-[40px] border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0D1525] shadow-2xl overflow-hidden">
         {/* Notch */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-4 rounded-b-2xl bg-black z-10" />
 
@@ -43,10 +43,10 @@ function PhoneMockup() {
 
         {/* App content */}
         <div className="px-5 pb-9 pt-2">
-          <p className="text-center text-[9px] text-white/25 tracking-[0.2em] uppercase mb-1">
+          <p className="text-center text-[9px] text-slate-400 dark:text-white/25 tracking-[0.2em] uppercase mb-1">
             سماع
           </p>
-          <p className="text-center text-white/70 text-xs font-medium mb-6">
+          <p className="text-center text-slate-600 dark:text-white/70 text-xs font-medium mb-6">
             Samaa
           </p>
 
@@ -67,7 +67,7 @@ function PhoneMockup() {
                     height: `${tick ? h : Math.max(h * 0.5, 3)}px`,
                     backgroundColor: tick
                       ? `rgba(14,165,233,${0.5 + (h / 21) * 0.5})`
-                      : "rgba(255,255,255,0.15)",
+                      : "rgba(100,116,139,0.25)",
                     transitionDelay: `${i * 25}ms`,
                   }}
                 />
@@ -76,16 +76,16 @@ function PhoneMockup() {
           </div>
 
           {/* Result card */}
-          <div className="rounded-2xl border border-white/8 bg-white/5 p-3 mb-5">
+          <div className="rounded-2xl border border-slate-100 dark:border-white/8 bg-slate-50 dark:bg-white/5 p-3 mb-5">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-sky-500/15 border border-sky-500/20 flex items-center justify-center text-sm shrink-0">
                 🎙️
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-white/85 text-xs font-semibold truncate">
+                <p className="text-slate-800 dark:text-white/85 text-xs font-semibold truncate">
                   Mishary Rashid Alafasy
                 </p>
-                <p className="text-white/35 text-[10px]">
+                <p className="text-slate-400 dark:text-white/35 text-[10px]">
                   Al-Fatiha · 98% match
                 </p>
               </div>
@@ -135,17 +135,17 @@ function PhoneMockup() {
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[92vh] flex items-center overflow-hidden pt-20 bg-[#070E1B]">
+    <section className="relative min-h-[92vh] flex items-center overflow-hidden pt-20 bg-white dark:bg-[#070E1B]">
       {/* Very subtle dot grid */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
-          backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)`,
+          backgroundImage: `radial-gradient(circle, var(--dot-color, rgba(14,165,233,0.07)) 1px, transparent 1px)`,
           backgroundSize: "32px 32px",
         }}
       />
       {/* Single soft bloom — top right */}
-      <div className="pointer-events-none absolute top-0 right-0 w-175 h-125 bg-sky-500/5 blur-[140px] rounded-full" />
+      <div className="pointer-events-none absolute top-0 right-0 w-175 h-125 bg-sky-500/8 dark:bg-sky-500/5 blur-[140px] rounded-full" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 w-full py-16">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -167,13 +167,13 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.06 }}
-              className="text-5xl sm:text-6xl font-bold leading-[1.08] tracking-tight text-white mb-6"
+              className="text-5xl sm:text-6xl font-bold leading-[1.08] tracking-tight text-slate-900 dark:text-white mb-6"
             >
               Who is reciting
               <br />
               <span className="samaa-gradient-text">the Quran?</span>
               <br />
-              <span className="text-white/60 font-semibold">
+              <span className="text-slate-400 dark:text-white/60 font-semibold">
                 Find out instantly.
               </span>
             </motion.h1>
@@ -182,7 +182,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 0.12 }}
-              className="text-white/45 text-lg leading-relaxed mb-10 max-w-md"
+              className="text-slate-500 dark:text-white/45 text-lg leading-relaxed mb-10 max-w-md"
             >
               Samaa listens to any Quran recitation and identifies the Qari in
               under three seconds — powered by AI trained on hundreds of
@@ -203,7 +203,7 @@ export default function Hero() {
               </a>
               <Link
                 href="/demo"
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/12 text-white/70 hover:text-white hover:border-white/25 font-semibold text-sm transition-all duration-200"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-200 dark:border-white/12 text-slate-600 dark:text-white/70 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-white/25 font-semibold text-sm transition-all duration-200"
               >
                 Try the web demo
                 <svg
@@ -228,8 +228,8 @@ export default function Hero() {
             >
               {stats.map((s, i) => (
                 <div key={i}>
-                  <p className="text-2xl font-bold text-white">{s.value}</p>
-                  <p className="text-white/35 text-xs mt-0.5">{s.label}</p>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">{s.value}</p>
+                  <p className="text-slate-400 dark:text-white/35 text-xs mt-0.5">{s.label}</p>
                 </div>
               ))}
             </motion.div>

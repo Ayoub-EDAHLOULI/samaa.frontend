@@ -9,25 +9,25 @@ export default function DownloadCTA() {
 
   return (
     /* Dark section — back to dark after the light Reciters section */
-    <section id="download" className="bg-[#070E1B] py-28">
+    <section id="download" className="bg-slate-50 dark:bg-[#070E1B] py-28">
       <div ref={ref} className="max-w-4xl mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.55 }}
-          className="relative rounded-3xl border border-white/8 bg-[#0D1525] p-12 lg:p-16 text-center overflow-hidden"
+          className="relative rounded-3xl border border-slate-200 dark:border-white/8 bg-white dark:bg-[#0D1525] p-12 lg:p-16 text-center overflow-hidden shadow-sm"
         >
           {/* Top accent line */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-px bg-linear-to-r from-transparent via-sky-500/50 to-transparent" />
 
           <p className="text-3xl mb-5 select-none opacity-30">سماع</p>
 
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight">
+          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4 leading-tight">
             Start discovering
             <br />
             <span className="samaa-gradient-text">your reciters today.</span>
           </h2>
-          <p className="text-white/40 text-lg max-w-md mx-auto mb-10">
+          <p className="text-slate-500 dark:text-white/40 text-lg max-w-md mx-auto mb-10">
             Free to download. No account required. Identify your first reciter in seconds.
           </p>
 
@@ -48,7 +48,7 @@ export default function DownloadCTA() {
 
             <a
               href="#"
-              className="flex items-center justify-center gap-3 px-7 py-4 rounded-2xl border border-white/12 text-white font-semibold hover:border-white/25 hover:bg-white/4 transition-all duration-200"
+              className="flex items-center justify-center gap-3 px-7 py-4 rounded-2xl border border-slate-200 dark:border-white/12 text-slate-800 dark:text-white font-semibold hover:border-sky-300 dark:hover:border-white/25 hover:bg-sky-50 dark:hover:bg-white/4 transition-all duration-200"
             >
               <svg className="w-6 h-6 shrink-0" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M3.18 23.76a1.95 1.95 0 0 0 2.2-.43l.06-.06 12.34-7.13-2.7-2.7zM20.54 10.23a1.95 1.95 0 0 0 0 3.54l.03.02-12.4-7.16.07.04L20.57 10.2l-.03.03zM2.1.26A1.94 1.94 0 0 0 1.5 1.7v20.6c0 .56.23 1.07.6 1.44l.07.07L14.56 12l-.06-.06L2.17.33.1.26z"/>
