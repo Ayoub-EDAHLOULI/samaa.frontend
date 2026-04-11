@@ -9,6 +9,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -17,11 +18,13 @@
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar: var(--sidebar);
+
   --color-chart-5: var(--chart-5);
   --color-chart-4: var(--chart-4);
   --color-chart-3: var(--chart-3);
   --color-chart-2: var(--chart-2);
   --color-chart-1: var(--chart-1);
+
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -38,6 +41,7 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -46,10 +50,10 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  /* Samaa brand */
-  --color-samaa-blue: #0ea5e9;
-  --color-samaa-blue-dark: #0284c7;
-  --color-samaa-gold: #c9a845;
+  /* Premium Samaa Brand Colors */
+  --color-samaa-blue: #0ea5e9; /* Serene Light Azure */
+  --color-samaa-blue-dark: #0284c7; /* Deep Ocean Blue */
+  --color-samaa-gold: #d4af37; /* Classic Quranic Illumination Gold */
 
   @keyframes float {
     0%,
@@ -100,75 +104,79 @@
   }
 }
 
-/* ─── Light theme (default) ──────────────────────────────────────────── */
+/* ─── Light theme (Serene, Airy, Ivory hints) ────────────────────────── */
 :root {
-  --background: oklch(1 0 0); /* white */
-  --foreground: oklch(0.13 0.01 260); /* slate-900 */
+  --background: oklch(1 0 0); /* Pure white */
+  --foreground: oklch(0.2 0.02 250); /* Soft deep slate, not harsh black */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.13 0.01 260);
+  --card-foreground: oklch(0.2 0.02 250);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.13 0.01 260);
-  --primary: oklch(0.62 0.19 220); /* sky-500 */
+  --popover-foreground: oklch(0.2 0.02 250);
+  --primary: oklch(0.65 0.15 235); /* Serene Light Blue */
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.97 0.005 240); /* slate-50 */
-  --secondary-foreground: oklch(0.13 0.01 260);
-  --muted: oklch(0.97 0.005 240);
-  --muted-foreground: oklch(0.5 0.02 250); /* slate-500 */
-  --accent: oklch(0.95 0.01 220);
-  --accent-foreground: oklch(0.13 0.01 260);
+  --secondary: oklch(0.98 0.01 85); /* Warm Ivory/Parchment hint */
+  --secondary-foreground: oklch(0.2 0.02 250);
+  --muted: oklch(0.97 0.01 240);
+  --muted-foreground: oklch(0.55 0.03 250);
+  --accent: oklch(0.96 0.02 235);
+  --accent-foreground: oklch(0.2 0.02 250);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.9 0.01 250); /* slate-200 */
-  --input: oklch(0.9 0.01 250);
-  --ring: oklch(0.62 0.19 220);
-  --chart-1: oklch(0.62 0.19 220);
+  --border: oklch(0.92 0.02 240);
+  --input: oklch(0.92 0.02 240);
+  --ring: oklch(0.65 0.15 235);
+
+  --chart-1: oklch(0.65 0.15 235);
   --chart-2: oklch(0.55 0.18 195);
   --chart-3: oklch(0.75 0.14 55);
   --chart-4: oklch(0.58 0.2 270);
   --chart-5: oklch(0.55 0.22 30);
   --radius: 0.75rem;
-  --sidebar: oklch(0.97 0.005 240);
-  --sidebar-foreground: oklch(0.13 0.01 260);
-  --sidebar-primary: oklch(0.62 0.19 220);
+
+  --sidebar: oklch(0.98 0.01 85);
+  --sidebar-foreground: oklch(0.2 0.02 250);
+  --sidebar-primary: oklch(0.65 0.15 235);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.95 0.01 220);
-  --sidebar-accent-foreground: oklch(0.13 0.01 260);
-  --sidebar-border: oklch(0.9 0.01 250);
-  --sidebar-ring: oklch(0.62 0.19 220);
+  --sidebar-accent: oklch(0.96 0.02 235);
+  --sidebar-accent-foreground: oklch(0.2 0.02 250);
+  --sidebar-border: oklch(0.92 0.02 240);
+  --sidebar-ring: oklch(0.65 0.15 235);
 }
 
-/* ─── Dark theme (opt-in via .dark class from next-themes) ───────────── */
+/* ─── Dark theme (Deep Midnight Blue, Qiyam al-Layl vibe) ────────────── */
 .dark {
-  --background: oklch(0.11 0.015 260);
-  --foreground: oklch(0.97 0.005 220);
-  --card: oklch(0.15 0.015 260);
+  --background: oklch(0.14 0.03 250); /* Deep Midnight Blue */
+  --foreground: oklch(0.98 0.005 220); /* Off-white text */
+  --card: oklch(0.18 0.03 250); /* Slightly lighter midnight for cards */
   --card-foreground: oklch(0.95 0.005 220);
-  --popover: oklch(0.15 0.015 260);
+  --popover: oklch(0.18 0.03 250);
   --popover-foreground: oklch(0.95 0.005 220);
-  --primary: oklch(0.72 0.18 210);
-  --primary-foreground: oklch(0.1 0.015 260);
-  --secondary: oklch(0.18 0.015 260);
-  --secondary-foreground: oklch(0.95 0.005 220);
-  --muted: oklch(0.18 0.015 260);
-  --muted-foreground: oklch(0.6 0.02 240);
-  --accent: oklch(0.18 0.015 260);
-  --accent-foreground: oklch(0.95 0.005 220);
+  --primary: oklch(0.7 0.14 235); /* Bright Light Blue for contrast */
+  --primary-foreground: oklch(0.14 0.03 250);
+  --secondary: oklch(0.2 0.03 250);
+  --secondary-foreground: oklch(0.98 0.005 220);
+  --muted: oklch(0.2 0.03 250);
+  --muted-foreground: oklch(0.65 0.03 250);
+  --accent: oklch(0.22 0.04 250);
+  --accent-foreground: oklch(0.98 0.005 220);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.72 0.18 210);
-  --chart-1: oklch(0.72 0.18 210);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.7 0.14 235);
+
+  --chart-1: oklch(0.7 0.14 235);
   --chart-2: oklch(0.62 0.18 195);
   --chart-3: oklch(0.78 0.14 55);
   --chart-4: oklch(0.6 0.2 270);
   --chart-5: oklch(0.55 0.22 30);
-  --sidebar: oklch(0.15 0.015 260);
-  --sidebar-foreground: oklch(0.95 0.005 220);
-  --sidebar-primary: oklch(0.72 0.18 210);
-  --sidebar-primary-foreground: oklch(0.1 0.015 260);
-  --sidebar-accent: oklch(0.18 0.015 260);
-  --sidebar-accent-foreground: oklch(0.95 0.005 220);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.72 0.18 210);
+
+  --sidebar: oklch(0.14 0.03 250);
+  --sidebar-foreground: oklch(0.98 0.005 220);
+  --sidebar-primary: oklch(0.7 0.14 235);
+  --sidebar-primary-foreground: oklch(0.14 0.03 250);
+  --sidebar-accent: oklch(0.2 0.03 250);
+  --sidebar-accent-foreground: oklch(0.98 0.005 220);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.7 0.14 235);
 }
 
 /* ─── Base ────────────────────────────────────────────────────────────── */
@@ -186,9 +194,9 @@
 
 /* ─── Utilities ───────────────────────────────────────────────────────── */
 @layer utilities {
-  /* Gradient text */
+  /* Premium Islamic-inspired Gradient Text */
   .samaa-gradient-text {
-    background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 60%, #c9a845 100%);
+    background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 50%, #d4af37 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -196,7 +204,7 @@
 
   /* Shimmer text */
   .samaa-shimmer-text {
-    background: linear-gradient(90deg, #0ea5e9, #38bdf8, #0ea5e9);
+    background: linear-gradient(90deg, #0ea5e9, #d4af37, #0ea5e9);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -207,22 +215,22 @@
   /* Soft card shadow (light) */
   .card-shadow {
     box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.06),
-      0 4px 16px rgba(0, 0, 0, 0.06);
+      0 2px 8px rgba(14, 165, 233, 0.04),
+      0 8px 24px rgba(14, 165, 233, 0.06);
   }
   .card-shadow-md {
     box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.07),
-      0 8px 32px rgba(0, 0, 0, 0.07);
+      0 4px 12px rgba(14, 165, 233, 0.06),
+      0 12px 40px rgba(14, 165, 233, 0.08);
   }
 
-  /* Blue glow for buttons / icons */
+  /* Blue/Gold glow for buttons / icons */
   .blue-glow {
     box-shadow: 0 0 0 0 transparent;
-    transition: box-shadow 0.25s;
+    transition: box-shadow 0.3s ease;
   }
   .blue-glow:hover {
-    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.35);
+    box-shadow: 0 4px 24px rgba(14, 165, 233, 0.4);
   }
 
   /* Section dividers */
@@ -231,14 +239,14 @@
     background: linear-gradient(
       to right,
       transparent,
-      oklch(0.9 0.01 250),
+      var(--border),
       transparent
     );
   }
 
   /* Animations */
   .animate-float {
-    animation: float 5s ease-in-out infinite;
+    animation: float 6s ease-in-out infinite;
   }
   .animate-marquee {
     animation: marquee 40s linear infinite;
@@ -247,7 +255,7 @@
     animation: marquee-reverse 40s linear infinite;
   }
   .animate-fade-up {
-    animation: fade-up 0.6s ease both;
+    animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
   .animation-delay-100 {
