@@ -1,4 +1,3 @@
-// A generic interface to map your C# ApiResponse wrapper
 export interface ApiResponse<T> {
   success: boolean;
   message: string;

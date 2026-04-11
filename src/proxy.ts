@@ -17,7 +17,6 @@ export function proxy(request: NextRequest) {
 
   const token = request.cookies.get("accessToken")?.value;
   const isAuthRoute = pathWithoutLocale.startsWith("/login");
-  const isRootRoute = pathWithoutLocale === "/";
 
   // Check if it's a protected route
   const isProtectedRoute =
@@ -57,7 +56,7 @@ export function proxy(request: NextRequest) {
       if (pathWithoutLocale.startsWith("/agent") && !isAgent)
         return NextResponse.redirect(new URL("/login", request.url));
 
-      if (isRootRoute || isAuthRoute) {
+      if (isAuthRoute) {
         const locale =
           pathname.match(/^\/(en|fr|es|ary)/)?.[0] ||
           `/${routing.defaultLocale}`; // ✅ Updated
