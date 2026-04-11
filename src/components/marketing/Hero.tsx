@@ -18,7 +18,7 @@ function PhoneMockup() {
   }, []);
 
   return (
-    <div className="relative w-[240px] lg:w-[264px] mx-auto animate-float select-none">
+    <div className="relative w-60 lg:w-66 mx-auto animate-float select-none">
       {/* Subtle glow behind phone */}
       <div className="absolute -inset-8 rounded-full bg-sky-500/8 blur-3xl" />
 
@@ -32,27 +32,42 @@ function PhoneMockup() {
           <span className="text-[10px] text-white/30">9:41</span>
           <div className="flex gap-0.5 items-end h-3">
             {[2, 3, 4, 4].map((h, i) => (
-              <div key={i} className="w-1 rounded-sm bg-white/20" style={{ height: `${h * 3}px` }} />
+              <div
+                key={i}
+                className="w-1 rounded-sm bg-white/20"
+                style={{ height: `${h * 3}px` }}
+              />
             ))}
           </div>
         </div>
 
         {/* App content */}
         <div className="px-5 pb-9 pt-2">
-          <p className="text-center text-[9px] text-white/25 tracking-[0.2em] uppercase mb-1">سماع</p>
-          <p className="text-center text-white/70 text-xs font-medium mb-6">Samaa</p>
+          <p className="text-center text-[9px] text-white/25 tracking-[0.2em] uppercase mb-1">
+            سماع
+          </p>
+          <p className="text-center text-white/70 text-xs font-medium mb-6">
+            Samaa
+          </p>
 
           {/* Waveform */}
           <div className="relative h-24 flex items-center justify-center mb-5">
-            <div className={`absolute w-20 h-20 rounded-full bg-sky-500/10 transition-all duration-1000 ${tick ? "scale-[1.3]" : "scale-100"}`} />
-            <div className="relative flex items-end gap-[3px]">
-              {[3,5,8,6,11,14,10,7,13,17,21,16,18,14,10,11,8,6,4].map((h, i) => (
+            <div
+              className={`absolute w-20 h-20 rounded-full bg-sky-500/10 transition-all duration-1000 ${tick ? "scale-[1.3]" : "scale-100"}`}
+            />
+            <div className="relative flex items-end gap-0.75">
+              {[
+                3, 5, 8, 6, 11, 14, 10, 7, 13, 17, 21, 16, 18, 14, 10, 11, 8, 6,
+                4,
+              ].map((h, i) => (
                 <div
                   key={i}
-                  className="w-[3px] rounded-full transition-all duration-700"
+                  className="w-3px rounded-full transition-all duration-700"
                   style={{
                     height: `${tick ? h : Math.max(h * 0.5, 3)}px`,
-                    backgroundColor: tick ? `rgba(14,165,233,${0.5 + (h / 21) * 0.5})` : "rgba(255,255,255,0.15)",
+                    backgroundColor: tick
+                      ? `rgba(14,165,233,${0.5 + (h / 21) * 0.5})`
+                      : "rgba(255,255,255,0.15)",
                     transitionDelay: `${i * 25}ms`,
                   }}
                 />
@@ -63,14 +78,28 @@ function PhoneMockup() {
           {/* Result card */}
           <div className="rounded-2xl border border-white/8 bg-white/5 p-3 mb-5">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-sky-500/15 border border-sky-500/20 flex items-center justify-center text-sm flex-shrink-0">🎙️</div>
-              <div className="flex-1 min-w-0">
-                <p className="text-white/85 text-xs font-semibold truncate">Mishary Rashid Alafasy</p>
-                <p className="text-white/35 text-[10px]">Al-Fatiha · 98% match</p>
+              <div className="w-9 h-9 rounded-xl bg-sky-500/15 border border-sky-500/20 flex items-center justify-center text-sm shrink-0">
+                🎙️
               </div>
-              <div className="w-5 h-5 rounded-full bg-sky-500 flex items-center justify-center flex-shrink-0">
-                <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 6L9 17l-5-5"/>
+              <div className="flex-1 min-w-0">
+                <p className="text-white/85 text-xs font-semibold truncate">
+                  Mishary Rashid Alafasy
+                </p>
+                <p className="text-white/35 text-[10px]">
+                  Al-Fatiha · 98% match
+                </p>
+              </div>
+              <div className="w-5 h-5 rounded-full bg-sky-500 flex items-center justify-center shrink-0">
+                <svg
+                  className="w-3 h-3 text-white"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={3}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M20 6L9 17l-5-5" />
                 </svg>
               </div>
             </div>
@@ -81,11 +110,19 @@ function PhoneMockup() {
             <div className="relative">
               <div className="absolute inset-0 rounded-full bg-sky-500/20 blur-md scale-[1.6]" />
               <div className="relative w-11 h-11 rounded-full bg-sky-500 flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                  <line x1="12" y1="19" x2="12" y2="23"/>
-                  <line x1="8" y1="23" x2="16" y2="23"/>
+                <svg
+                  className="w-5 h-5 text-white"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                  <line x1="12" y1="19" x2="12" y2="23" />
+                  <line x1="8" y1="23" x2="16" y2="23" />
                 </svg>
               </div>
             </div>
@@ -108,7 +145,7 @@ export default function Hero() {
         }}
       />
       {/* Single soft bloom — top right */}
-      <div className="pointer-events-none absolute top-0 right-0 w-[700px] h-[500px] bg-sky-500/5 blur-[140px] rounded-full" />
+      <div className="pointer-events-none absolute top-0 right-0 w-175 h-125 bg-sky-500/5 blur-[140px] rounded-full" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 w-full py-16">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -121,7 +158,9 @@ export default function Hero() {
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-sky-500/20 bg-sky-500/8 mb-8"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-              <span className="text-sky-400 text-xs font-medium">AI-Powered Quran Recognition</span>
+              <span className="text-sky-400 text-xs font-medium">
+                AI-Powered Quran Recognition
+              </span>
             </motion.div>
 
             <motion.h1
@@ -134,7 +173,9 @@ export default function Hero() {
               <br />
               <span className="samaa-gradient-text">the Quran?</span>
               <br />
-              <span className="text-white/60 font-semibold">Find out instantly.</span>
+              <span className="text-white/60 font-semibold">
+                Find out instantly.
+              </span>
             </motion.h1>
 
             <motion.p
@@ -143,7 +184,9 @@ export default function Hero() {
               transition={{ duration: 0.45, delay: 0.12 }}
               className="text-white/45 text-lg leading-relaxed mb-10 max-w-md"
             >
-              Samaa listens to any Quran recitation and identifies the Qari in under three seconds — powered by AI trained on hundreds of reciters.
+              Samaa listens to any Quran recitation and identifies the Qari in
+              under three seconds — powered by AI trained on hundreds of
+              reciters.
             </motion.p>
 
             <motion.div
@@ -163,8 +206,16 @@ export default function Hero() {
                 className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/12 text-white/70 hover:text-white hover:border-white/25 font-semibold text-sm transition-all duration-200"
               >
                 Try the web demo
-                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                <svg
+                  className="w-3.5 h-3.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </Link>
             </motion.div>
