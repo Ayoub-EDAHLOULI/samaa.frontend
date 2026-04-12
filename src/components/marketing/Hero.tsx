@@ -10,125 +10,102 @@ const stats = [
   { value: "< 3s", label: "Recognition" },
 ];
 
-function PhoneMockup() {
-  const [tick, setTick] = useState(false);
+const BARS = [3,5,8,6,11,14,10,7,13,17,21,16,18,14,10,11,8,6,4,11,15,9,7,12];
+
+function ListenOrb() {
+  const [active, setActive] = useState(false);
+
   useEffect(() => {
-    const id = setInterval(() => setTick((v) => !v), 2200);
+    // Alternate every 2.4 s so the waveform "pulses"
+    const id = setInterval(() => setActive((v) => !v), 2400);
     return () => clearInterval(id);
   }, []);
 
   return (
-    <div className="relative w-60 lg:w-66 mx-auto animate-float select-none">
-      {/* Subtle glow behind phone */}
-      <div className="absolute -inset-8 rounded-full bg-sky-500/8 blur-3xl" />
+    <div className="relative flex items-center justify-center w-[340px] h-[340px] lg:w-[400px] lg:h-[400px] select-none">
 
-      {/* Shell */}
-      <div className="relative rounded-[40px] border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0D1525] shadow-2xl overflow-hidden">
-        {/* Notch */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-4 rounded-b-2xl bg-black z-10" />
+      {/* ── Outer atmospheric glow ── */}
+      <div className="absolute inset-0 rounded-full bg-sky-400/10 dark:bg-sky-400/6 blur-[80px]" />
 
-        {/* Status bar */}
-        <div className="flex justify-between items-center px-6 pt-5 pb-1">
-          <span className="text-[10px] text-white/30">9:41</span>
-          <div className="flex gap-0.5 items-end h-3">
-            {[2, 3, 4, 4].map((h, i) => (
-              <div
-                key={i}
-                className="w-1 rounded-sm bg-white/20"
-                style={{ height: `${h * 3}px` }}
-              />
-            ))}
-          </div>
+      {/* ── Concentric sonar rings ── */}
+      {[1, 0.72, 0.5].map((scale, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full border border-sky-400/20 dark:border-sky-400/15 transition-all duration-[1200ms]"
+          style={{
+            width:  `${scale * 100}%`,
+            height: `${scale * 100}%`,
+            transform: active ? `scale(${1 + i * 0.06})` : "scale(1)",
+            opacity: active ? 0.6 - i * 0.15 : 0.3 - i * 0.05,
+          }}
+        />
+      ))}
+
+      {/* ── Main circle ── */}
+      <div
+        className="absolute rounded-full border border-sky-400/30 dark:border-sky-400/20 bg-sky-50/60 dark:bg-sky-500/5 backdrop-blur-sm transition-all duration-[1200ms]"
+        style={{
+          width: "50%",
+          height: "50%",
+          transform: active ? "scale(1.05)" : "scale(1)",
+        }}
+      />
+
+      {/* ── Waveform bars (horizontal, centred) ── */}
+      <div className="absolute flex items-center gap-[3px]">
+        {BARS.map((h, i) => (
+          <div
+            key={i}
+            className="rounded-full transition-all duration-700"
+            style={{
+              width: "3px",
+              height: `${active ? h : Math.max(h * 0.45, 3)}px`,
+              backgroundColor: active
+                ? `rgba(14,165,233,${0.45 + (h / 21) * 0.55})`
+                : "rgba(148,163,184,0.35)",
+              transitionDelay: `${i * 22}ms`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* ── Centre mic button ── */}
+      <div className="relative z-10 flex flex-col items-center gap-3">
+        {/* Mic glow */}
+        <div className="absolute w-16 h-16 rounded-full bg-sky-400/30 dark:bg-sky-400/20 blur-xl" />
+        <div className="relative w-14 h-14 rounded-full bg-sky-500 shadow-lg shadow-sky-400/30 dark:shadow-sky-400/20 flex items-center justify-center">
+          <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="23"/>
+            <line x1="8" y1="23" x2="16" y2="23"/>
+          </svg>
         </div>
+      </div>
 
-        {/* App content */}
-        <div className="px-5 pb-9 pt-2">
-          <p className="text-center text-[9px] text-slate-400 dark:text-white/25 tracking-[0.2em] uppercase mb-1">
-            سماع
-          </p>
-          <p className="text-center text-slate-600 dark:text-white/70 text-xs font-medium mb-6">
-            Samaa
-          </p>
-
-          {/* Waveform */}
-          <div className="relative h-24 flex items-center justify-center mb-5">
-            <div
-              className={`absolute w-20 h-20 rounded-full bg-sky-500/10 transition-all duration-1000 ${tick ? "scale-[1.3]" : "scale-100"}`}
-            />
-            <div className="relative flex items-end gap-0.75">
-              {[
-                3, 5, 8, 6, 11, 14, 10, 7, 13, 17, 21, 16, 18, 14, 10, 11, 8, 6,
-                4,
-              ].map((h, i) => (
-                <div
-                  key={i}
-                  className="w-3px rounded-full transition-all duration-700"
-                  style={{
-                    height: `${tick ? h : Math.max(h * 0.5, 3)}px`,
-                    backgroundColor: tick
-                      ? `rgba(14,165,233,${0.5 + (h / 21) * 0.5})`
-                      : "rgba(100,116,139,0.25)",
-                    transitionDelay: `${i * 25}ms`,
-                  }}
-                />
-              ))}
-            </div>
+      {/* ── Result card (floats at bottom of orb) ── */}
+      <div
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[220px] rounded-2xl border border-slate-100 dark:border-white/10 bg-white/90 dark:bg-[#0D1525]/90 backdrop-blur-md shadow-lg px-4 py-3 transition-all duration-[1200ms]"
+        style={{ opacity: active ? 1 : 0.5 }}
+      >
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-xl bg-sky-500/15 border border-sky-500/20 flex items-center justify-center text-sm shrink-0">🎙️</div>
+          <div className="min-w-0">
+            <p className="text-slate-800 dark:text-white text-xs font-semibold truncate">Mishary Alafasy</p>
+            <p className="text-slate-400 dark:text-white/40 text-[10px]">Al-Fatiha · 98% match</p>
           </div>
-
-          {/* Result card */}
-          <div className="rounded-2xl border border-slate-100 dark:border-white/8 bg-slate-50 dark:bg-white/5 p-3 mb-5">
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-sky-500/15 border border-sky-500/20 flex items-center justify-center text-sm shrink-0">
-                🎙️
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-slate-800 dark:text-white/85 text-xs font-semibold truncate">
-                  Mishary Rashid Alafasy
-                </p>
-                <p className="text-slate-400 dark:text-white/35 text-[10px]">
-                  Al-Fatiha · 98% match
-                </p>
-              </div>
-              <div className="w-5 h-5 rounded-full bg-sky-500 flex items-center justify-center shrink-0">
-                <svg
-                  className="w-3 h-3 text-white"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={3}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          {/* Mic */}
-          <div className="flex justify-center">
-            <div className="relative">
-              <div className="absolute inset-0 rounded-full bg-sky-500/20 blur-md scale-[1.6]" />
-              <div className="relative w-11 h-11 rounded-full bg-sky-500 flex items-center justify-center">
-                <svg
-                  className="w-5 h-5 text-white"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-                  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-                  <line x1="12" y1="19" x2="12" y2="23" />
-                  <line x1="8" y1="23" x2="16" y2="23" />
-                </svg>
-              </div>
-            </div>
+          <div className="w-5 h-5 rounded-full bg-sky-500 flex items-center justify-center shrink-0 ml-auto">
+            <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
           </div>
         </div>
       </div>
+
+      {/* ── Arabic label (top) ── */}
+      <p className="absolute top-8 text-[10px] tracking-[0.25em] uppercase text-slate-400 dark:text-white/25 font-medium">
+        سماع · Listening
+      </p>
     </div>
   );
 }
@@ -242,7 +219,7 @@ export default function Hero() {
             transition={{ duration: 0.65, delay: 0.1, ease: "easeOut" }}
             className="flex justify-center lg:justify-end"
           >
-            <PhoneMockup />
+            <ListenOrb />
           </motion.div>
         </div>
       </div>

@@ -9,9 +9,9 @@ const links = {
   ],
   Company: [
     { label: "About", href: "/about" },
-    { label: "Blog", href: "#" },
-    { label: "Careers", href: "#" },
-    { label: "Contact", href: "#" },
+    { label: "Blog", href: "/blog" },
+    { label: "Careers", href: "/careers" },
+    { label: "Contact", href: "/contact" },
   ],
   Legal: [
     { label: "Privacy Policy", href: "#" },

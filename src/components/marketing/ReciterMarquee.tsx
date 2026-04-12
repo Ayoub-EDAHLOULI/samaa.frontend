@@ -27,9 +27,9 @@ const row2 = [...reciters.slice().reverse(), ...reciters.slice().reverse()];
 
 function Chip({ name, flag }: { name: string; flag: string }) {
   return (
-    <div className="shrink-0 flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-slate-100 bg-white shadow-sm">
+    <div className="shrink-0 flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-slate-100 dark:border-white/8 bg-white dark:bg-[#0A1628] shadow-sm">
       <span className="text-base leading-none">{flag}</span>
-      <span className="text-slate-700 text-sm font-medium whitespace-nowrap">{name}</span>
+      <span className="text-slate-700 dark:text-slate-300 text-sm font-medium whitespace-nowrap">{name}</span>
     </div>
   );
 }
@@ -40,7 +40,7 @@ export default function ReciterMarquee() {
 
   return (
     /* Light section — contrasts with the dark Features above */
-    <section id="reciters" className="bg-slate-50 border-y border-slate-100 py-24 overflow-hidden">
+    <section id="reciters" className="bg-slate-50 dark:bg-[#0D1525] border-y border-slate-100 dark:border-white/5 py-24 overflow-hidden">
       <div ref={ref} className="max-w-7xl mx-auto px-6 lg:px-8 mb-14">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -49,10 +49,10 @@ export default function ReciterMarquee() {
           className="max-w-xl"
         >
           <p className="text-sky-500 text-xs font-semibold tracking-widest uppercase mb-3">Reciter Database</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-3 leading-snug">
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-3 leading-snug">
             200+ Reciters recognized
           </h2>
-          <p className="text-slate-500 text-base leading-relaxed">
+          <p className="text-slate-500 dark:text-white/40 text-base leading-relaxed">
             From the Imams of the Grand Mosque to beloved contemporary voices worldwide.
           </p>
         </motion.div>
@@ -64,15 +64,15 @@ export default function ReciterMarquee() {
           <div className="flex gap-3 animate-marquee w-max">
             {row1.map((r, i) => <Chip key={`r1-${i}`} name={r.name} flag={r.flag} />)}
           </div>
-          <div className="absolute inset-y-0 left-0 w-20 bg-linear-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-20 bg-linear-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 left-0 w-20 bg-linear-to-r from-slate-50 dark:from-[#0D1525] to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-20 bg-linear-to-l from-slate-50 dark:from-[#0D1525] to-transparent z-10 pointer-events-none" />
         </div>
         <div className="relative">
           <div className="flex gap-3 animate-marquee-reverse w-max">
             {row2.map((r, i) => <Chip key={`r2-${i}`} name={r.name} flag={r.flag} />)}
           </div>
-          <div className="absolute inset-y-0 left-0 w-20 bg-linear-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-20 bg-linear-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 left-0 w-20 bg-linear-to-r from-slate-50 dark:from-[#0D1525] to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-20 bg-linear-to-l from-slate-50 dark:from-[#0D1525] to-transparent z-10 pointer-events-none" />
         </div>
       </div>
 
