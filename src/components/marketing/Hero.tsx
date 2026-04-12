@@ -60,7 +60,7 @@ function ListenOrb() {
               width: "3px",
               height: `${active ? h : Math.max(h * 0.45, 3)}px`,
               backgroundColor: active
-                ? `rgba(14,165,233,${0.45 + (h / 21) * 0.55})`
+                ? `rgba(16,185,129,${0.45 + (h / 21) * 0.55})`
                 : "rgba(148,163,184,0.35)",
               transitionDelay: `${i * 22}ms`,
             }}
@@ -146,7 +146,7 @@ export default function Hero() {
       <div
         className="pointer-events-none absolute inset-0"
         style={{
-          backgroundImage: `radial-gradient(circle, var(--dot-color, rgba(14,165,233,0.07)) 1px, transparent 1px)`,
+          backgroundImage: `radial-gradient(circle, var(--dot-color, rgba(16,185,129,0.07)) 1px, transparent 1px)`,
           backgroundSize: "32px 32px",
         }}
       />
