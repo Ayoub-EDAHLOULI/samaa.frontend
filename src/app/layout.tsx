@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import "./globals.css";
 
@@ -39,9 +39,15 @@ export default async function RootLayout({
   const initialTheme: "light" | "dark" =
     themeCookie === "light" ? "light" : "dark";
 
+  // next-intl middleware sets x-next-intl-locale on the request
+  const headersList = await headers();
+  const locale = headersList.get("x-next-intl-locale") ?? "fr";
+  const dir = locale === "ary" ? "rtl" : "ltr";
+
   return (
     <html
-      lang="en"
+      lang={locale}
+      dir={dir}
       className={`${geistSans.variable} ${geistMono.variable} ${initialTheme}`}
       suppressHydrationWarning
     >

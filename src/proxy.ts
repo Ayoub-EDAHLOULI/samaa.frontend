@@ -13,6 +13,7 @@ export function proxy(request: NextRequest) {
   // 3. Extract path and remove the locale prefix for Auth checking
   // Example: "/fr/admin/dashboard" becomes "/admin/dashboard"
   const pathname = request.nextUrl.pathname;
+
   const pathWithoutLocale = pathname.replace(/^\/(en|fr|es|ary)/, "") || "/"; // ✅ Updated
 
   const token = request.cookies.get("accessToken")?.value;

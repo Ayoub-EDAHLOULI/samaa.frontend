@@ -101,7 +101,7 @@ const categories: { label: string; value: Category }[] = [
 ];
 
 const tagColors: Record<string, string> = {
-  Technology: "bg-sky-50 text-sky-600 dark:bg-sky-900/30 dark:text-sky-400",
+  Technology: "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400",
   Quran:      "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400",
   Product:    "bg-violet-50 text-violet-600 dark:bg-violet-900/30 dark:text-violet-400",
   Community:  "bg-amber-50 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400",
@@ -129,7 +129,7 @@ function ArticleCard({ article, index }: { article: Article; index: number }) {
       </div>
 
       <div className="p-6">
-        <h3 className="text-slate-900 dark:text-white font-semibold text-base leading-snug mb-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors duration-200">
+        <h3 className="text-slate-900 dark:text-white font-semibold text-base leading-snug mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors duration-200">
           {article.title}
         </h3>
         <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-5 line-clamp-2">
@@ -137,7 +137,7 @@ function ArticleCard({ article, index }: { article: Article; index: number }) {
         </p>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-full bg-sky-500 flex items-center justify-center text-white text-[10px] font-bold">
+            <div className="w-7 h-7 rounded-full bg-emerald-500 flex items-center justify-center text-white text-[10px] font-bold">
               {article.author.avatar}
             </div>
             <div>
@@ -161,7 +161,7 @@ function FeaturedCard({ article }: { article: Article }) {
       className="group col-span-full rounded-2xl border border-slate-100 dark:border-white/8 bg-white dark:bg-[#0D1525] overflow-hidden hover:shadow-lg hover:border-slate-200 dark:hover:border-white/12 transition-all duration-300 cursor-pointer lg:grid lg:grid-cols-5"
     >
       {/* Thumbnail */}
-      <div className="lg:col-span-2 h-56 lg:h-auto bg-gradient-to-br from-sky-50 via-slate-50 to-slate-100 dark:from-[#0A1628] dark:via-[#0D1E38] dark:to-[#0A1628] relative overflow-hidden">
+      <div className="lg:col-span-2 h-56 lg:h-auto bg-gradient-to-br from-emerald-50 via-slate-50 to-slate-100 dark:from-[#0A1628] dark:via-[#0D1E38] dark:to-[#0A1628] relative overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="text-7xl opacity-10 select-none">سماع</span>
         </div>
@@ -171,13 +171,13 @@ function FeaturedCard({ article }: { article: Article }) {
           </span>
         </div>
         <div className="absolute bottom-5 left-5">
-          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-sky-500 text-white">Featured</span>
+          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500 text-white">Featured</span>
         </div>
       </div>
 
       {/* Content */}
       <div className="lg:col-span-3 p-8 flex flex-col justify-center">
-        <h3 className="text-slate-900 dark:text-white font-bold text-xl leading-snug mb-3 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors duration-200">
+        <h3 className="text-slate-900 dark:text-white font-bold text-xl leading-snug mb-3 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors duration-200">
           {article.title}
         </h3>
         <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">
@@ -185,7 +185,7 @@ function FeaturedCard({ article }: { article: Article }) {
         </p>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-sky-500 flex items-center justify-center text-white text-xs font-bold">
+            <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white text-xs font-bold">
               {article.author.avatar}
             </div>
             <div>
@@ -193,7 +193,7 @@ function FeaturedCard({ article }: { article: Article }) {
               <p className="text-slate-400 dark:text-slate-500 text-xs">{article.date} · {article.readTime}</p>
             </div>
           </div>
-          <div className="flex items-center gap-1 text-sky-500 dark:text-sky-400 text-sm font-medium group-hover:gap-2 transition-all duration-200">
+          <div className="flex items-center gap-1 text-emerald-500 dark:text-emerald-400 text-sm font-medium group-hover:gap-2 transition-all duration-200">
             Read more
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -222,7 +222,7 @@ export default function BlogPage() {
 
           {/* Header */}
           <div className="mb-14">
-            <p className="text-sky-500 dark:text-sky-400 text-xs font-semibold tracking-widest uppercase mb-3">Blog</p>
+            <p className="text-emerald-500 dark:text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-3">Blog</p>
             <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4 leading-tight">
               Stories, guides & updates
             </h1>
@@ -239,8 +239,8 @@ export default function BlogPage() {
                 onClick={() => setActive(cat.value)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                   active === cat.value
-                    ? "bg-sky-500 text-white shadow-sm"
-                    : "border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:border-sky-200 dark:hover:border-sky-800/60 hover:text-sky-600 dark:hover:text-sky-400 bg-white dark:bg-transparent"
+                    ? "bg-emerald-500 text-white shadow-sm"
+                    : "border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:border-emerald-200 dark:hover:border-emerald-800/60 hover:text-emerald-600 dark:hover:text-emerald-400 bg-white dark:bg-transparent"
                 }`}
               >
                 {cat.label}

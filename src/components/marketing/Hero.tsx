@@ -3,12 +3,9 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
-const stats = [
-  { value: "200+", label: "Reciters" },
-  { value: "98%", label: "Accuracy" },
-  { value: "< 3s", label: "Recognition" },
-];
+const STAT_VALUES = ["200+", "98%", "< 3s"] as const;
 
 const BARS = [3,5,8,6,11,14,10,7,13,17,21,16,18,14,10,11,8,6,4,11,15,9,7,12];
 
@@ -25,13 +22,13 @@ function ListenOrb() {
     <div className="relative flex items-center justify-center w-[340px] h-[340px] lg:w-[400px] lg:h-[400px] select-none">
 
       {/* ── Outer atmospheric glow ── */}
-      <div className="absolute inset-0 rounded-full bg-sky-400/10 dark:bg-sky-400/6 blur-[80px]" />
+      <div className="absolute inset-0 rounded-full bg-emerald-400/10 dark:bg-emerald-400/6 blur-[80px]" />
 
       {/* ── Concentric sonar rings ── */}
       {[1, 0.72, 0.5].map((scale, i) => (
         <div
           key={i}
-          className="absolute rounded-full border border-sky-400/20 dark:border-sky-400/15 transition-all duration-[1200ms]"
+          className="absolute rounded-full border border-emerald-400/20 dark:border-emerald-400/15 transition-all duration-[1200ms]"
           style={{
             width:  `${scale * 100}%`,
             height: `${scale * 100}%`,
@@ -43,7 +40,7 @@ function ListenOrb() {
 
       {/* ── Main circle ── */}
       <div
-        className="absolute rounded-full border border-sky-400/30 dark:border-sky-400/20 bg-sky-50/60 dark:bg-sky-500/5 backdrop-blur-sm transition-all duration-[1200ms]"
+        className="absolute rounded-full border border-emerald-400/30 dark:border-emerald-400/20 bg-emerald-50/60 dark:bg-emerald-500/5 backdrop-blur-sm transition-all duration-[1200ms]"
         style={{
           width: "50%",
           height: "50%",
@@ -72,8 +69,8 @@ function ListenOrb() {
       {/* ── Centre mic button ── */}
       <div className="relative z-10 flex flex-col items-center gap-3">
         {/* Mic glow */}
-        <div className="absolute w-16 h-16 rounded-full bg-sky-400/30 dark:bg-sky-400/20 blur-xl" />
-        <div className="relative w-14 h-14 rounded-full bg-sky-500 shadow-lg shadow-sky-400/30 dark:shadow-sky-400/20 flex items-center justify-center">
+        <div className="absolute w-16 h-16 rounded-full bg-emerald-400/30 dark:bg-emerald-400/20 blur-xl" />
+        <div className="relative w-14 h-14 rounded-full bg-emerald-500 shadow-lg shadow-emerald-400/30 dark:shadow-emerald-400/20 flex items-center justify-center">
           <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
             <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
@@ -89,12 +86,12 @@ function ListenOrb() {
         style={{ opacity: active ? 1 : 0.5 }}
       >
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-sky-500/15 border border-sky-500/20 flex items-center justify-center text-sm shrink-0">🎙️</div>
+          <div className="w-8 h-8 rounded-xl bg-emerald-500/15 border border-emerald-500/20 flex items-center justify-center text-sm shrink-0">🎙️</div>
           <div className="min-w-0">
             <p className="text-slate-800 dark:text-white text-xs font-semibold truncate">Mishary Alafasy</p>
             <p className="text-slate-400 dark:text-white/40 text-[10px]">Al-Fatiha · 98% match</p>
           </div>
-          <div className="w-5 h-5 rounded-full bg-sky-500 flex items-center justify-center shrink-0 ml-auto">
+          <div className="w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center shrink-0 ml-auto">
             <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
               <path d="M20 6L9 17l-5-5"/>
             </svg>
@@ -111,6 +108,14 @@ function ListenOrb() {
 }
 
 export default function Hero() {
+  const t = useTranslations("hero");
+
+  const stats = [
+    { value: STAT_VALUES[0], label: t("stats.reciters") },
+    { value: STAT_VALUES[1], label: t("stats.accuracy") },
+    { value: STAT_VALUES[2], label: t("stats.recognition") },
+  ];
+
   return (
     <section className="relative min-h-[92vh] flex items-center overflow-hidden pt-20 bg-white dark:bg-[#070E1B]">
       {/* Very subtle dot grid */}
@@ -122,7 +127,7 @@ export default function Hero() {
         }}
       />
       {/* Single soft bloom — top right */}
-      <div className="pointer-events-none absolute top-0 right-0 w-175 h-125 bg-sky-500/8 dark:bg-sky-500/5 blur-[140px] rounded-full" />
+      <div className="pointer-events-none absolute top-0 right-0 w-175 h-125 bg-emerald-500/8 dark:bg-emerald-500/5 blur-[140px] rounded-full" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 w-full py-16">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -132,11 +137,11 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-sky-500/20 bg-sky-500/8 mb-8"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/8 mb-8"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-              <span className="text-sky-400 text-xs font-medium">
-                AI-Powered Quran Recognition
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-emerald-400 text-xs font-medium">
+                {t("badge")}
               </span>
             </motion.div>
 
@@ -146,12 +151,12 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.06 }}
               className="text-5xl sm:text-6xl font-bold leading-[1.08] tracking-tight text-slate-900 dark:text-white mb-6"
             >
-              Who is reciting
+              {t("headline1")}
               <br />
-              <span className="samaa-gradient-text">the Quran?</span>
+              <span className="samaa-gradient-text">{t("headline2")}</span>
               <br />
               <span className="text-slate-400 dark:text-white/60 font-semibold">
-                Find out instantly.
+                {t("headline3")}
               </span>
             </motion.h1>
 
@@ -161,9 +166,7 @@ export default function Hero() {
               transition={{ duration: 0.45, delay: 0.12 }}
               className="text-slate-500 dark:text-white/45 text-lg leading-relaxed mb-10 max-w-md"
             >
-              Samaa listens to any Quran recitation and identifies the Qari in
-              under three seconds — powered by AI trained on hundreds of
-              reciters.
+              {t("description")}
             </motion.p>
 
             <motion.div
@@ -174,15 +177,15 @@ export default function Hero() {
             >
               <a
                 href="#download"
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-sky-500 hover:bg-sky-400 text-white font-semibold text-sm transition-colors duration-200 shadow-lg shadow-sky-500/20"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white font-semibold text-sm transition-colors duration-200 shadow-lg shadow-emerald-500/20"
               >
-                Download Free
+                {t("downloadFree")}
               </a>
               <Link
                 href="/demo"
                 className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-200 dark:border-white/12 text-slate-600 dark:text-white/70 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-white/25 font-semibold text-sm transition-all duration-200"
               >
-                Try the web demo
+                {t("webDemo")}
                 <svg
                   className="w-3.5 h-3.5"
                   viewBox="0 0 24 24"

@@ -1,1 +1,255 @@
-{}
+{
+  "nav": {
+    "features": "Características",
+    "howItWorks": "Cómo funciona",
+    "reciters": "Recitadores",
+    "demo": "Demo",
+    "more": "Más",
+    "blog": "Blog",
+    "about": "Sobre nosotros",
+    "careers": "Empleo",
+    "contact": "Contacto",
+    "signIn": "Iniciar sesión",
+    "getApp": "Descargar app"
+  },
+  "hero": {
+    "badge": "Reconocimiento del Corán por IA",
+    "headline1": "¿Quién recita",
+    "headline2": "el Corán?",
+    "headline3": "Descúbrelo al instante.",
+    "description": "Samaa escucha cualquier recitación del Corán e identifica al Qari en menos de tres segundos — impulsado por IA entrenada en cientos de recitadores.",
+    "downloadFree": "Descargar gratis",
+    "webDemo": "Probar la demo web",
+    "stats": {
+      "reciters": "Recitadores",
+      "accuracy": "Precisión",
+      "recognition": "Reconocimiento"
+    }
+  },
+  "howItWorks": {
+    "label": "Cómo funciona",
+    "title": "Tres pasos. Menos de tres segundos.",
+    "subtitle": "Sin conocimientos previos. Si puedes oírlo, Samaa puede nombrarlo.",
+    "steps": {
+      "step1": {
+        "title": "Graba una recitación",
+        "description": "Toca el micrófono y acerca tu teléfono a cualquier fuente — altavoz, TV o radio — que emita el Corán. Con unos segundos es suficiente."
+      },
+      "step2": {
+        "title": "La IA analiza la voz",
+        "description": "Nuestro modelo extrae huellas vocales únicas del audio y las compara con más de 200 recitadores en milisegundos."
+      },
+      "step3": {
+        "title": "Descubre al Qari",
+        "description": "Samaa te muestra el nombre del recitador y una puntuación de confianza. Guárdalo, compártelo o explora más de sus recitaciones."
+      }
+    }
+  },
+  "features": {
+    "label": "Características",
+    "title": "Diseñado para el oyente musulmán",
+    "subtitle": "Cada detalle diseñado para profundizar tu relación con el Corán.",
+    "exploreAll": "Explorar todas las características",
+    "items": {
+      "instant": {
+        "title": "Reconocimiento instantáneo",
+        "description": "Menos de 3 segundos desde el toque del micrófono hasta el nombre del recitador. Sin demoras ni esperas."
+      },
+      "reciters": {
+        "title": "Más de 200 recitadores",
+        "description": "Desde los Imames de La Meca hasta las voces contemporáneas más queridas — y creciendo mensualmente."
+      },
+      "confidence": {
+        "title": "Puntuación de confianza",
+        "description": "Cada resultado muestra qué tan seguro está Samaa. Los resultados por debajo del 60% se marcan como inciertos."
+      },
+      "privacy": {
+        "title": "Privacidad primero",
+        "description": "El audio se procesa en tiempo real y nunca se almacena en nuestros servidores. Tu escucha es tuya."
+      },
+      "history": {
+        "title": "Historial personal",
+        "description": "Cada identificación se guarda con marca de tiempo en tu línea de tiempo de descubrimientos."
+      },
+      "trending": {
+        "title": "Tendencias mundiales",
+        "description": "Descubre qué recitadores está escuchando y descubriendo más la Ummah en este momento."
+      }
+    }
+  },
+  "reciters": {
+    "label": "Base de datos de recitadores",
+    "title": "Más de 200 recitadores reconocidos",
+    "subtitle": "Desde los Imames de la Gran Mezquita hasta las voces contemporáneas más queridas en todo el mundo.",
+    "browseAll": "Ver todos los recitadores"
+  },
+  "download": {
+    "title": "Comienza a descubrir",
+    "titleAccent": "tus recitadores hoy.",
+    "subtitle": "Descarga gratuita. Sin cuenta requerida. Identifica a tu primer recitador en segundos.",
+    "downloadOn": "Descargar en",
+    "getItOn": "Disponible en",
+    "trust": {
+      "free": "Siempre gratis",
+      "noAds": "Sin anuncios",
+      "noTracking": "Sin rastreo"
+    }
+  },
+  "recitersPage": {
+    "label": "Base de datos",
+    "title": "Más de 200 recitadores y creciendo",
+    "subtitle": "Desde los Imames de la Masjid al-Haram hasta las voces contemporáneas más queridas — Samaa los conoce a todos.",
+    "popularLabel": "Más identificados",
+    "allLabel": "Todos los recitadores",
+    "moreText": "+ 180 recitadores más en la base de datos. Nuevas incorporaciones mensuales."
+  },
+  "aboutPage": {
+    "label": "Sobre nosotros",
+    "title": "La misión detrás de",
+    "titleAccent": "Samaa",
+    "subtitle": "Samaa (سماع) nació de una simple pregunta escuchada en millones de hogares musulmanes: \"¿Quién está recitando?\"",
+    "storyHeading": "Nuestra historia",
+    "storyP1": "Ya fuera un versículo en la radio, un video compartido en WhatsApp, o una recitación que llegaba de la casa de un vecino — identificar al Qari siempre ha requerido un conocimiento profundo o un momento de suerte. Samaa cambia eso.",
+    "storyP2": "Construimos un modelo de aprendizaje automático personalizado entrenado en cientos de recitadores — extrayendo huellas vocales únicas de MFCCs, Mel-Espectrogramas y características Chroma — y lo envolvimos en una experiencia tan sencilla como Shazam.",
+    "techHeading": "Nuestra tecnología",
+    "techP": "En su núcleo, Samaa utiliza un modelo de clasificación scikit-learn (servido vía FastAPI) que procesa fragmentos de audio cortos y devuelve un nombre de recitador con una puntuación de confianza. Solo se muestran a los usuarios los resultados con una confianza superior al 60%. El modelo se mejora continuamente a medida que crece nuestro conjunto de datos.",
+    "valuesHeading": "Nuestros valores",
+    "values": {
+      "privacy": { "label": "Privacidad primero", "text": "El audio se procesa de forma transitoria. Nunca almacenamos tus grabaciones." },
+      "accuracy": { "label": "Precisión sobre velocidad", "text": "Preferimos decir \"no sabemos\" antes que devolver una respuesta incorrecta." },
+      "free": { "label": "Gratis para la Ummah", "text": "La identificación básica siempre será gratuita. Sin anuncios, sin rastreo." }
+    }
+  },
+  "demoPage": {
+    "label": "Demo Web",
+    "title": "Prueba Samaa en tu navegador",
+    "subtitle": "Haz clic en el micrófono, acerca tu dispositivo a una recitación del Corán y deja que Samaa identifique al Qari en segundos.",
+    "tapToStart": "Toca para comenzar a escuchar",
+    "recording": "Grabando · 5 segundos",
+    "resultPlaceholder": "El resultado aparecerá aquí",
+    "awaiting": "Esperando grabación...",
+    "tipPrefix": "Para la mejor experiencia, descarga la",
+    "tipLink": "aplicación móvil",
+    "tipSuffix": "— funciona incluso con ruido de fondo."
+  },
+  "blogPage": {
+    "label": "Blog",
+    "title": "Historias, guías y novedades",
+    "subtitle": "Perspectivas sobre la recitación del Corán, tecnología de audio islámico y lo que estamos construyendo en Samaa.",
+    "categories": {
+      "all": "Todo",
+      "technology": "Tecnología",
+      "quran": "Corán",
+      "product": "Producto",
+      "community": "Comunidad"
+    },
+    "featured": "Destacado",
+    "readMore": "Leer más",
+    "noArticles": "No hay artículos en esta categoría todavía."
+  },
+  "careersPage": {
+    "label": "Empleo",
+    "title": "Construye tecnología para",
+    "titleAccent": "mil millones de musulmanes.",
+    "subtitle": "Somos un equipo pequeño y enfocado construyendo algo que nunca ha existido antes. Si te importa el Corán y amas crear grandes productos — sigue leyendo.",
+    "values": {
+      "mission": { "title": "Orientados a la misión", "description": "Cada línea de código sirve a la Ummah. Construimos tecnología que profundiza la relación entre los musulmanes y el Corán." },
+      "remote":  { "title": "Completamente remoto",   "description": "Nuestro equipo abarca varios continentes y zonas horarias. Trabaja desde donde mejor piensas." },
+      "privacy": { "title": "Privacidad por defecto", "description": "Nunca comprometemos la privacidad del usuario. Está integrada en cada decisión que tomamos como equipo." },
+      "impact":  { "title": "Impacto desde el inicio","description": "Darás forma a las decisiones clave del producto, no solo ejecutarás tareas. Tu trabajo será visto por los usuarios de inmediato." }
+    },
+    "openPositions": "Posiciones abiertas",
+    "openPositionsSubtitle": "Todos los roles son remotos. Damos la bienvenida a solicitantes de todo el mundo.",
+    "apply": "Postular",
+    "openApplication": "¿No ves tu rol listado? Siempre estamos interesados en personas excepcionales.",
+    "sendApplication": "Envíanos una solicitud abierta",
+    "roles": {
+      "ml":        { "title": "Ingeniero de Machine Learning",   "team": "IA e Investigación", "location": "Remoto",                 "type": "Tiempo completo", "description": "Gestiona el modelo de reconocimiento — mejora la precisión, amplía la base de datos de recitadores e investiga nuevas técnicas de extracción de características de audio." },
+      "rn":        { "title": "Desarrollador React Native",      "team": "Móvil",              "location": "Remoto",                 "type": "Tiempo completo", "description": "Construye la experiencia iOS y Android utilizada por miles de musulmanes diariamente. Serás responsable del flujo de grabación, animación y reconocimiento." },
+      "fullstack": { "title": "Ingeniero Full-Stack",            "team": "Plataforma",         "location": "Remoto",                 "type": "Tiempo completo", "description": "Construye y escala la puerta de enlace API, cuentas de usuario, historial de reconocimiento y panel de administración. Stack Node.js + Next.js." },
+      "content":   { "title": "Investigador de contenido islámico","team": "Contenido",        "location": "Remoto · Tiempo parcial","type": "Tiempo parcial",  "description": "Ayúdanos a ampliar nuestra base de datos de recitadores con datos biográficos precisos, estilos de recitación e información de cobertura de Suras." }
+    }
+  },
+  "contactPage": {
+    "label": "Contacto",
+    "title": "Ponte en contacto",
+    "subtitle": "¿Tienes una pregunta, un recitador que sugerir, o simplemente quieres decir السلام عليكم? Nos encantaría saber de ti.",
+    "topics": {
+      "general":     "Consulta general",
+      "support":     "Soporte de la app",
+      "reciter":     "Sugerir un recitador",
+      "partnership": "Asociación",
+      "press":       "Prensa y medios",
+      "careers":     "Empleo"
+    },
+    "form": {
+      "nameLabel":         "Tu nombre",
+      "namePlaceholder":   "Ahmad Al-Rashid",
+      "emailLabel":        "Correo electrónico",
+      "topicLabel":        "Tema",
+      "messageLabel":      "Mensaje",
+      "messagePlaceholder":"Cuéntanos qué tienes en mente...",
+      "submit":            "Enviar mensaje"
+    },
+    "success": {
+      "title":    "¡Mensaje enviado!",
+      "subtitle": "جزاك الله خيراً. Te responderemos en 1-2 días hábiles."
+    },
+    "otherWays": "Otras formas de contactarnos",
+    "cards": {
+      "email":   "Correo",
+      "support": "Soporte",
+      "twitter": "Twitter / X"
+    },
+    "responseTime": {
+      "label": "Tiempo de respuesta",
+      "text":  "Nos comprometemos a responder todos los mensajes en 24-48 horas en días hábiles. Las consultas de soporte tienen prioridad."
+    }
+  },
+  "featuresPage": {
+    "label": "Características",
+    "title": "Todo lo que Samaa puede hacer",
+    "subtitle": "Un análisis profundo de la tecnología y la experiencia detrás del primer identificador de recitadores del Corán del mundo.",
+    "sections": {
+      "recognition": {
+        "label": "Motor de reconocimiento",
+        "items": {
+          "fp":         { "title": "Huella vocal",                "description": "Extrae MFCCs, Mel-Spectrogramas y características Chroma para crear una firma acústica única para cada recitación." },
+          "speed":      { "title": "Resultados en menos de 3 s",  "description": "Nuestro modelo FastAPI está cargado en memoria sin arranques en frío. Del toque a la respuesta en menos de 3 segundos." },
+          "confidence": { "title": "Puntuación de confianza",     "description": "Cada resultado incluye un porcentaje de confianza. Los resultados por debajo del 60% se marcan como inciertos." },
+          "noise":      { "title": "Tolerancia al ruido",         "description": "Funciona incluso con ruido de fondo, leve eco o fuentes de audio de baja calidad." }
+        }
+      },
+      "app": {
+        "label": "Experiencia de la app",
+        "items": {
+          "history":  { "title": "Historial personal",       "description": "Cada identificación se guarda con marca de tiempo en tu cuenta para consulta posterior." },
+          "trending": { "title": "Recitadores en tendencia", "description": "Mira qué recitadores están siendo más identificados globalmente en tiempo real." },
+          "offline":  { "title": "Caché sin conexión",       "description": "Los recitadores identificados recientemente se almacenan localmente para reproducciones sin llamada de red." },
+          "share":    { "title": "Compartir descubrimientos","description": "Comparte una tarjeta de resultado directamente en WhatsApp, Instagram o cualquier app." }
+        }
+      }
+    }
+  },
+  "footer": {
+    "description": "El Shazam del Corán. Identifica a cualquier recitador al instante con el reconocimiento de voz por IA.",
+    "groups": {
+      "Product": "Producto",
+      "Company": "Empresa",
+      "Legal": "Legal"
+    },
+    "links": {
+      "features": "Características",
+      "howItWorks": "Cómo funciona",
+      "reciters": "Recitadores",
+      "demo": "Demo",
+      "about": "Sobre nosotros",
+      "blog": "Blog",
+      "careers": "Empleo",
+      "contact": "Contacto",
+      "privacy": "Política de privacidad",
+      "terms": "Términos de servicio"
+    },
+    "copyright": "© 2026 Samaa. Hecho con ♥ para la Ummah."
+  }
+}

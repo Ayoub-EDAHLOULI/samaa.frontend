@@ -51,8 +51,9 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 
   /* Premium Samaa Brand Colors */
-  --color-samaa-blue: #0ea5e9; /* Serene Light Azure */
-  --color-samaa-blue-dark: #0284c7; /* Deep Ocean Blue */
+  /* To revert to sky-blue: replace #10b981 → #0ea5e9, #059669 → #0284c7, #34d399 → #38bdf8, rgba(16,185,129 → rgba(14,165,233 */
+  --color-samaa-green: #10b981; /* Emerald — Islamic spiritual green */
+  --color-samaa-green-dark: #059669; /* Deep Emerald */
   --color-samaa-gold: #d4af37; /* Classic Quranic Illumination Gold */
 
   @keyframes float {
@@ -196,7 +197,7 @@
 @layer utilities {
   /* Premium Islamic-inspired Gradient Text */
   .samaa-gradient-text {
-    background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 50%, #d4af37 100%);
+    background: linear-gradient(135deg, #10b981 0%, #34d399 50%, #d4af37 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -204,7 +205,7 @@
 
   /* Shimmer text */
   .samaa-shimmer-text {
-    background: linear-gradient(90deg, #0ea5e9, #d4af37, #0ea5e9);
+    background: linear-gradient(90deg, #10b981, #d4af37, #10b981);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -215,22 +216,22 @@
   /* Soft card shadow (light) */
   .card-shadow {
     box-shadow:
-      0 2px 8px rgba(14, 165, 233, 0.04),
-      0 8px 24px rgba(14, 165, 233, 0.06);
+      0 2px 8px rgba(16, 185, 129, 0.04),
+      0 8px 24px rgba(16, 185, 129, 0.06);
   }
   .card-shadow-md {
     box-shadow:
-      0 4px 12px rgba(14, 165, 233, 0.06),
-      0 12px 40px rgba(14, 165, 233, 0.08);
+      0 4px 12px rgba(16, 185, 129, 0.06),
+      0 12px 40px rgba(16, 185, 129, 0.08);
   }
 
-  /* Blue/Gold glow for buttons / icons */
+  /* Emerald/Gold glow for buttons / icons */
   .blue-glow {
     box-shadow: 0 0 0 0 transparent;
     transition: box-shadow 0.3s ease;
   }
   .blue-glow:hover {
-    box-shadow: 0 4px 24px rgba(14, 165, 233, 0.4);
+    box-shadow: 0 4px 24px rgba(16, 185, 129, 0.4);
   }
 
   /* Section dividers */

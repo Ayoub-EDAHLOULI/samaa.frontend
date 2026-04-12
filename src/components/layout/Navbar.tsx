@@ -5,22 +5,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { useTheme } from "@/components/layout/ThemeProvider";
 
 /* ─── Config ─────────────────────────────────────────────────────────── */
-const navLinks = [
-  { label: "Features", href: "/features" },
-  { label: "How It Works", href: "/#how-it-works" },
-  { label: "Reciters", href: "/reciters" },
-  { label: "Demo", href: "/demo" },
-];
+const NAV_LINK_DEFS = [
+  { key: "features",   href: "/features" },
+  { key: "howItWorks", href: "/#how-it-works" },
+  { key: "reciters",   href: "/reciters" },
+  { key: "demo",       href: "/demo" },
+] as const;
 
-const moreLinks = [
-  { label: "Blog", href: "/blog" },
-  { label: "About", href: "/about" },
-  { label: "Careers", href: "/careers" },
-  { label: "Contact", href: "/contact" },
-];
+const MORE_LINK_DEFS = [
+  { key: "blog",     href: "/blog" },
+  { key: "about",    href: "/about" },
+  { key: "careers",  href: "/careers" },
+  { key: "contact",  href: "/contact" },
+] as const;
 
 const locales = [
   { code: "fr", label: "Français", countryCode: "fr" },
@@ -124,14 +125,14 @@ function LangSwitcher() {
                 onClick={() => switchLocale(locale.code)}
                 className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors duration-150 ${
                   locale.code === currentCode
-                    ? "text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-900/20"
+                    ? "text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20"
                     : "text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white/5"
                 }`}
               >
                 <FlagImg countryCode={locale.countryCode} />
                 <span className="font-medium">{locale.label}</span>
                 {locale.code === currentCode && (
-                  <svg className="w-3.5 h-3.5 ml-auto text-sky-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                  <svg className="w-3.5 h-3.5 ml-auto text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
                 )}
@@ -145,7 +146,9 @@ function LangSwitcher() {
 }
 
 /* ─── More dropdown ───────────────────────────────────────────────────── */
-function MoreDropdown({ pathWithoutLocale }: { pathWithoutLocale: string }) {
+type NavLink = { label: string; href: string };
+
+function MoreDropdown({ pathWithoutLocale, links, labelMore }: { pathWithoutLocale: string; links: NavLink[]; labelMore: string }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -157,7 +160,7 @@ function MoreDropdown({ pathWithoutLocale }: { pathWithoutLocale: string }) {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  const anyActive = moreLinks.some(
+  const anyActive = links.some(
     (l) => pathWithoutLocale === l.href || pathWithoutLocale.startsWith(l.href + "/")
   );
 
@@ -167,11 +170,11 @@ function MoreDropdown({ pathWithoutLocale }: { pathWithoutLocale: string }) {
         onClick={() => setOpen((v) => !v)}
         className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
           anyActive
-            ? "text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-900/25"
+            ? "text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/25"
             : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60"
         }`}
       >
-        More
+        {labelMore}
         <svg className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
           <path d="M6 9l6 6 6-6"/>
         </svg>
@@ -186,7 +189,7 @@ function MoreDropdown({ pathWithoutLocale }: { pathWithoutLocale: string }) {
             transition={{ duration: 0.15 }}
             className="absolute right-0 top-full mt-2 w-44 rounded-xl border border-slate-100 dark:border-white/10 bg-white dark:bg-[#0D1525] shadow-lg dark:shadow-black/40 overflow-hidden z-50"
           >
-            {moreLinks.map((link) => {
+            {links.map((link) => {
               const active =
                 pathWithoutLocale === link.href ||
                 pathWithoutLocale.startsWith(link.href + "/");
@@ -197,7 +200,7 @@ function MoreDropdown({ pathWithoutLocale }: { pathWithoutLocale: string }) {
                   onClick={() => setOpen(false)}
                   className={`flex items-center px-4 py-2.5 text-sm transition-colors duration-150 ${
                     active
-                      ? "text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-900/20"
+                      ? "text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20"
                       : "text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white/5"
                   }`}
                 >
@@ -217,6 +220,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const t = useTranslations("nav");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -225,6 +229,9 @@ export default function Navbar() {
   }, []);
 
   const pathWithoutLocale = pathname.replace(/^\/(en|fr|es|ary)/, "") || "/";
+
+  const navLinks = NAV_LINK_DEFS.map((d) => ({ label: t(d.key), href: d.href }));
+  const moreLinks = MORE_LINK_DEFS.map((d) => ({ label: t(d.key), href: d.href }));
 
   return (
     <motion.header
@@ -242,7 +249,7 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-            <div className="w-8 h-8 rounded-xl bg-sky-500 flex items-center justify-center shadow-sm group-hover:bg-sky-600 transition-colors duration-200">
+            <div className="w-8 h-8 rounded-xl bg-emerald-500 flex items-center justify-center shadow-sm group-hover:bg-emerald-600 transition-colors duration-200">
               <svg viewBox="0 0 24 24" fill="none" className="w-4.5 h-4.5 text-white" stroke="currentColor" strokeWidth={2.2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 19V6l12-3v13M9 19c0 1.1-1.34 2-3 2s-3-.9-3-2 1.34-2 3-2 3 .9 3 2zm12-3c0 1.1-1.34 2-3 2s-3-.9-3-2 1.34-2 3-2 3 .9 3 2zM9 10l12-3"/>
               </svg>
@@ -262,7 +269,7 @@ export default function Navbar() {
                   href={link.href}
                   className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                     active
-                      ? "text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-900/25"
+                      ? "text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/25"
                       : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60"
                   }`}
                 >
@@ -270,7 +277,7 @@ export default function Navbar() {
                 </Link>
               );
             })}
-            <MoreDropdown pathWithoutLocale={pathWithoutLocale} />
+            <MoreDropdown pathWithoutLocale={pathWithoutLocale} links={moreLinks} labelMore={t("more")} />
           </nav>
 
           {/* Right side */}
@@ -282,13 +289,13 @@ export default function Navbar() {
               href="/login"
               className="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/8 transition-all duration-200"
             >
-              Sign in
+              {t("signIn")}
             </Link>
             <a
               href="#download"
-              className="px-4 py-2 rounded-lg text-sm font-semibold bg-sky-500 hover:bg-sky-600 text-white transition-colors duration-200 shadow-sm"
+              className="px-4 py-2 rounded-lg text-sm font-semibold bg-emerald-500 hover:bg-emerald-600 text-white transition-colors duration-200 shadow-sm"
             >
-              Get the App
+              {t("getApp")}
             </a>
           </div>
 
@@ -335,10 +342,10 @@ export default function Navbar() {
               ))}
               <div className="mt-3 pt-3 border-t border-slate-100 dark:border-white/8 flex flex-col gap-2">
                 <Link href="/login" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400">
-                  Sign in
+                  {t("signIn")}
                 </Link>
-                <a href="#download" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 rounded-lg text-sm font-semibold bg-sky-500 text-white text-center">
-                  Get the App
+                <a href="#download" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 rounded-lg text-sm font-semibold bg-emerald-500 text-white text-center">
+                  {t("getApp")}
                 </a>
               </div>
             </div>
