@@ -18,12 +18,12 @@ function PhoneMockup() {
   }, []);
 
   return (
-    <div className="relative w-[260px] lg:w-[300px] mx-auto animate-float">
+    <div className="relative w-65 lg:w-75 mx-auto animate-float">
       {/* Outer glow halo */}
-      <div className="absolute inset-0 rounded-[44px] bg-gradient-to-b from-[#38BDF8]/20 to-[#1D4ED8]/10 blur-3xl scale-110" />
+      <div className="absolute inset-0 rounded-[44px] bg-linear-to-b from-[#38BDF8]/20 to-[#1D4ED8]/10 blur-3xl scale-110" />
 
       {/* Phone shell */}
-      <div className="relative rounded-[44px] border border-white/10 bg-gradient-to-b from-[#0A1628] to-[#040C18] shadow-2xl overflow-hidden">
+      <div className="relative rounded-[44px] border border-white/10 bg-linear-to-b from-[#0A1628] to-[#040C18] shadow-2xl overflow-hidden">
         {/* Status bar */}
         <div className="flex justify-between items-center px-6 pt-4 pb-2">
           <span className="text-[10px] text-white/40">9:41</span>
@@ -38,8 +38,18 @@ function PhoneMockup() {
                 />
               ))}
             </div>
-            <svg className="w-3 h-3 text-white/50" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M1.5 8.5a13 13 0 0121 0M5 12a10 10 0 0114 0M8.5 15.5a6 6 0 017 0M12 19h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none"/>
+            <svg
+              className="w-3 h-3 text-white/50"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M1.5 8.5a13 13 0 0121 0M5 12a10 10 0 0114 0M8.5 15.5a6 6 0 017 0M12 19h.01"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                fill="none"
+              />
             </svg>
           </div>
         </div>
@@ -48,7 +58,9 @@ function PhoneMockup() {
         <div className="px-5 pb-10 pt-2">
           {/* App header */}
           <div className="text-center mb-6">
-            <p className="text-[10px] text-white/30 tracking-widest uppercase">سماع</p>
+            <p className="text-[10px] text-white/30 tracking-widest uppercase">
+              سماع
+            </p>
             <p className="text-white text-xs font-semibold">Samaa</p>
           </div>
 
@@ -66,7 +78,10 @@ function PhoneMockup() {
             {/* Waveform bars */}
             <div className="relative flex items-center gap-0.5">
               {Array.from({ length: 28 }).map((_, i) => {
-                const base = [3, 5, 8, 6, 10, 14, 10, 7, 12, 16, 20, 16, 22, 18, 24, 18, 22, 16, 20, 14, 10, 12, 8, 10, 6, 8, 5, 3];
+                const base = [
+                  3, 5, 8, 6, 10, 14, 10, 7, 12, 16, 20, 16, 22, 18, 24, 18, 22,
+                  16, 20, 14, 10, 12, 8, 10, 6, 8, 5, 3,
+                ];
                 const h = base[i % base.length];
                 return (
                   <div
@@ -87,16 +102,31 @@ function PhoneMockup() {
           {/* Result card */}
           <div className="rounded-2xl bg-white/5 border border-white/10 p-3 mb-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#38BDF8]/20 to-[#1D4ED8]/20 border border-[#38BDF8]/20 flex items-center justify-center text-base">
+              <div className="w-10 h-10 rounded-xl bg-linear-to-b from-[#38BDF8]/20 to-[#1D4ED8]/20 border border-[#38BDF8]/20 flex items-center justify-center text-base">
                 🎙️
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-white text-xs font-semibold truncate">Mishary Rashid Alafasy</p>
-                <p className="text-white/40 text-[10px]">Surah Al-Fatiha · 98% match</p>
+                <p className="text-white text-xs font-semibold truncate">
+                  Mishary Rashid Alafasy
+                </p>
+                <p className="text-white/40 text-[10px]">
+                  Surah Al-Fatiha · 98% match
+                </p>
               </div>
               <div className="w-7 h-7 rounded-full bg-[#38BDF8]/20 flex items-center justify-center">
-                <svg className="w-3.5 h-3.5 text-[#38BDF8]" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg
+                  className="w-3.5 h-3.5 text-[#38BDF8]"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </div>
             </div>
@@ -106,12 +136,20 @@ function PhoneMockup() {
           <div className="flex justify-center">
             <div className="relative">
               <div className="absolute inset-0 rounded-full bg-[#38BDF8]/30 blur-md scale-150" />
-              <div className="relative w-12 h-12 rounded-full bg-gradient-to-br from-[#38BDF8] to-[#1D4ED8] flex items-center justify-center shadow-lg">
-                <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                  <line x1="12" y1="19" x2="12" y2="23"/>
-                  <line x1="8" y1="23" x2="16" y2="23"/>
+              <div className="relative w-12 h-12 rounded-full bg-linear-to-b from-[#38BDF8] to-[#1D4ED8] flex items-center justify-center shadow-lg">
+                <svg
+                  className="w-5 h-5 text-white"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                  <line x1="12" y1="19" x2="12" y2="23" />
+                  <line x1="8" y1="23" x2="16" y2="23" />
                 </svg>
               </div>
             </div>
@@ -132,9 +170,9 @@ export default function Hero() {
     >
       {/* Background blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] rounded-full bg-[#38BDF8]/6 blur-[120px] animate-blob" />
-        <div className="absolute top-[20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-[#1D4ED8]/8 blur-[100px] animate-blob animation-delay-2000" />
-        <div className="absolute bottom-[10%] left-[20%] w-[400px] h-[400px] rounded-full bg-[#C9A845]/4 blur-[100px] animate-blob animation-delay-4000" />
+        <div className="absolute top-[-10%] left-[-5%] w-150 h-150 rounded-full bg-[#38BDF8]/6 blur-[120px] animate-blob" />
+        <div className="absolute top-[20%] right-[-10%] w-125 h-125 rounded-full bg-[#1D4ED8]/8 blur-[100px] animate-blob animation-delay-2000" />
+        <div className="absolute bottom-[10%] left-[20%] w-100 h-100 rounded-full bg-[#C9A845]/4 blur-[100px] animate-blob animation-delay-4000" />
         {/* Grid pattern */}
         <div
           className="absolute inset-0 opacity-[0.03]"
@@ -182,7 +220,8 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-white/55 text-lg leading-relaxed mb-10 max-w-md"
             >
-              Hold your phone near any Quran recitation. Samaa identifies the Qari in seconds — like Shazam, but for the words of Allah.
+              Hold your phone near any Quran recitation. Samaa identifies the
+              Qari in seconds — like Shazam, but for the words of Allah.
             </motion.p>
 
             {/* CTA buttons */}
@@ -194,10 +233,14 @@ export default function Hero() {
             >
               <a
                 href="#download"
-                className="group flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#38BDF8] to-[#0EA5E9] text-[#040C18] font-semibold hover:shadow-xl hover:shadow-[#38BDF8]/25 transition-all duration-300 hover:scale-105"
+                className="group flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-linear-to-r from-[#38BDF8] to-[#0EA5E9] text-[#040C18] font-semibold hover:shadow-xl hover:shadow-[#38BDF8]/25 transition-all duration-300 hover:scale-105"
               >
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                <svg
+                  className="w-5 h-5"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
                 </svg>
                 Download for iOS
               </a>
@@ -205,8 +248,12 @@ export default function Hero() {
                 href="#download"
                 className="group flex items-center gap-3 px-6 py-3.5 rounded-2xl border border-white/15 text-white font-semibold hover:border-[#38BDF8]/40 hover:bg-[#38BDF8]/5 transition-all duration-300 hover:scale-105"
               >
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M3.18 23.76a1.95 1.95 0 0 0 2.2-.43l.06-.06 12.34-7.13-2.7-2.7zM20.54 10.23a1.95 1.95 0 0 0 0 3.54l.03.02-12.4-7.16.07.04L20.57 10.2l-.03.03zM2.1.26A1.94 1.94 0 0 0 1.5 1.7v20.6c0 .56.23 1.07.6 1.44l.07.07L14.56 12l-.06-.06L2.17.33.1.26z"/>
+                <svg
+                  className="w-5 h-5"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M3.18 23.76a1.95 1.95 0 0 0 2.2-.43l.06-.06 12.34-7.13-2.7-2.7zM20.54 10.23a1.95 1.95 0 0 0 0 3.54l.03.02-12.4-7.16.07.04L20.57 10.2l-.03.03zM2.1.26A1.94 1.94 0 0 0 1.5 1.7v20.6c0 .56.23 1.07.6 1.44l.07.07L14.56 12l-.06-.06L2.17.33.1.26z" />
                 </svg>
                 Get on Android
               </a>
@@ -221,7 +268,9 @@ export default function Hero() {
             >
               {stats.map((stat, i) => (
                 <div key={i}>
-                  <p className="text-2xl font-bold samaa-gradient-text">{stat.value}</p>
+                  <p className="text-2xl font-bold samaa-gradient-text">
+                    {stat.value}
+                  </p>
                   <p className="text-white/40 text-sm mt-0.5">{stat.label}</p>
                 </div>
               ))}
@@ -241,7 +290,7 @@ export default function Hero() {
       </div>
 
       {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#040C18] to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-[#040C18] to-transparent pointer-events-none" />
     </section>
   );
 }

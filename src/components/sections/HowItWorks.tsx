@@ -7,11 +7,19 @@ const steps = [
   {
     number: "01",
     icon: (
-      <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-        <line x1="12" y1="19" x2="12" y2="23"/>
-        <line x1="8" y1="23" x2="16" y2="23"/>
+      <svg
+        className="w-7 h-7"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+        <line x1="12" y1="19" x2="12" y2="23" />
+        <line x1="8" y1="23" x2="16" y2="23" />
       </svg>
     ),
     title: "Record a Recitation",
@@ -22,10 +30,18 @@ const steps = [
   {
     number: "02",
     icon: (
-      <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="11" cy="11" r="8"/>
-        <path d="m21 21-4.35-4.35"/>
-        <path d="M11 8v3l2 2"/>
+      <svg
+        className="w-7 h-7"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.35-4.35" />
+        <path d="M11 8v3l2 2" />
       </svg>
     ),
     title: "AI Analyzes the Audio",
@@ -36,8 +52,16 @@ const steps = [
   {
     number: "03",
     icon: (
-      <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+      <svg
+        className="w-7 h-7"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
       </svg>
     ),
     title: "Discover the Qari",
@@ -55,8 +79,8 @@ export default function HowItWorks() {
     <section id="how-it-works" className="relative py-28 overflow-hidden">
       {/* Section background accent */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#38BDF8]/20 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#38BDF8]/20 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-[#38BDF8]/20 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-[#38BDF8]/20 to-transparent" />
       </div>
 
       <div ref={ref} className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -75,14 +99,15 @@ export default function HowItWorks() {
             <span className="samaa-gradient-text">enlightenment</span>
           </h2>
           <p className="text-white/50 text-lg max-w-xl mx-auto">
-            From sound to identity in under three seconds — powered by machine learning trained on hundreds of reciters.
+            From sound to identity in under three seconds — powered by machine
+            learning trained on hundreds of reciters.
           </p>
         </motion.div>
 
         {/* Steps */}
         <div className="relative">
           {/* Connecting line (desktop) */}
-          <div className="hidden lg:block absolute top-1/2 left-[16.5%] right-[16.5%] h-px bg-gradient-to-r from-[#38BDF8]/30 via-[#06B6D4]/30 to-[#C9A845]/30 -translate-y-1/2" />
+          <div className="hidden lg:block absolute top-1/2 left-[16.5%] right-[16.5%] h-px bg-linear-to-r from-[#38BDF8]/30 via-[#06B6D4]/30 to-[#C9A845]/30 -translate-y-1/2" />
 
           <div className="grid lg:grid-cols-3 gap-8 lg:gap-6">
             {steps.map((step, i) => (
@@ -95,7 +120,7 @@ export default function HowItWorks() {
               >
                 <div className="glass-card rounded-3xl p-8 h-full hover:border-[#38BDF8]/25 transition-all duration-500 hover:-translate-y-1">
                   {/* Step number */}
-                  <div className="text-7xl font-black text-white/[0.04] absolute top-4 right-6 leading-none select-none">
+                  <div className="text-7xl font-black text-white/4 absolute top-4 right-6 leading-none select-none">
                     {step.number}
                   </div>
 
@@ -123,8 +148,12 @@ export default function HowItWorks() {
                     Step {step.number}
                   </div>
 
-                  <h3 className="text-xl font-bold text-white mb-4">{step.title}</h3>
-                  <p className="text-white/50 leading-relaxed text-sm">{step.description}</p>
+                  <h3 className="text-xl font-bold text-white mb-4">
+                    {step.title}
+                  </h3>
+                  <p className="text-white/50 leading-relaxed text-sm">
+                    {step.description}
+                  </p>
                 </div>
               </motion.div>
             ))}

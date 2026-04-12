@@ -22,7 +22,7 @@ function ListenOrb() {
   }, []);
 
   return (
-    <div className="relative flex items-center justify-center w-[340px] h-[340px] lg:w-[400px] lg:h-[400px] select-none">
+    <div className="relative flex items-center justify-center w-85 h-85 lg:w-100 lg:h-100 select-none">
       {/* ── Outer atmospheric glow ── */}
       <div className="absolute inset-0 rounded-full bg-emerald-400/10 dark:bg-emerald-400/6 blur-[80px]" />
 
@@ -30,7 +30,7 @@ function ListenOrb() {
       {[1, 0.72, 0.5].map((scale, i) => (
         <div
           key={i}
-          className="absolute rounded-full border border-emerald-400/20 dark:border-emerald-400/15 transition-all duration-[1200ms]"
+          className="absolute rounded-full border border-emerald-400/20 dark:border-emerald-400/15 transition-all duration-1200"
           style={{
             width: `${scale * 100}%`,
             height: `${scale * 100}%`,
@@ -42,7 +42,7 @@ function ListenOrb() {
 
       {/* ── Main circle ── */}
       <div
-        className="absolute rounded-full border border-emerald-400/30 dark:border-emerald-400/20 bg-emerald-50/60 dark:bg-emerald-500/5 backdrop-blur-sm transition-all duration-[1200ms]"
+        className="absolute rounded-full border border-emerald-400/30 dark:border-emerald-400/20 bg-emerald-50/60 dark:bg-emerald-500/5 backdrop-blur-sm transition-all duration-1200"
         style={{
           width: "50%",
           height: "50%",
@@ -51,7 +51,7 @@ function ListenOrb() {
       />
 
       {/* ── Waveform bars (horizontal, centred) ── */}
-      <div className="absolute flex items-center gap-[3px]">
+      <div className="absolute flex items-center gap-0.75">
         {BARS.map((h, i) => (
           <div
             key={i}
@@ -92,7 +92,7 @@ function ListenOrb() {
 
       {/* ── Result card (floats at bottom of orb) ── */}
       <div
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[220px] rounded-2xl border border-slate-100 dark:border-white/10 bg-white/90 dark:bg-[#0D1525]/90 backdrop-blur-md shadow-lg px-4 py-3 transition-all duration-[1200ms]"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 w-55 rounded-2xl border border-slate-100 dark:border-white/10 bg-white/90 dark:bg-[#0D1525]/90 backdrop-blur-md shadow-lg px-4 py-3 transition-all duration-1200"
         style={{ opacity: active ? 1 : 0.5 }}
       >
         <div className="flex items-center gap-3">

@@ -94,10 +94,14 @@ const articles: Article[] = [
 ];
 
 const tagColors: Record<string, string> = {
-  Technology: "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400",
-  Quran:      "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400",
-  Product:    "bg-violet-50 text-violet-600 dark:bg-violet-900/30 dark:text-violet-400",
-  Community:  "bg-amber-50 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400",
+  Technology:
+    "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400",
+  Quran:
+    "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400",
+  Product:
+    "bg-violet-50 text-violet-600 dark:bg-violet-900/30 dark:text-violet-400",
+  Community:
+    "bg-amber-50 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400",
 };
 
 /* ─── Components ─────────────────────────────────────────────────────── */
@@ -110,12 +114,14 @@ function ArticleCard({ article, index }: { article: Article; index: number }) {
       className="group rounded-2xl border border-slate-100 dark:border-white/8 bg-white dark:bg-[#0D1525] overflow-hidden hover:shadow-md hover:border-slate-200 dark:hover:border-white/12 transition-all duration-300 cursor-pointer"
     >
       {/* Thumbnail placeholder */}
-      <div className="h-44 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-[#0A1628] dark:to-[#111E35] relative overflow-hidden">
+      <div className="h-44 bg-linear-to-br from-slate-50 to-slate-100 dark:from-[#0A1628] dark:to-[#111E35] relative overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="text-5xl opacity-20 select-none">سماع</span>
         </div>
         <div className="absolute top-4 left-4">
-          <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${tagColors[article.tag] ?? ""}`}>
+          <span
+            className={`text-xs font-semibold px-2.5 py-1 rounded-full ${tagColors[article.tag] ?? ""}`}
+          >
             {article.tag}
           </span>
         </div>
@@ -134,18 +140,32 @@ function ArticleCard({ article, index }: { article: Article; index: number }) {
               {article.author.avatar}
             </div>
             <div>
-              <p className="text-slate-600 dark:text-slate-400 text-xs font-medium">{article.author.name}</p>
-              <p className="text-slate-400 dark:text-slate-500 text-[10px]">{article.date}</p>
+              <p className="text-slate-600 dark:text-slate-400 text-xs font-medium">
+                {article.author.name}
+              </p>
+              <p className="text-slate-400 dark:text-slate-500 text-[10px]">
+                {article.date}
+              </p>
             </div>
           </div>
-          <span className="text-slate-400 dark:text-slate-500 text-xs">{article.readTime}</span>
+          <span className="text-slate-400 dark:text-slate-500 text-xs">
+            {article.readTime}
+          </span>
         </div>
       </div>
     </motion.article>
   );
 }
 
-function FeaturedCard({ article, featuredLabel, readMoreLabel }: { article: Article; featuredLabel: string; readMoreLabel: string }) {
+function FeaturedCard({
+  article,
+  featuredLabel,
+  readMoreLabel,
+}: {
+  article: Article;
+  featuredLabel: string;
+  readMoreLabel: string;
+}) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
@@ -154,17 +174,21 @@ function FeaturedCard({ article, featuredLabel, readMoreLabel }: { article: Arti
       className="group col-span-full rounded-2xl border border-slate-100 dark:border-white/8 bg-white dark:bg-[#0D1525] overflow-hidden hover:shadow-lg hover:border-slate-200 dark:hover:border-white/12 transition-all duration-300 cursor-pointer lg:grid lg:grid-cols-5"
     >
       {/* Thumbnail */}
-      <div className="lg:col-span-2 h-56 lg:h-auto bg-gradient-to-br from-emerald-50 via-slate-50 to-slate-100 dark:from-[#0A1628] dark:via-[#0D1E38] dark:to-[#0A1628] relative overflow-hidden">
+      <div className="lg:col-span-2 h-56 lg:h-auto bg-linear-to-br from-emerald-50 via-slate-50 to-slate-100 dark:from-[#0A1628] dark:via-[#0D1E38] dark:to-[#0A1628] relative overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="text-7xl opacity-10 select-none">سماع</span>
         </div>
         <div className="absolute top-5 left-5">
-          <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${tagColors[article.tag] ?? ""}`}>
+          <span
+            className={`text-xs font-semibold px-2.5 py-1 rounded-full ${tagColors[article.tag] ?? ""}`}
+          >
             {article.tag}
           </span>
         </div>
         <div className="absolute bottom-5 left-5">
-          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500 text-white">{featuredLabel}</span>
+          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500 text-white">
+            {featuredLabel}
+          </span>
         </div>
       </div>
 
@@ -182,14 +206,26 @@ function FeaturedCard({ article, featuredLabel, readMoreLabel }: { article: Arti
               {article.author.avatar}
             </div>
             <div>
-              <p className="text-slate-700 dark:text-slate-300 text-sm font-medium">{article.author.name}</p>
-              <p className="text-slate-400 dark:text-slate-500 text-xs">{article.date} · {article.readTime}</p>
+              <p className="text-slate-700 dark:text-slate-300 text-sm font-medium">
+                {article.author.name}
+              </p>
+              <p className="text-slate-400 dark:text-slate-500 text-xs">
+                {article.date} · {article.readTime}
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-1 text-emerald-500 dark:text-emerald-400 text-sm font-medium group-hover:gap-2 transition-all duration-200">
             {readMoreLabel}
-            <svg className="w-4 h-4 rtl:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
+            <svg
+              className="w-4 h-4 rtl:rotate-180"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </div>
         </div>
@@ -203,23 +239,34 @@ export default function BlogPage() {
   const t = useTranslations("blogPage");
   const [active, setActive] = useState<Category>("all");
 
-  const CATEGORY_KEYS: Category[] = ["all", "technology", "quran", "product", "community"];
-  const categories = CATEGORY_KEYS.map((key) => ({ label: t(`categories.${key}`), value: key }));
+  const CATEGORY_KEYS: Category[] = [
+    "all",
+    "technology",
+    "quran",
+    "product",
+    "community",
+  ];
+  const categories = CATEGORY_KEYS.map((key) => ({
+    label: t(`categories.${key}`),
+    value: key,
+  }));
 
   const featured = articles.filter((a) => a.featured);
-  const filtered = active === "all"
-    ? articles.filter((a) => !a.featured)
-    : articles.filter((a) => a.category === active && !a.featured);
+  const filtered =
+    active === "all"
+      ? articles.filter((a) => !a.featured)
+      : articles.filter((a) => a.category === active && !a.featured);
 
   return (
     <>
       <Navbar />
       <main className="min-h-screen bg-white dark:bg-[#070E1B] pt-24 pb-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-
           {/* Header */}
           <div className="mb-14">
-            <p className="text-emerald-500 dark:text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-3">{t("label")}</p>
+            <p className="text-emerald-500 dark:text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-3">
+              {t("label")}
+            </p>
             <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4 leading-tight">
               {t("title")}
             </h1>

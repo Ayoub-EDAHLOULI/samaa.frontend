@@ -5,23 +5,24 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Careers — Samaa",
-  description: "Join the team building the world's first AI-powered Quran reciter identification platform.",
+  description:
+    "Join the team building the world's first AI-powered Quran reciter identification platform.",
 };
 
 const ROLE_KEYS = ["ml", "rn", "fullstack", "content"] as const;
 const ROLE_SKILLS: Record<string, string[]> = {
-  ml:        ["Python", "scikit-learn", "PyTorch", "FastAPI", "librosa"],
-  rn:        ["React Native", "Expo", "TypeScript", "Reanimated"],
+  ml: ["Python", "scikit-learn", "PyTorch", "FastAPI", "librosa"],
+  rn: ["React Native", "Expo", "TypeScript", "Reanimated"],
   fullstack: ["Node.js", "Next.js", "PostgreSQL", "Prisma", "TypeScript"],
-  content:   ["Arabic", "Quran knowledge", "Research", "Data entry"],
+  content: ["Arabic", "Quran knowledge", "Research", "Data entry"],
 };
 
 const VALUE_KEYS = ["mission", "remote", "privacy", "impact"] as const;
 const VALUE_ICONS: Record<string, string> = {
   mission: "🕌",
-  remote:  "🌍",
+  remote: "🌍",
   privacy: "🔒",
-  impact:  "📈",
+  impact: "📈",
 };
 
 export default async function CareersPage() {
@@ -49,10 +50,11 @@ export default async function CareersPage() {
       <Navbar />
       <main className="min-h-screen bg-white dark:bg-[#070E1B] pt-24 pb-20">
         <div className="max-w-5xl mx-auto px-6 lg:px-8">
-
           {/* Header */}
           <div className="mb-20">
-            <p className="text-emerald-500 dark:text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-3">{t("label")}</p>
+            <p className="text-emerald-500 dark:text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-3">
+              {t("label")}
+            </p>
             <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-5 leading-tight">
               {t("title")}
               <br />
@@ -71,16 +73,24 @@ export default async function CareersPage() {
                 className="rounded-2xl border border-slate-100 dark:border-white/8 bg-slate-50 dark:bg-[#0D1525] p-6"
               >
                 <span className="text-2xl mb-4 block">{v.icon}</span>
-                <h3 className="text-slate-900 dark:text-white font-semibold mb-2">{v.title}</h3>
-                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{v.description}</p>
+                <h3 className="text-slate-900 dark:text-white font-semibold mb-2">
+                  {v.title}
+                </h3>
+                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                  {v.description}
+                </p>
               </div>
             ))}
           </div>
 
           {/* Open roles */}
           <div>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{t("openPositions")}</h2>
-            <p className="text-slate-500 dark:text-slate-400 text-sm mb-8">{t("openPositionsSubtitle")}</p>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+              {t("openPositions")}
+            </h2>
+            <p className="text-slate-500 dark:text-slate-400 text-sm mb-8">
+              {t("openPositionsSubtitle")}
+            </p>
 
             <div className="space-y-4">
               {openRoles.map((role) => (
@@ -140,8 +150,16 @@ export default async function CareersPage() {
                 className="inline-flex items-center gap-2 text-emerald-500 hover:text-emerald-600 dark:text-emerald-400 dark:hover:text-emerald-300 font-semibold text-sm transition-colors"
               >
                 {t("sendApplication")}
-                <svg className="w-4 h-4 rtl:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                <svg
+                  className="w-4 h-4 rtl:rotate-180"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </a>
             </div>

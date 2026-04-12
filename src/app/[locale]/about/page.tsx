@@ -5,7 +5,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About — Samaa",
-  description: "Learn about the mission, technology, and team behind Samaa — the AI-powered Quran reciter identifier.",
+  description:
+    "Learn about the mission, technology, and team behind Samaa — the AI-powered Quran reciter identifier.",
 };
 
 export default async function AboutPage() {
@@ -17,7 +18,9 @@ export default async function AboutPage() {
       <main className="min-h-screen bg-white dark:bg-slate-950 pt-24 pb-16">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <div className="mb-16">
-            <p className="text-emerald-500 dark:text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-3">{t("label")}</p>
+            <p className="text-emerald-500 dark:text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-3">
+              {t("label")}
+            </p>
             <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
               {t("title")}{" "}
               <span className="samaa-gradient-text">{t("titleAccent")}</span>
@@ -37,9 +40,18 @@ export default async function AboutPage() {
 
             <h2>{t("valuesHeading")}</h2>
             <ul>
-              <li><strong>{t("values.privacy.label")}</strong> — {t("values.privacy.text")}</li>
-              <li><strong>{t("values.accuracy.label")}</strong> — {t("values.accuracy.text")}</li>
-              <li><strong>{t("values.free.label")}</strong> — {t("values.free.text")}</li>
+              <li>
+                <strong>{t("values.privacy.label")}</strong> —{" "}
+                {t("values.privacy.text")}
+              </li>
+              <li>
+                <strong>{t("values.accuracy.label")}</strong> —{" "}
+                {t("values.accuracy.text")}
+              </li>
+              <li>
+                <strong>{t("values.free.label")}</strong> —{" "}
+                {t("values.free.text")}
+              </li>
             </ul>
           </div>
         </div>

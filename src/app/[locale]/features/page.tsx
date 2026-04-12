@@ -6,7 +6,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Features — Samaa",
-  description: "Explore all features of Samaa: instant Quran reciter recognition, confidence scores, history, 200+ reciters, and more.",
+  description:
+    "Explore all features of Samaa: instant Quran reciter recognition, confidence scores, history, 200+ reciters, and more.",
 };
 
 const SECTION_KEYS = ["recognition", "app"] as const;
@@ -53,9 +54,16 @@ export default async function FeaturesPage() {
                 </h2>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {section.items.map((item) => (
-                    <div key={item.title} className="rounded-2xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 p-6">
-                      <h3 className="text-slate-900 dark:text-white font-semibold mb-2">{item.title}</h3>
-                      <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{item.description}</p>
+                    <div
+                      key={item.title}
+                      className="rounded-2xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 p-6"
+                    >
+                      <h3 className="text-slate-900 dark:text-white font-semibold mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                        {item.description}
+                      </p>
                     </div>
                   ))}
                 </div>

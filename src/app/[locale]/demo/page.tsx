@@ -12,7 +12,9 @@ export default function DemoPage() {
       <Navbar />
       <main className="min-h-screen bg-white dark:bg-slate-950 pt-24 pb-16">
         <div className="max-w-2xl mx-auto px-6 lg:px-8 text-center">
-          <p className="text-emerald-500 dark:text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-4">{t("label")}</p>
+          <p className="text-emerald-500 dark:text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-4">
+            {t("label")}
+          </p>
           <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-5">
             {t("title")}
           </h1>
@@ -26,26 +28,44 @@ export default function DemoPage() {
             <div className="relative">
               <div className="absolute inset-0 rounded-full bg-emerald-400/20 scale-150 blur-xl" />
               <button className="relative w-20 h-20 rounded-full bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white shadow-lg shadow-emerald-200 dark:shadow-emerald-900/40 transition-all duration-200 flex items-center justify-center">
-                <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                  <line x1="12" y1="19" x2="12" y2="23"/>
-                  <line x1="8" y1="23" x2="16" y2="23"/>
+                <svg
+                  className="w-8 h-8"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.8}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                  <line x1="12" y1="19" x2="12" y2="23" />
+                  <line x1="8" y1="23" x2="16" y2="23" />
                 </svg>
               </button>
             </div>
 
             <div>
-              <p className="text-slate-900 dark:text-white font-semibold">{t("tapToStart")}</p>
-              <p className="text-slate-400 dark:text-slate-500 text-sm mt-1">{t("recording")}</p>
+              <p className="text-slate-900 dark:text-white font-semibold">
+                {t("tapToStart")}
+              </p>
+              <p className="text-slate-400 dark:text-slate-500 text-sm mt-1">
+                {t("recording")}
+              </p>
             </div>
 
             <div className="w-full max-w-xs rounded-2xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-950 p-4 text-left">
-              <p className="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-wide mb-3">{t("resultPlaceholder")}</p>
+              <p className="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-wide mb-3">
+                {t("resultPlaceholder")}
+              </p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-lg">🎙️</div>
+                <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-lg">
+                  🎙️
+                </div>
                 <div>
-                  <p className="text-slate-400 dark:text-slate-500 text-sm">{t("awaiting")}</p>
+                  <p className="text-slate-400 dark:text-slate-500 text-sm">
+                    {t("awaiting")}
+                  </p>
                 </div>
               </div>
             </div>
@@ -53,8 +73,13 @@ export default function DemoPage() {
 
           <p className="text-slate-400 dark:text-slate-500 text-sm mt-6">
             {t("tipPrefix")}{" "}
-            <a href="#download" className="text-emerald-500 hover:text-emerald-600 font-medium">{t("tipLink")}</a>
-            {" "}{t("tipSuffix")}
+            <a
+              href="#download"
+              className="text-emerald-500 hover:text-emerald-600 font-medium"
+            >
+              {t("tipLink")}
+            </a>{" "}
+            {t("tipSuffix")}
           </p>
         </div>
       </main>

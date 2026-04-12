@@ -18,7 +18,15 @@ export const metadata: Metadata = {
   title: "Samaa — Identify Any Quran Reciter Instantly",
   description:
     "Samaa (سماع) is the Shazam for Quran. Record any recitation and discover the reciter in seconds using AI-powered voice recognition.",
-  keywords: ["Quran", "reciter", "Qari", "Islamic app", "audio recognition", "Samaa", "سماع"],
+  keywords: [
+    "Quran",
+    "reciter",
+    "Qari",
+    "Islamic app",
+    "audio recognition",
+    "Samaa",
+    "سماع",
+  ],
   authors: [{ name: "Samaa" }],
   openGraph: {
     title: "Samaa — Identify Any Quran Reciter Instantly",
@@ -52,9 +60,7 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground antialiased">
-        <ThemeProvider initialTheme={initialTheme}>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider initialTheme={initialTheme}>{children}</ThemeProvider>
       </body>
     </html>
   );

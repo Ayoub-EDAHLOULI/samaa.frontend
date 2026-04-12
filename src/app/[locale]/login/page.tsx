@@ -12,7 +12,7 @@ const BARS = [
 
 function WaveformDecor() {
   return (
-    <div className="flex items-end gap-[3px] opacity-30">
+    <div className="flex items-end gap-0.75 opacity-30">
       {BARS.map((h, i) => (
         <div
           key={i}
@@ -49,8 +49,8 @@ export default function LoginPage() {
       {/* ── Left panel — branding ── */}
       <div className="hidden lg:flex lg:w-[52%] relative bg-[#070E1B] flex-col justify-between p-12 overflow-hidden">
         {/* Background blobs */}
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-emerald-500/8 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-emerald-400/6 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3 pointer-events-none" />
+        <div className="absolute top-0 left-0 w-125 h-125 bg-emerald-500/8 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-100 h-100 bg-emerald-400/6 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3 pointer-events-none" />
 
         {/* Dot grid */}
         <div
@@ -224,7 +224,7 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
-                  className="absolute inset-y-0 end-0 px-4 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-white/60 transition-colors"
+                  className="absolute inset-y-0 inset-e-0 px-4 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-white/60 transition-colors"
                   tabIndex={-1}
                 >
                   {showPassword ? (

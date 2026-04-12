@@ -32,8 +32,8 @@ const row2 = [...reciters.slice(10), ...reciters.slice(10)];
 
 function ReciterCard({ reciter }: { reciter: (typeof reciters)[0] }) {
   return (
-    <div className="flex-shrink-0 flex items-center gap-3 px-5 py-3.5 rounded-2xl glass-card border-[#38BDF8]/10 hover:border-[#38BDF8]/25 transition-colors duration-300 cursor-default group">
-      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#38BDF8]/20 to-[#1D4ED8]/10 border border-[#38BDF8]/15 flex items-center justify-center text-xl">
+    <div className="shrink-0 flex items-center gap-3 px-5 py-3.5 rounded-2xl glass-card border-[#38BDF8]/10 hover:border-[#38BDF8]/25 transition-colors duration-300 cursor-default group">
+      <div className="w-10 h-10 rounded-xl bg-linear-to-br from-[#38BDF8]/20 to-[#1D4ED8]/10 border border-[#38BDF8]/15 flex items-center justify-center text-xl">
         {reciter.country}
       </div>
       <div>
@@ -54,9 +54,9 @@ export default function Reciters() {
     <section id="reciters" className="relative py-28 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#38BDF8]/20 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#38BDF8]/20 to-transparent" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[#38BDF8]/3 rounded-full blur-[120px]" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-[#38BDF8]/20 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-[#38BDF8]/20 to-transparent" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-175 h-100 bg-[#38BDF8]/3 rounded-full blur-[120px]" />
       </div>
 
       <div ref={ref} className="max-w-7xl mx-auto px-6 lg:px-8 mb-16">
@@ -74,7 +74,8 @@ export default function Reciters() {
             <span className="samaa-gradient-text">200+ Reciters</span>
           </h2>
           <p className="text-white/50 text-lg max-w-xl mx-auto">
-            From the great Sheikhs of Makkah and Madinah to beloved contemporary voices — Samaa knows them all.
+            From the great Sheikhs of Makkah and Madinah to beloved contemporary
+            voices — Samaa knows them all.
           </p>
         </motion.div>
       </div>
@@ -89,8 +90,8 @@ export default function Reciters() {
             ))}
           </div>
           {/* Edge fades */}
-          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#040C18] to-transparent pointer-events-none z-10" />
-          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#040C18] to-transparent pointer-events-none z-10" />
+          <div className="absolute inset-y-0 left-0 w-32 bg-linear-to-r from-[#040C18] to-transparent pointer-events-none z-10" />
+          <div className="absolute inset-y-0 right-0 w-32 bg-linear-to-l from-[#040C18] to-transparent pointer-events-none z-10" />
         </div>
 
         {/* Row 2 — right to left */}
@@ -100,8 +101,8 @@ export default function Reciters() {
               <ReciterCard key={`r2-${i}`} reciter={r} />
             ))}
           </div>
-          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#040C18] to-transparent pointer-events-none z-10" />
-          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#040C18] to-transparent pointer-events-none z-10" />
+          <div className="absolute inset-y-0 left-0 w-32 bg-linear-to-r from-[#040C18] to-transparent pointer-events-none z-10" />
+          <div className="absolute inset-y-0 right-0 w-32 bg-linear-to-l from-[#040C18] to-transparent pointer-events-none z-10" />
         </div>
       </div>
 
