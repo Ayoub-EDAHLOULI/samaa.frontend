@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { useTranslations } from "next-intl";
 
 /* ─── Types ──────────────────────────────────────────────────────────── */
 type Category = "all" | "technology" | "quran" | "product" | "community";
@@ -92,14 +93,6 @@ const articles: Article[] = [
   },
 ];
 
-const categories: { label: string; value: Category }[] = [
-  { label: "All", value: "all" },
-  { label: "Technology", value: "technology" },
-  { label: "Quran", value: "quran" },
-  { label: "Product", value: "product" },
-  { label: "Community", value: "community" },
-];
-
 const tagColors: Record<string, string> = {
   Technology: "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400",
   Quran:      "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400",
@@ -152,7 +145,7 @@ function ArticleCard({ article, index }: { article: Article; index: number }) {
   );
 }
 
-function FeaturedCard({ article }: { article: Article }) {
+function FeaturedCard({ article, featuredLabel, readMoreLabel }: { article: Article; featuredLabel: string; readMoreLabel: string }) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
@@ -171,7 +164,7 @@ function FeaturedCard({ article }: { article: Article }) {
           </span>
         </div>
         <div className="absolute bottom-5 left-5">
-          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500 text-white">Featured</span>
+          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500 text-white">{featuredLabel}</span>
         </div>
       </div>
 
@@ -194,8 +187,8 @@ function FeaturedCard({ article }: { article: Article }) {
             </div>
           </div>
           <div className="flex items-center gap-1 text-emerald-500 dark:text-emerald-400 text-sm font-medium group-hover:gap-2 transition-all duration-200">
-            Read more
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+            {readMoreLabel}
+            <svg className="w-4 h-4 rtl:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </div>
@@ -207,7 +200,11 @@ function FeaturedCard({ article }: { article: Article }) {
 
 /* ─── Page ────────────────────────────────────────────────────────────── */
 export default function BlogPage() {
+  const t = useTranslations("blogPage");
   const [active, setActive] = useState<Category>("all");
+
+  const CATEGORY_KEYS: Category[] = ["all", "technology", "quran", "product", "community"];
+  const categories = CATEGORY_KEYS.map((key) => ({ label: t(`categories.${key}`), value: key }));
 
   const featured = articles.filter((a) => a.featured);
   const filtered = active === "all"
@@ -222,12 +219,12 @@ export default function BlogPage() {
 
           {/* Header */}
           <div className="mb-14">
-            <p className="text-emerald-500 dark:text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-3">Blog</p>
+            <p className="text-emerald-500 dark:text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-3">{t("label")}</p>
             <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4 leading-tight">
-              Stories, guides & updates
+              {t("title")}
             </h1>
             <p className="text-slate-500 dark:text-slate-400 text-lg max-w-lg">
-              Insights on Quran recitation, Islamic audio technology, and what we're building at Samaa.
+              {t("subtitle")}
             </p>
           </div>
 
@@ -252,7 +249,12 @@ export default function BlogPage() {
           {active === "all" && featured.length > 0 && (
             <div className="grid gap-5 mb-5">
               {featured.map((a) => (
-                <FeaturedCard key={a.slug} article={a} />
+                <FeaturedCard
+                  key={a.slug}
+                  article={a}
+                  featuredLabel={t("featured")}
+                  readMoreLabel={t("readMore")}
+                />
               ))}
             </div>
           )}
@@ -266,7 +268,7 @@ export default function BlogPage() {
             </div>
           ) : (
             <div className="text-center py-20 text-slate-400 dark:text-slate-500">
-              No articles in this category yet.
+              {t("noArticles")}
             </div>
           )}
         </div>

@@ -231,6 +231,28 @@
       }
     }
   },
+  "loginPage": {
+    "brandHeadline1": "Qui récite",
+    "brandHeadline2": "le Coran ?",
+    "brandSubtitle": "Identification de récitants par IA, utilisée par des milliers de musulmans dans le monde.",
+    "statReciters": "Récitants",
+    "statAccuracy": "Précision",
+    "statSpeed": "Reconnaissance",
+    "quote": "Je sais enfin qui récite sur Al Jazeera chaque soir. Samaa me l'a dit en 2 secondes.",
+    "quoteAuthor": "Utilisateur Samaa · Maroc",
+    "title": "Bon retour",
+    "subtitle": "Connectez-vous à votre compte Samaa pour continuer.",
+    "emailLabel": "Adresse e-mail",
+    "emailPlaceholder": "ahmad@exemple.com",
+    "passwordLabel": "Mot de passe",
+    "forgotPassword": "Mot de passe oublié ?",
+    "rememberMe": "Se souvenir de moi pendant 30 jours",
+    "signIn": "Se connecter",
+    "signingIn": "Connexion…",
+    "or": "ou",
+    "continueGoogle": "Continuer avec Google",
+    "footerNote": "En vous connectant, vous acceptez nos Conditions d'utilisation et notre Politique de confidentialité."
+  },
   "footer": {
     "description": "Le Shazam du Coran. Identifiez n'importe quel récitant instantanément grâce à la reconnaissance vocale par IA.",
     "groups": {

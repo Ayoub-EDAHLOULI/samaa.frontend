@@ -231,6 +231,28 @@
       }
     }
   },
+  "loginPage": {
+    "brandHeadline1": "¿Quién está recitando",
+    "brandHeadline2": "el Corán?",
+    "brandSubtitle": "Identificación de recitadores con IA, de confianza para miles de musulmanes en todo el mundo.",
+    "statReciters": "Recitadores",
+    "statAccuracy": "Precisión",
+    "statSpeed": "Reconocimiento",
+    "quote": "Por fin sé quién recita en Al Jazeera cada noche. Samaa me lo dijo en 2 segundos.",
+    "quoteAuthor": "Usuario de Samaa · Marruecos",
+    "title": "Bienvenido de nuevo",
+    "subtitle": "Inicia sesión en tu cuenta Samaa para continuar.",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "ahmad@ejemplo.com",
+    "passwordLabel": "Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "rememberMe": "Recuérdame durante 30 días",
+    "signIn": "Iniciar sesión",
+    "signingIn": "Iniciando sesión…",
+    "or": "o",
+    "continueGoogle": "Continuar con Google",
+    "footerNote": "Al iniciar sesión aceptas nuestros Términos de servicio y Política de privacidad."
+  },
   "footer": {
     "description": "El Shazam del Corán. Identifica a cualquier recitador al instante con el reconocimiento de voz por IA.",
     "groups": {

@@ -7,7 +7,10 @@ import { useTranslations } from "next-intl";
 
 const STAT_VALUES = ["200+", "98%", "< 3s"] as const;
 
-const BARS = [3,5,8,6,11,14,10,7,13,17,21,16,18,14,10,11,8,6,4,11,15,9,7,12];
+const BARS = [
+  3, 5, 8, 6, 11, 14, 10, 7, 13, 17, 21, 16, 18, 14, 10, 11, 8, 6, 4, 11, 15, 9,
+  7, 12,
+];
 
 function ListenOrb() {
   const [active, setActive] = useState(false);
@@ -20,7 +23,6 @@ function ListenOrb() {
 
   return (
     <div className="relative flex items-center justify-center w-[340px] h-[340px] lg:w-[400px] lg:h-[400px] select-none">
-
       {/* ── Outer atmospheric glow ── */}
       <div className="absolute inset-0 rounded-full bg-emerald-400/10 dark:bg-emerald-400/6 blur-[80px]" />
 
@@ -30,7 +32,7 @@ function ListenOrb() {
           key={i}
           className="absolute rounded-full border border-emerald-400/20 dark:border-emerald-400/15 transition-all duration-[1200ms]"
           style={{
-            width:  `${scale * 100}%`,
+            width: `${scale * 100}%`,
             height: `${scale * 100}%`,
             transform: active ? `scale(${1 + i * 0.06})` : "scale(1)",
             opacity: active ? 0.6 - i * 0.15 : 0.3 - i * 0.05,
@@ -71,11 +73,19 @@ function ListenOrb() {
         {/* Mic glow */}
         <div className="absolute w-16 h-16 rounded-full bg-emerald-400/30 dark:bg-emerald-400/20 blur-xl" />
         <div className="relative w-14 h-14 rounded-full bg-emerald-500 shadow-lg shadow-emerald-400/30 dark:shadow-emerald-400/20 flex items-center justify-center">
-          <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-            <line x1="12" y1="19" x2="12" y2="23"/>
-            <line x1="8" y1="23" x2="16" y2="23"/>
+          <svg
+            className="w-6 h-6 text-white"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+            <line x1="12" y1="19" x2="12" y2="23" />
+            <line x1="8" y1="23" x2="16" y2="23" />
           </svg>
         </div>
       </div>
@@ -86,14 +96,28 @@ function ListenOrb() {
         style={{ opacity: active ? 1 : 0.5 }}
       >
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-emerald-500/15 border border-emerald-500/20 flex items-center justify-center text-sm shrink-0">🎙️</div>
+          <div className="w-8 h-8 rounded-xl bg-emerald-500/15 border border-emerald-500/20 flex items-center justify-center text-sm shrink-0">
+            🎙️
+          </div>
           <div className="min-w-0">
-            <p className="text-slate-800 dark:text-white text-xs font-semibold truncate">Mishary Alafasy</p>
-            <p className="text-slate-400 dark:text-white/40 text-[10px]">Al-Fatiha · 98% match</p>
+            <p className="text-slate-800 dark:text-white text-xs font-semibold truncate">
+              Mishary Alafasy
+            </p>
+            <p className="text-slate-400 dark:text-white/40 text-[10px]">
+              Al-Fatiha · 98% match
+            </p>
           </div>
           <div className="w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center shrink-0 ml-auto">
-            <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20 6L9 17l-5-5"/>
+            <svg
+              className="w-3 h-3 text-white"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={3}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M20 6L9 17l-5-5" />
             </svg>
           </div>
         </div>
@@ -208,8 +232,12 @@ export default function Hero() {
             >
               {stats.map((s, i) => (
                 <div key={i}>
-                  <p className="text-2xl font-bold text-slate-900 dark:text-white">{s.value}</p>
-                  <p className="text-slate-400 dark:text-white/35 text-xs mt-0.5">{s.label}</p>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
+                    {s.value}
+                  </p>
+                  <p className="text-slate-400 dark:text-white/35 text-xs mt-0.5">
+                    {s.label}
+                  </p>
                 </div>
               ))}
             </motion.div>

@@ -231,6 +231,28 @@
       }
     }
   },
+  "loginPage": {
+    "brandHeadline1": "Who is reciting",
+    "brandHeadline2": "the Quran?",
+    "brandSubtitle": "AI-powered reciter identification trusted by thousands of Muslims worldwide.",
+    "statReciters": "Reciters",
+    "statAccuracy": "Accuracy",
+    "statSpeed": "Recognition",
+    "quote": "I finally know who's reciting on Al Jazeera every night. Samaa told me in 2 seconds.",
+    "quoteAuthor": "Samaa user · Morocco",
+    "title": "Welcome back",
+    "subtitle": "Sign in to your Samaa account to continue.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "ahmad@example.com",
+    "passwordLabel": "Password",
+    "forgotPassword": "Forgot password?",
+    "rememberMe": "Remember me for 30 days",
+    "signIn": "Sign in",
+    "signingIn": "Signing in…",
+    "or": "or",
+    "continueGoogle": "Continue with Google",
+    "footerNote": "By signing in you agree to our Terms of Service and Privacy Policy."
+  },
   "footer": {
     "description": "The Shazam for Quran. Identify any reciter instantly using AI-powered voice recognition.",
     "groups": {
