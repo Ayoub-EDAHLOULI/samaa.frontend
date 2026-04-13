@@ -42,26 +42,43 @@ export function proxy(request: NextRequest) {
       const payloadJson = Buffer.from(payloadBase64, "base64").toString("utf8");
       const decoded = JSON.parse(payloadJson);
 
-      const roleClaim =
+      // Backend Prisma enum values are uppercase: "ADMIN", "USER"
+      const roleClaim: string = (
         decoded.role ||
-        decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-      const isAdmin = roleClaim === "Admin" || roleClaim === "1";
-      const isClient = roleClaim === "Client" || roleClaim === "2";
-      const isAgent = roleClaim === "Agent" || roleClaim === "3";
+        decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] ||
+        ""
+      ).toUpperCase();
+      const isAdmin = roleClaim === "ADMIN";
+      const isClient = roleClaim === "CLIENT";
+      const isAgent = roleClaim === "AGENT";
 
-      // Strict Route Enforcement
-      if (pathWithoutLocale.startsWith("/admin") && !isAdmin)
-        return NextResponse.redirect(new URL("/login", request.url));
-      if (pathWithoutLocale.startsWith("/client") && !isClient)
-        return NextResponse.redirect(new URL("/login", request.url));
-      if (pathWithoutLocale.startsWith("/agent") && !isAgent)
-        return NextResponse.redirect(new URL("/login", request.url));
+      const locale =
+        pathname.match(/^\/(en|fr|es|ary)/)?.[0] || `/${routing.defaultLocale}`;
+
+      // Strict Route Enforcement — wrong role gets redirected to login with cookie cleared
+      if (pathWithoutLocale.startsWith("/admin") && !isAdmin) {
+        const res = NextResponse.redirect(
+          new URL(`${locale}/login`, request.url),
+        );
+        res.cookies.delete("accessToken");
+        return res;
+      }
+      if (pathWithoutLocale.startsWith("/client") && !isClient) {
+        const res = NextResponse.redirect(
+          new URL(`${locale}/login`, request.url),
+        );
+        res.cookies.delete("accessToken");
+        return res;
+      }
+      if (pathWithoutLocale.startsWith("/agent") && !isAgent) {
+        const res = NextResponse.redirect(
+          new URL(`${locale}/login`, request.url),
+        );
+        res.cookies.delete("accessToken");
+        return res;
+      }
 
       if (isAuthRoute) {
-        const locale =
-          pathname.match(/^\/(en|fr|es|ary)/)?.[0] ||
-          `/${routing.defaultLocale}`; // ✅ Updated
-
         if (isAdmin)
           return NextResponse.redirect(new URL(`${locale}/admin`, request.url));
         if (isClient)
@@ -71,15 +88,23 @@ export function proxy(request: NextRequest) {
         if (isAgent)
           return NextResponse.redirect(new URL(`${locale}/agent`, request.url));
 
-        // Invalid role fallback
-        response.cookies.delete("accessToken");
-        response.cookies.delete("refreshToken");
-        return NextResponse.redirect(new URL(`${locale}/login`, request.url));
+        // Invalid role fallback — clear the bad token and show login
+        const res = NextResponse.redirect(
+          new URL(`${locale}/login`, request.url),
+        );
+        res.cookies.delete("accessToken");
+        res.cookies.delete("refreshToken");
+        return res;
       }
     } catch {
-      response.cookies.delete("accessToken");
-      response.cookies.delete("refreshToken");
-      return NextResponse.redirect(new URL("/login", request.url));
+      const locale =
+        pathname.match(/^\/(en|fr|es|ary)/)?.[0] || `/${routing.defaultLocale}`;
+      const res = NextResponse.redirect(
+        new URL(`${locale}/login`, request.url),
+      );
+      res.cookies.delete("accessToken");
+      res.cookies.delete("refreshToken");
+      return res;
     }
   }
 

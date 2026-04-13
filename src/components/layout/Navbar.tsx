@@ -34,7 +34,7 @@ const locales = [
 function FlagImg({ countryCode }: { countryCode: string }) {
   return (
     <Image
-      src={`https://flagcdn.com/w20/${countryCode}.png`}
+      src={`/images/flags/${countryCode}.png`}
       width={20}
       height={15}
       alt={countryCode}
@@ -276,9 +276,8 @@ export default function Navbar() {
   const t = useTranslations("nav");
   const { user, isAuthenticated } = useAuth();
 
-  const dashboardHref =
-    user?.role === "Admin" ? "/admin" :
-    user?.role === "Agent" ? "/agent" : "/client";
+  const currentLocale = pathname.match(/^\/(en|fr|es|ary)/)?.[1] ?? "fr";
+  const dashboardHref = `/${currentLocale}${user?.role === "ADMIN" ? "/admin" : "/client"}`;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);

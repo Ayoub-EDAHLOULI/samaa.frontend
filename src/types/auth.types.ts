@@ -1,5 +1,5 @@
-// Matches the backend Prisma Role enum strings
-export type UserRole = "Admin" | "Client" | "Agent" | "Citizen";
+// Matches the backend Prisma Role enum strings (uppercase)
+export type UserRole = "ADMIN" | "USER";
 
 // Shape returned by GET /auth/profile and embedded in login/register responses
 export interface User {
