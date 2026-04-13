@@ -1,0 +1,90 @@
+// ==========================================
+// BREAKPOINTS
+// ==========================================
+$mobile-width: 768px;
+$tablet-width: 1024px;
+$desktop-width: 1280px;
+
+// Mixin for mobile devices (max-width: 768px)
+@mixin mobile {
+  @media (max-width: #{$mobile-width}) {
+    @content;
+  }
+}
+
+// Mixin for tablets (max-width: 1024px)
+@mixin tablet {
+  @media (max-width: #{$tablet-width}) {
+    @content;
+  }
+}
+
+// Mixin for specific min-width queries
+@mixin min-width($width) {
+  @media (min-width: #{$width}) {
+    @content;
+  }
+}
+
+// ==========================================
+// LAYOUT UTILITIES
+// ==========================================
+
+// Standard container to center content and add padding
+@mixin container {
+  width: 100%;
+  max-width: 1220px;
+  margin: 0 auto;
+
+  @include mobile {
+    padding: 0 1rem;
+  }
+}
+
+// Flexbox centering helper
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Flexbox between helper
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Grid auto-fit helper
+@mixin grid-auto($min-size: 300px, $gap: 1rem) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-size, 1fr));
+  gap: $gap;
+}
+
+// ==========================================
+// VISUAL UTILITIES
+// ==========================================
+
+// Text truncation (ellipsis)
+@mixin truncate($lines: 1) {
+  @if $lines == 1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// Smooth transition for hover effects
+@mixin transition($properties...) {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  @if length($properties) > 0 {
+    transition-property: $properties;
+  }
+}

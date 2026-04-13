@@ -1,0 +1,513 @@
+// app/admin/admin-globals.scss
+
+$sidebar-width: 250px;
+$header-height: 70px;
+$dark-bg: #1e1e1e; // Main background dark color
+$dark-surface: #262626; // Sidebar/Card background slightly lighter
+$text-light: #f5f5f5;
+$text-muted: #999;
+$accent-color: #4a90e2; // Blue accent for primary actions/focus
+$published-status: #4caf50; // Green status dot
+
+// Global Admin Body Styles (Ensure this is applied only within the Admin context)
+.admin-dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: $dark-bg;
+  color: $text-light;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+
+  // Hide scrollbar for Chrome, Safari and Opera
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  // Hide scrollbar for IE, Edge and Firefox
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+// --- SIDEBAR STYLES ---
+
+.admin-sidebar-wrapper {
+  width: $sidebar-width;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background-color: $dark-surface;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+
+  // Hide scrollbar for Chrome, Safari and Opera
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  // Hide scrollbar for IE, Edge and Firefox
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.admin-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 15px 25px 15px;
+  width: 90%;
+  margin: 5px auto 20px auto;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+
+  .admin-sidebar-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .admin-sidebar-logo {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+  }
+}
+
+.admin-sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 50px;
+  flex-grow: 1;
+  overflow: auto;
+
+  // Hide scrollbar for Chrome, Safari and Opera
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  // Hide scrollbar for IE, Edge and Firefox
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  .admin-sidebar-nav-item {
+    margin: 5px 0;
+
+    a {
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+      color: $text-muted;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition:
+        background-color 0.2s,
+        color 0.2s;
+
+      .admin-sidebar-icon {
+        margin-right: 10px;
+        font-size: 1.8rem;
+      }
+    }
+
+    &.active a {
+      background-color: rgba(255, 255, 255, 0.1); // Highlight color
+      color: $text-light;
+      border-left: 3px solid $accent-color;
+      padding-left: 12px; // Adjust for the border
+    }
+
+    &:not(.active):hover a {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: $text-light;
+    }
+  }
+}
+
+.admin-sidebar-footer {
+  padding: 20px 15px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+  .admin-sidebar-settings {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    color: $text-muted;
+    text-decoration: none;
+    margin-bottom: 10px;
+    &:hover {
+      color: $text-light;
+    }
+  }
+
+  .admin-sidebar-user {
+    display: flex;
+    align-items: center;
+    background-color: $dark-bg;
+    padding: 8px;
+    border-radius: 4px;
+
+    .admin-user-avatar {
+      width: 30px;
+      height: 30px;
+      background-color: $accent-color;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.9rem;
+      margin-right: 10px;
+    }
+
+    .admin-user-info p {
+      font-size: 0.8rem;
+      margin: 0;
+      color: $text-light;
+    }
+  }
+}
+
+// --- MAIN CONTENT & HEADER STYLES ---
+
+.admin-main-content-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: $sidebar-width;
+
+  // Hide scrollbar for Chrome, Safari and Opera
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  // Hide scrollbar for IE, Edge and Firefox
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.admin-header {
+  height: $header-height;
+  background-color: $dark-bg;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .admin-header-title h1 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+    color: $text-light;
+  }
+
+  .admin-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .admin-action-btn {
+      padding: 8px 15px;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.2s;
+
+      &.primary {
+        background-color: $accent-color;
+        color: white;
+        border: 1px solid $accent-color;
+      }
+
+      &.secondary {
+        background: none;
+        color: $text-light;
+        border: 1px solid $text-muted;
+      }
+    }
+  }
+
+  .language-selector {
+    position: relative;
+    background-color: #2a2a2a;
+    border-radius: 6px;
+    padding: 2px 6px;
+    cursor: pointer;
+
+    .language-trigger {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+      font-size: 13px;
+      color: #d9d9d9;
+
+      &:hover {
+        color: var(--color-primary-red);
+      }
+
+      .flag-icon {
+        width: 14px;
+      }
+
+      .language-code {
+        font-size: 11px;
+        font-weight: 500;
+
+        @media (max-width: 1024px) {
+          display: none;
+        }
+      }
+    }
+
+    .language-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 140px;
+      background: #2a2a2a;
+      border-radius: 6px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      z-index: 1000;
+      padding: 6px 0;
+
+      li {
+        list-style: none;
+
+        button {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          background: none;
+          border: none;
+          padding: 10px 14px;
+          font-size: 12px;
+          cursor: pointer;
+          color: #d9d9d9;
+          text-align: left;
+
+          img {
+            width: 15px;
+          }
+
+          &:hover {
+            background-color: #3a3a3a;
+            color: var(--color-primary-red);
+          }
+
+          &.active {
+            font-weight: 600;
+            color: var(--color-primary-red);
+          }
+        }
+      }
+    }
+  }
+}
+
+.admin-search-bar {
+  display: flex;
+  align-items: center;
+  background-color: $dark-surface;
+  border-radius: 4px;
+  padding: 5px;
+
+  input {
+    background: none;
+    border: none;
+    color: $text-light;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    width: 200px;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .admin-search-icon {
+    color: $text-muted;
+    margin-right: 5px;
+  }
+
+  .admin-filter-btn {
+    background: none;
+    border: none;
+    color: $text-muted;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 1.2rem;
+    margin-left: 5px;
+  }
+}
+
+.admin-main-content {
+  flex-grow: 1;
+  padding: 25px;
+  overflow-y: auto; // Allows internal scrolling if content is too long
+
+  // Hide scrollbar for Chrome, Safari and Opera
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  // Hide scrollbar for IE, Edge and Firefox
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+// --- PLACEHOLDER TABLE STYLES (for ProductsTable) ---
+
+.admin-data-table {
+  background-color: $dark-surface;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      padding: 15px 20px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    th {
+      color: $text-muted;
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    td {
+      font-size: 1rem;
+      .product-image {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 4px;
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+  &.published {
+    background-color: $published-status;
+  }
+  &.draft {
+    background-color: $text-muted;
+  }
+}
+
+// --- RESPONSIVE ---
+
+// Sidebar close button (X) — desktop hidden, mobile visible
+.admin-sidebar-close {
+  display: none;
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #f5f5f5;
+  }
+}
+
+// Hamburger button in header — hidden on desktop, shown on mobile
+.admin-mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: #f5f5f5;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+// Dark overlay behind open sidebar on mobile
+.admin-sidebar-overlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  // Show hamburger button
+  .admin-mobile-menu-btn {
+    display: flex;
+  }
+
+  // Show sidebar close button
+  .admin-sidebar-close {
+    display: flex;
+  }
+
+  // Sidebar hidden by default, slides in when .sidebar-open
+  .admin-sidebar-wrapper {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 300;
+
+    &.sidebar-open {
+      transform: translateX(0);
+    }
+  }
+
+  // Overlay visible
+  .admin-sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 299;
+  }
+
+  // Main content takes full width
+  .admin-main-content-wrapper {
+    margin-left: 0;
+  }
+
+  // Make all admin table containers scrollable horizontally
+  .admin-table-container,
+  .admin-data-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .admin-main-content {
+    padding: 16px;
+  }
+
+  .admin-header {
+    padding: 0 16px;
+  }
+}

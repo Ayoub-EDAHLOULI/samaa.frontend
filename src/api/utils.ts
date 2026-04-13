@@ -3,12 +3,12 @@
 /**
  * Extracts the locale (language code) from a Next.js pathname.
  * Assumes the path structure is /en/some/route or /fr/another/route.
- * * @param pathname The full path string (e.g., "/en/profile/admin")
+ * * @param pathname The full path string (e.g., "/en/admin")
  * @returns The locale string (e.g., "en" or "fr"), defaults to 'en' if not found.
  */
 export function getLocaleFromPathname(pathname: string): string {
   // 1. Remove leading/trailing slashes and split the path into segments.
-  // Example: "/en/profile/admin" -> ["", "en", "profile", "admin"]
+  // Example: "/en/admin" -> ["", "en", "admin"]
   const segments = pathname.split("/").filter((segment) => segment.length > 0);
 
   // 2. The locale is expected to be the first non-empty segment (index 0).
