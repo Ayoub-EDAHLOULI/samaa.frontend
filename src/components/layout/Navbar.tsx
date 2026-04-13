@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useTheme } from "@/components/layout/ThemeProvider";
+import { useAuth } from "@/contexts/AuthContext";
 
 /* ─── Config ─────────────────────────────────────────────────────────── */
 const NAV_LINK_DEFS = [
@@ -273,6 +274,11 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const t = useTranslations("nav");
+  const { user, isAuthenticated } = useAuth();
+
+  const dashboardHref =
+    user?.role === "Admin" ? "/admin" :
+    user?.role === "Agent" ? "/agent" : "/client";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -358,12 +364,21 @@ export default function Navbar() {
             <LangSwitcher />
             <ThemeToggle />
             <div className="w-px h-5 bg-slate-200 dark:bg-white/10 mx-1" />
-            <Link
-              href="/login"
-              className="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/8 transition-all duration-200"
-            >
-              {t("signIn")}
-            </Link>
+            {isAuthenticated ? (
+              <Link
+                href={dashboardHref}
+                className="px-3.5 py-2 rounded-lg text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/25 transition-all duration-200"
+              >
+                {t("dashboard")}
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/8 transition-all duration-200"
+              >
+                {t("signIn")}
+              </Link>
+            )}
             <a
               href="#download"
               className="px-4 py-2 rounded-lg text-sm font-semibold bg-emerald-500 hover:bg-emerald-600 text-white transition-colors duration-200 shadow-sm"
@@ -430,13 +445,23 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="mt-3 pt-3 border-t border-slate-100 dark:border-white/8 flex flex-col gap-2">
-                <Link
-                  href="/login"
-                  onClick={() => setMobileOpen(false)}
-                  className="px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400"
-                >
-                  {t("signIn")}
-                </Link>
+                {isAuthenticated ? (
+                  <Link
+                    href={dashboardHref}
+                    onClick={() => setMobileOpen(false)}
+                    className="px-3 py-2.5 text-sm font-medium text-emerald-600 dark:text-emerald-400"
+                  >
+                    {t("dashboard")}
+                  </Link>
+                ) : (
+                  <Link
+                    href="/login"
+                    onClick={() => setMobileOpen(false)}
+                    className="px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400"
+                  >
+                    {t("signIn")}
+                  </Link>
+                )}
                 <a
                   href="#download"
                   onClick={() => setMobileOpen(false)}
