@@ -3,6 +3,10 @@ import { notFound } from "next/navigation";
 import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import ScrollToTopButton from "@/components/ui/ScrollToTopButton";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { ToastProvider } from "@/contexts/ToastContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default async function LocaleLayout({
   children,
@@ -21,9 +25,21 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      {children}
-
-      <ScrollToTopButton />
+      <ToastProvider>
+        <AuthProvider>
+          {children}
+          <ScrollToTopButton />
+          <ToastContainer
+            position="top-right"
+            autoClose={2500}
+            hideProgressBar={false}
+            closeOnClick
+            pauseOnHover
+            draggable
+            theme="colored"
+          />
+        </AuthProvider>
+      </ToastProvider>
     </NextIntlClientProvider>
   );
 }

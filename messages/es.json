@@ -232,6 +232,16 @@
     }
   },
   "loginPage": {
+    "validation": {
+      "emailRequired": "El correo electrónico es obligatorio.",
+      "emailInvalid": "Por favor, introduce un correo electrónico válido.",
+      "passwordRequired": "La contraseña es obligatoria.",
+      "passwordMin": "La contraseña debe tener al menos 8 caracteres.",
+      "passwordStrength": "La contraseña debe contener mayúsculas, minúsculas y un número.",
+      "passwordMismatch": "Las contraseñas no coinciden.",
+      "displayNameMin": "El nombre debe tener al menos 2 caracteres.",
+      "displayNameMax": "El nombre no debe superar los 100 caracteres."
+    },
     "brandHeadline1": "¿Quién está recitando",
     "brandHeadline2": "el Corán?",
     "brandSubtitle": "Identificación de recitadores con IA, de confianza para miles de musulmanes en todo el mundo.",
@@ -251,7 +261,9 @@
     "signingIn": "Iniciando sesión…",
     "or": "o",
     "continueGoogle": "Continuar con Google",
-    "footerNote": "Al iniciar sesión aceptas nuestros Términos de servicio y Política de privacidad."
+    "footerNote": "Al iniciar sesión aceptas nuestros Términos de servicio y Política de privacidad.",
+    "toastSuccess": "¡Bienvenido de nuevo! Redirigiendo…",
+    "toastError": "Correo o contraseña incorrectos. Inténtalo de nuevo."
   },
   "footer": {
     "description": "El Shazam del Corán. Identifica a cualquier recitador al instante con el reconocimiento de voz por IA.",

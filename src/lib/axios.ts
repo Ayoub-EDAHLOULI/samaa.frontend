@@ -5,12 +5,11 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const apiClient = axios.create({
   baseURL: API_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
+  headers: { "Content-Type": "application/json" },
+  withCredentials: true, // always send httpOnly cookies (refreshToken)
 });
 
-// Variables to handle simultaneous requests during a token refresh
+// Mutex state for coordinating concurrent refresh attempts
 let isRefreshing = false;
 let failedQueue: Array<{
   resolve: (value?: unknown) => void;
@@ -19,16 +18,13 @@ let failedQueue: Array<{
 
 const processQueue = (error: unknown, token: string | null = null) => {
   failedQueue.forEach((prom) => {
-    if (error) {
-      prom.reject(error);
-    } else {
-      prom.resolve(token);
-    }
+    if (error) prom.reject(error);
+    else prom.resolve(token);
   });
   failedQueue = [];
 };
 
-// 1. REQUEST INTERCEPTOR: Attach the Access Token
+// REQUEST INTERCEPTOR — attach accessToken from cookie
 apiClient.interceptors.request.use(
   (config) => {
     const accessToken = Cookies.get("accessToken");
@@ -40,7 +36,7 @@ apiClient.interceptors.request.use(
   (error) => Promise.reject(error),
 );
 
-// 2. RESPONSE INTERCEPTOR: Catch 401s and Refresh
+// RESPONSE INTERCEPTOR — catch 401s and silently refresh via httpOnly cookie
 apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -48,66 +44,45 @@ apiClient.interceptors.response.use(
       _retry?: boolean;
     };
 
-    // If the error is 401 (Unauthorized) and we haven't retried this request yet
     if (error.response?.status === 401 && !originalRequest._retry) {
-      // If a refresh is already happening, add this request to the queue to wait
+      // Skip refresh for auth endpoints to avoid loops
+      const url: string = originalRequest.url ?? "";
+      if (url.includes("/auth/login") || url.includes("/auth/register") || url.includes("/auth/refresh-token")) {
+        return Promise.reject(error);
+      }
+
       if (isRefreshing) {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
           failedQueue.push({ resolve, reject });
         })
           .then((token) => {
-            originalRequest.headers.Authorization = "Bearer " + token;
+            originalRequest.headers.Authorization = `Bearer ${token}`;
             return apiClient(originalRequest);
           })
           .catch((err) => Promise.reject(err));
       }
 
-      // Mark the request so we don't end up in an infinite loop
       originalRequest._retry = true;
       isRefreshing = true;
 
-      const accessToken = Cookies.get("accessToken");
-      const refreshToken = Cookies.get("refreshToken");
-
-      // If there's no refresh token, the user is completely logged out
-      if (!refreshToken) {
-        isRefreshing = false;
-        forceLogout();
-        return Promise.reject(error);
-      }
-
       try {
-        // Ask the C# backend for new tokens
-        // Note: We use a fresh axios instance here to avoid interceptor loops
+        // Backend reads refreshToken from httpOnly cookie — no body needed
         const refreshResponse = await axios.post(
-          `${API_URL}/Auth/refresh-token`,
-          {
-            accessToken: accessToken,
-            refreshToken: refreshToken,
-          },
+          `${API_URL}/auth/refresh-token`,
+          {},
+          { withCredentials: true },
         );
 
-        if (refreshResponse.data.success) {
-          const newAccessToken = refreshResponse.data.data.accessToken;
-          const newRefreshToken = refreshResponse.data.data.refreshToken;
-
-          // Save the new tokens
+        if (refreshResponse.data?.success) {
+          const newAccessToken: string = refreshResponse.data.data.accessToken;
           Cookies.set("accessToken", newAccessToken, { expires: 7 });
-          Cookies.set("refreshToken", newRefreshToken, { expires: 7 });
-
-          // Update the failed request with the new token
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-
-          // Release the queue for any other requests that were waiting
           processQueue(null, newAccessToken);
-
-          // Retry the original request
           return apiClient(originalRequest);
         } else {
           throw new Error("Refresh failed");
         }
       } catch (refreshError) {
-        // If the refresh token is expired or invalid, destroy the session
         processQueue(refreshError, null);
         forceLogout();
         return Promise.reject(refreshError);
@@ -120,22 +95,11 @@ apiClient.interceptors.response.use(
   },
 );
 
-// Utility function to cleanly boot the user out
 const forceLogout = () => {
   Cookies.remove("accessToken");
-  Cookies.remove("refreshToken");
-  Cookies.remove("user");
-
   if (typeof window !== "undefined") {
     const path = window.location.pathname;
-
-    // Only force a redirect to login if they are inside a protected dashboard area.
-    // If they are on a public page (like /blog or /), let them stay there!
-    if (
-      path.startsWith("/admin") ||
-      path.startsWith("/client") ||
-      path.startsWith("/agent")
-    ) {
+    if (path.includes("/admin") || path.includes("/client") || path.includes("/agent")) {
       window.location.href = "/login";
     }
   }

@@ -10,17 +10,17 @@ import { useTheme } from "@/components/layout/ThemeProvider";
 
 /* ─── Config ─────────────────────────────────────────────────────────── */
 const NAV_LINK_DEFS = [
-  { key: "features",   href: "/features" },
+  { key: "features", href: "/features" },
   { key: "howItWorks", href: "/#how-it-works" },
-  { key: "reciters",   href: "/reciters" },
-  { key: "demo",       href: "/demo" },
+  { key: "reciters", href: "/reciters" },
+  { key: "demo", href: "/demo" },
 ] as const;
 
 const MORE_LINK_DEFS = [
-  { key: "blog",     href: "/blog" },
-  { key: "about",    href: "/about" },
-  { key: "careers",  href: "/careers" },
-  { key: "contact",  href: "/contact" },
+  { key: "blog", href: "/blog" },
+  { key: "about", href: "/about" },
+  { key: "careers", href: "/careers" },
+  { key: "contact", href: "/contact" },
 ] as const;
 
 const locales = [
@@ -37,7 +37,7 @@ function FlagImg({ countryCode }: { countryCode: string }) {
       width={20}
       height={15}
       alt={countryCode}
-      className="object-cover rounded-[2px]"
+      className="object-cover rounded-xs"
       unoptimized
     />
   );
@@ -57,13 +57,29 @@ function ThemeToggle() {
       aria-label="Toggle theme"
     >
       {resolvedTheme === "dark" ? (
-        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="5"/>
-          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        <svg
+          className="w-4 h-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <circle cx="12" cy="12" r="5" />
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
         </svg>
       ) : (
-        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        <svg
+          className="w-4 h-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
         </svg>
       )}
     </button>
@@ -84,7 +100,8 @@ function LangSwitcher() {
   // Close on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+      if (ref.current && !ref.current.contains(e.target as Node))
+        setOpen(false);
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
@@ -105,8 +122,16 @@ function LangSwitcher() {
       >
         <FlagImg countryCode={current.countryCode} />
         <span className="font-medium uppercase text-xs">{current.code}</span>
-        <svg className={`w-3 h-3 transition-transform duration-200 ${open ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-          <path d="M6 9l6 6 6-6"/>
+        <svg
+          className={`w-3 h-3 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M6 9l6 6 6-6" />
         </svg>
       </button>
 
@@ -132,8 +157,16 @@ function LangSwitcher() {
                 <FlagImg countryCode={locale.countryCode} />
                 <span className="font-medium">{locale.label}</span>
                 {locale.code === currentCode && (
-                  <svg className="w-3.5 h-3.5 ml-auto text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M20 6L9 17l-5-5"/>
+                  <svg
+                    className="w-3.5 h-3.5 ml-auto text-emerald-500"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2.5}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M20 6L9 17l-5-5" />
                   </svg>
                 )}
               </button>
@@ -148,20 +181,31 @@ function LangSwitcher() {
 /* ─── More dropdown ───────────────────────────────────────────────────── */
 type NavLink = { label: string; href: string };
 
-function MoreDropdown({ pathWithoutLocale, links, labelMore }: { pathWithoutLocale: string; links: NavLink[]; labelMore: string }) {
+function MoreDropdown({
+  pathWithoutLocale,
+  links,
+  labelMore,
+}: {
+  pathWithoutLocale: string;
+  links: NavLink[];
+  labelMore: string;
+}) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+      if (ref.current && !ref.current.contains(e.target as Node))
+        setOpen(false);
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
   const anyActive = links.some(
-    (l) => pathWithoutLocale === l.href || pathWithoutLocale.startsWith(l.href + "/")
+    (l) =>
+      pathWithoutLocale === l.href ||
+      pathWithoutLocale.startsWith(l.href + "/"),
   );
 
   return (
@@ -175,8 +219,16 @@ function MoreDropdown({ pathWithoutLocale, links, labelMore }: { pathWithoutLoca
         }`}
       >
         {labelMore}
-        <svg className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-          <path d="M6 9l6 6 6-6"/>
+        <svg
+          className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M6 9l6 6 6-6" />
         </svg>
       </button>
 
@@ -230,8 +282,14 @@ export default function Navbar() {
 
   const pathWithoutLocale = pathname.replace(/^\/(en|fr|es|ary)/, "") || "/";
 
-  const navLinks = NAV_LINK_DEFS.map((d) => ({ label: t(d.key), href: d.href }));
-  const moreLinks = MORE_LINK_DEFS.map((d) => ({ label: t(d.key), href: d.href }));
+  const navLinks = NAV_LINK_DEFS.map((d) => ({
+    label: t(d.key),
+    href: d.href,
+  }));
+  const moreLinks = MORE_LINK_DEFS.map((d) => ({
+    label: t(d.key),
+    href: d.href,
+  }));
 
   return (
     <motion.header
@@ -246,15 +304,26 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group shrink-0">
             <div className="w-8 h-8 rounded-xl bg-emerald-500 flex items-center justify-center shadow-sm group-hover:bg-emerald-600 transition-colors duration-200">
-              <svg viewBox="0 0 24 24" fill="none" className="w-4.5 h-4.5 text-white" stroke="currentColor" strokeWidth={2.2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 19V6l12-3v13M9 19c0 1.1-1.34 2-3 2s-3-.9-3-2 1.34-2 3-2 3 .9 3 2zm12-3c0 1.1-1.34 2-3 2s-3-.9-3-2 1.34-2 3-2 3 .9 3 2zM9 10l12-3"/>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                className="w-4.5 h-4.5 text-white"
+                stroke="currentColor"
+                strokeWidth={2.2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 19V6l12-3v13M9 19c0 1.1-1.34 2-3 2s-3-.9-3-2 1.34-2 3-2 3 .9 3 2zm12-3c0 1.1-1.34 2-3 2s-3-.9-3-2 1.34-2 3-2 3 .9 3 2zM9 10l12-3"
+                />
               </svg>
             </div>
-            <span className="font-bold text-slate-900 dark:text-white text-lg tracking-tight">Samaa</span>
+            <span className="font-bold text-slate-900 dark:text-white text-lg tracking-tight">
+              Samaa
+            </span>
           </Link>
 
           {/* Desktop nav */}
@@ -277,7 +346,11 @@ export default function Navbar() {
                 </Link>
               );
             })}
-            <MoreDropdown pathWithoutLocale={pathWithoutLocale} links={moreLinks} labelMore={t("more")} />
+            <MoreDropdown
+              pathWithoutLocale={pathWithoutLocale}
+              links={moreLinks}
+              labelMore={t("more")}
+            />
           </nav>
 
           {/* Right side */}
@@ -308,11 +381,27 @@ export default function Navbar() {
               className="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
               aria-label="Toggle menu"
             >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                {mobileOpen
-                  ? <><path d="M18 6L6 18"/><path d="M6 6l12 12"/></>
-                  : <><path d="M3 12h18"/><path d="M3 6h18"/><path d="M3 18h18"/></>
-                }
+              <svg
+                className="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                {mobileOpen ? (
+                  <>
+                    <path d="M18 6L6 18" />
+                    <path d="M6 6l12 12" />
+                  </>
+                ) : (
+                  <>
+                    <path d="M3 12h18" />
+                    <path d="M3 6h18" />
+                    <path d="M3 18h18" />
+                  </>
+                )}
               </svg>
             </button>
           </div>
@@ -341,10 +430,18 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="mt-3 pt-3 border-t border-slate-100 dark:border-white/8 flex flex-col gap-2">
-                <Link href="/login" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400">
+                <Link
+                  href="/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400"
+                >
                   {t("signIn")}
                 </Link>
-                <a href="#download" onClick={() => setMobileOpen(false)} className="px-3 py-2.5 rounded-lg text-sm font-semibold bg-emerald-500 text-white text-center">
+                <a
+                  href="#download"
+                  onClick={() => setMobileOpen(false)}
+                  className="px-3 py-2.5 rounded-lg text-sm font-semibold bg-emerald-500 text-white text-center"
+                >
                   {t("getApp")}
                 </a>
               </div>

@@ -232,6 +232,16 @@
     }
   },
   "loginPage": {
+    "validation": {
+      "emailRequired": "Email address is required.",
+      "emailInvalid": "Please enter a valid email address.",
+      "passwordRequired": "Password is required.",
+      "passwordMin": "Password must be at least 8 characters.",
+      "passwordStrength": "Password must contain uppercase, lowercase, and a number.",
+      "passwordMismatch": "Passwords do not match.",
+      "displayNameMin": "Name must be at least 2 characters.",
+      "displayNameMax": "Name must not exceed 100 characters."
+    },
     "brandHeadline1": "Who is reciting",
     "brandHeadline2": "the Quran?",
     "brandSubtitle": "AI-powered reciter identification trusted by thousands of Muslims worldwide.",
@@ -251,7 +261,9 @@
     "signingIn": "Signing in…",
     "or": "or",
     "continueGoogle": "Continue with Google",
-    "footerNote": "By signing in you agree to our Terms of Service and Privacy Policy."
+    "footerNote": "By signing in you agree to our Terms of Service and Privacy Policy.",
+    "toastSuccess": "Welcome back! Redirecting…",
+    "toastError": "Invalid email or password. Please try again."
   },
   "footer": {
     "description": "The Shazam for Quran. Identify any reciter instantly using AI-powered voice recognition.",
