@@ -1,0 +1,260 @@
+/* SurahPageTable.scss */
+
+$dark-bg: #1e1e1e;
+$card-bg: #2a2a2a;
+$text-color: #dadada;
+$muted-text: #a0a0a0;
+$border-color: #3b3b3b;
+$primary-color: #4a90e2;
+$success-color: #10b981;
+$danger-color: #f44336;
+$edit-row-bg: #2f3a2f; // subtle green tint on the row being edited
+
+.admin-table-container {
+  background-color: $card-bg;
+  border-radius: 8px;
+  padding: 24px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  max-width: 100%;
+  color: $text-color;
+  border: 1px solid $border-color;
+}
+
+/* --- Header --- */
+.admin-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px 16px 24px;
+  border-bottom: 1px solid $border-color;
+
+  .admin-table-title {
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0;
+    }
+    p {
+      color: $muted-text;
+      font-size: 0.8rem;
+      margin: 5px 0 0 0;
+    }
+  }
+
+  .admin-table-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .admin-search-bar {
+      display: flex;
+      align-items: center;
+      background-color: $dark-bg;
+      border-radius: 4px;
+      padding: 4px 10px;
+
+      .search-input {
+        background: none;
+        border: none;
+        color: $text-color;
+        padding: 4px 10px;
+        font-size: 0.85rem;
+        width: 220px;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .search-icon {
+        color: $muted-text;
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+}
+
+.loading-text {
+  color: $muted-text;
+  font-size: 1rem;
+  text-align: center;
+  padding: 40px 0;
+}
+
+/* --- Table --- */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+
+  thead {
+    background-color: $dark-bg;
+
+    tr {
+      border-bottom: 1px solid $border-color;
+
+      th {
+        padding: 15px 24px;
+        text-align: left;
+        color: $muted-text;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid $border-color;
+      transition: background-color 0.15s;
+
+      &:hover {
+        background-color: #333;
+      }
+
+      &.editing-row {
+        background-color: $edit-row-bg;
+
+        &:hover {
+          background-color: $edit-row-bg;
+        }
+      }
+
+      td {
+        padding: 10px 24px;
+        vertical-align: middle;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+/* --- Cell types --- */
+
+.surah-number {
+  color: $muted-text;
+  font-weight: 700;
+  font-size: 0.85rem;
+  width: 50px;
+}
+
+.arabic-cell {
+  font-family: "Amiri", "Scheherazade New", "Traditional Arabic", serif;
+  font-size: 1.1rem;
+  direction: rtl;
+  text-align: left;
+  color: #f0e6cc;
+}
+
+.ayah-count {
+  color: $muted-text;
+  font-size: 0.85rem;
+}
+
+/* --- Inline edit inputs --- */
+.inline-input {
+  background-color: $dark-bg;
+  border: 1px solid $primary-color;
+  border-radius: 4px;
+  color: $text-color;
+  padding: 5px 8px;
+  font-size: 0.88rem;
+  width: 100%;
+  min-width: 160px;
+  outline: none;
+  transition: border-color 0.2s;
+
+  &:focus {
+    border-color: lighten($primary-color, 15%);
+  }
+
+  &.rtl {
+    direction: rtl;
+    font-family: "Amiri", "Scheherazade New", "Traditional Arabic", serif;
+    font-size: 1rem;
+    color: #f0e6cc;
+  }
+
+  &.ayah-input {
+    min-width: 80px;
+    width: 80px;
+  }
+}
+
+/* --- Actions --- */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  .btn-edit {
+    background: none;
+    border: none;
+    color: $muted-text;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    transition: all 0.2s;
+
+    &:hover {
+      color: $primary-color;
+      background-color: rgba($primary-color, 0.1);
+    }
+  }
+
+  .btn-save {
+    background: none;
+    border: none;
+    color: $muted-text;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    transition: all 0.2s;
+
+    &:hover:not(:disabled) {
+      color: $success-color;
+      background-color: rgba($success-color, 0.1);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  .btn-cancel {
+    background: none;
+    border: none;
+    color: $muted-text;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    transition: all 0.2s;
+
+    &:hover:not(:disabled) {
+      color: $danger-color;
+      background-color: rgba($danger-color, 0.1);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+}
+
+/* --- Footer --- */
+.table-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 24px;
+  border-top: 1px solid $border-color;
+
+  span {
+    color: $muted-text;
+    font-size: 0.82rem;
+  }
+}
