@@ -1,6 +1,6 @@
 // api/admin-config.ts
 
-import { type LucideIcon, LayoutDashboard } from "lucide-react";
+import { type LucideIcon, LayoutDashboard, Users } from "lucide-react";
 
 // Define the structure for a sidebar item
 export interface SidebarItem {
@@ -19,6 +19,12 @@ export const ADMIN_NAV_LINKS: SidebarItem[] = [
     name: "Dashboard",
     href: "/admin",
     icon: LayoutDashboard,
+  },
+  {
+    id: "users",
+    name: "Users",
+    href: "/admin/users",
+    icon: Users,
   },
 ];
 
