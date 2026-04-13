@@ -29,6 +29,7 @@ export default function ReciterFormModal({ reciter, onSave, onClose }: Props) {
   const {
     register,
     handleSubmit,
+    control,
     setValue,
     formState: { errors, isSubmitting },
   } = useForm<ReciterFormValues>({
@@ -44,7 +45,7 @@ export default function ReciterFormModal({ reciter, onSave, onClose }: Props) {
   });
 
   // Auto-generate slug from name in create mode
-  const nameValue = useWatch({ name: "name" });
+  const nameValue = useWatch({ control, name: "name" });
   useEffect(() => {
     if (!isEdit && nameValue) {
       const generated = nameValue
