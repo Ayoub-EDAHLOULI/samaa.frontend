@@ -45,10 +45,13 @@ apiClient.interceptors.response.use(
     };
 
     if (error.response?.status === 401 && !originalRequest._retry) {
-      // Skip refresh for auth endpoints to avoid loops
+      // Skip refresh for auth endpoints to avoid loops.
+      // Extract the backend message so callers get "Invalid email or password"
+      // instead of the generic axios "Request failed with status code 401".
       const url: string = originalRequest.url ?? "";
       if (url.includes("/auth/login") || url.includes("/auth/register") || url.includes("/auth/refresh-token")) {
-        return Promise.reject(error);
+        const backendMessage: string | undefined = error.response?.data?.message;
+        return Promise.reject(new Error(backendMessage ?? error.message));
       }
 
       if (isRefreshing) {
