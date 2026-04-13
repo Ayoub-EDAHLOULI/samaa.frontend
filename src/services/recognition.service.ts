@@ -23,7 +23,11 @@ export const recognitionService = {
     options?: { audioDuration?: number; deviceOs?: string },
   ): Promise<RecognitionResultResponse> => {
     const fd = new FormData();
-    const ext = audioBlob.type.includes("wav") ? "wav" : "mp4";
+    const ext = audioBlob.type.includes("wav")
+      ? "wav"
+      : audioBlob.type.includes("ogg")
+      ? "ogg"
+      : "mp4";
     fd.append("audioSnippet", audioBlob, `recording.${ext}`);
     if (options?.audioDuration != null) {
       fd.append("audioDuration", String(options.audioDuration));

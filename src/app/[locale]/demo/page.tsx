@@ -8,13 +8,24 @@ import Image from "next/image";
 import { recognitionService } from "@/services/recognition.service";
 import { RecognitionResultResponse } from "@/types/recognitions.types";
 
-type DemoState = "idle" | "recording" | "processing" | "match" | "nomatch" | "error";
+type DemoState =
+  | "idle"
+  | "recording"
+  | "processing"
+  | "match"
+  | "nomatch"
+  | "error";
 
 // Backend accepts: audio/mpeg, audio/mp3, audio/wav, audio/aac, audio/m4a, audio/x-m4a, audio/mp4
 // MediaRecorder in Chrome/Safari supports audio/mp4; Firefox supports audio/wav
 function getSupportedMimeType(): string | null {
   if (typeof MediaRecorder === "undefined") return null;
-  const candidates = ["audio/mp4", "audio/wav"];
+  const candidates = [
+    "audio/mp4",
+    "audio/ogg;codecs=opus",
+    "audio/ogg",
+    "audio/wav",
+  ];
   for (const type of candidates) {
     if (MediaRecorder.isTypeSupported(type)) return type;
   }
@@ -39,9 +50,7 @@ export default function DemoPage() {
   useEffect(() => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
-      mediaRecorderRef.current?.stream
-        ?.getTracks()
-        .forEach((t) => t.stop());
+      mediaRecorderRef.current?.stream?.getTracks().forEach((t) => t.stop());
     };
   }, []);
 
@@ -53,7 +62,9 @@ export default function DemoPage() {
     try {
       stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     } catch {
-      setErrorMsg("Microphone access denied. Please allow microphone permissions and try again.");
+      setErrorMsg(
+        "Microphone access denied. Please allow microphone permissions and try again.",
+      );
       setState("error");
       return;
     }
@@ -61,7 +72,9 @@ export default function DemoPage() {
     const mimeType = getSupportedMimeType();
     if (!mimeType) {
       stream.getTracks().forEach((t) => t.stop());
-      setErrorMsg("Your browser doesn't support a compatible audio format. Please use Chrome, Safari, or Firefox.");
+      setErrorMsg(
+        "Your browser doesn't support a compatible audio format. Please use Chrome, Safari, or Firefox.",
+      );
       setState("error");
       return;
     }
@@ -88,7 +101,10 @@ export default function DemoPage() {
         setResult(res);
         setState(res.isMatch ? "match" : "nomatch");
       } catch (err) {
-        const msg = err instanceof Error ? err.message : "Recognition failed. Please try again.";
+        const msg =
+          err instanceof Error
+            ? err.message
+            : "Recognition failed. Please try again.";
         setErrorMsg(msg);
         setState("error");
       }
@@ -134,7 +150,6 @@ export default function DemoPage() {
           </p>
 
           <div className="rounded-3xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 p-12 flex flex-col items-center gap-6">
-
             {/* --- Mic button --- */}
             <div className="relative">
               {/* Pulse ring while recording */}
@@ -144,25 +159,56 @@ export default function DemoPage() {
               <div className="absolute inset-0 rounded-full bg-emerald-400/20 scale-150 blur-xl" />
 
               <button
-                onClick={state === "idle" || state === "match" || state === "nomatch" || state === "error" ? startRecording : undefined}
+                onClick={
+                  state === "idle" ||
+                  state === "match" ||
+                  state === "nomatch" ||
+                  state === "error"
+                    ? startRecording
+                    : undefined
+                }
                 disabled={state === "recording" || state === "processing"}
                 className={`relative w-20 h-20 rounded-full text-white shadow-lg transition-all duration-200 flex items-center justify-center
-                  ${state === "recording"
-                    ? "bg-red-500 shadow-red-200 dark:shadow-red-900/40 scale-110"
-                    : state === "processing"
-                    ? "bg-slate-400 cursor-not-allowed"
-                    : "bg-emerald-500 hover:bg-emerald-600 active:scale-95 shadow-emerald-200 dark:shadow-emerald-900/40 cursor-pointer"
+                  ${
+                    state === "recording"
+                      ? "bg-red-500 shadow-red-200 dark:shadow-red-900/40 scale-110"
+                      : state === "processing"
+                        ? "bg-slate-400 cursor-not-allowed"
+                        : "bg-emerald-500 hover:bg-emerald-600 active:scale-95 shadow-emerald-200 dark:shadow-emerald-900/40 cursor-pointer"
                   }`}
               >
                 {state === "processing" ? (
                   /* Spinner */
-                  <svg className="w-7 h-7 animate-spin" viewBox="0 0 24 24" fill="none">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                  <svg
+                    className="w-7 h-7 animate-spin"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                    />
                   </svg>
                 ) : (
                   /* Mic icon */
-                  <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    className="w-8 h-8"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={1.8}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
                     <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
                     <line x1="12" y1="19" x2="12" y2="23" />
@@ -176,8 +222,12 @@ export default function DemoPage() {
             <div>
               {state === "idle" && (
                 <>
-                  <p className="text-slate-900 dark:text-white font-semibold">{t("tapToStart")}</p>
-                  <p className="text-slate-400 dark:text-slate-500 text-sm mt-1">{t("recording")}</p>
+                  <p className="text-slate-900 dark:text-white font-semibold">
+                    {t("tapToStart")}
+                  </p>
+                  <p className="text-slate-400 dark:text-slate-500 text-sm mt-1">
+                    {t("recording")}
+                  </p>
                 </>
               )}
               {state === "recording" && (
@@ -190,8 +240,12 @@ export default function DemoPage() {
               )}
               {state === "processing" && (
                 <>
-                  <p className="text-slate-900 dark:text-white font-semibold">Identifying reciter…</p>
-                  <p className="text-slate-400 dark:text-slate-500 text-sm mt-1">Analysing audio with AI</p>
+                  <p className="text-slate-900 dark:text-white font-semibold">
+                    Identifying reciter…
+                  </p>
+                  <p className="text-slate-400 dark:text-slate-500 text-sm mt-1">
+                    Analysing audio with AI
+                  </p>
                 </>
               )}
               {(state === "match" || state === "nomatch") && (
@@ -219,7 +273,9 @@ export default function DemoPage() {
               </p>
 
               {/* Idle / processing */}
-              {(state === "idle" || state === "recording" || state === "processing") && (
+              {(state === "idle" ||
+                state === "recording" ||
+                state === "processing") && (
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-lg">
                     🎙️
@@ -233,7 +289,7 @@ export default function DemoPage() {
               {/* Match */}
               {state === "match" && result?.reciter && (
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 overflow-hidden flex-shrink-0 relative">
+                  <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 overflow-hidden shrink-0 relative">
                     {result.reciter.imageUrl ? (
                       <Image
                         src={result.reciter.imageUrl}
@@ -243,7 +299,9 @@ export default function DemoPage() {
                         unoptimized
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-xl">🎙️</div>
+                      <div className="w-full h-full flex items-center justify-center text-xl">
+                        🎙️
+                      </div>
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -272,7 +330,8 @@ export default function DemoPage() {
                     🔍
                   </div>
                   <p className="text-slate-500 dark:text-slate-400 text-sm">
-                    {result?.message ?? "No reciter identified. Try holding your device closer to the audio source."}
+                    {result?.message ??
+                      "No reciter identified. Try holding your device closer to the audio source."}
                   </p>
                 </div>
               )}
@@ -293,7 +352,10 @@ export default function DemoPage() {
 
           <p className="text-slate-400 dark:text-slate-500 text-sm mt-6">
             {t("tipPrefix")}{" "}
-            <a href="#download" className="text-emerald-500 hover:text-emerald-600 font-medium">
+            <a
+              href="#download"
+              className="text-emerald-500 hover:text-emerald-600 font-medium"
+            >
               {t("tipLink")}
             </a>{" "}
             {t("tipSuffix")}
