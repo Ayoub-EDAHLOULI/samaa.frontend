@@ -14,6 +14,7 @@ import { Language } from "@/types/languages.types";
 import { reciterService } from "@/services/reciter.service";
 import { languageService } from "@/services/language.service";
 import { X, Upload, Loader2 } from "lucide-react";
+import fullImageUrl from "@/utils/fullImageUrl";
 
 // ---------------------------------------------------------------------------
 // Per-language placeholder text — add a new entry here when adding a language
@@ -141,7 +142,9 @@ export default function ReciterFormModal({ reciter, onSave, onClose }: Props) {
         const [langs, adminReciter]: [Language[], AdminReciter | null] =
           await Promise.all([
             languageService.getAll(),
-            isEdit ? reciterService.getById(reciter!.id) : Promise.resolve(null),
+            isEdit
+              ? reciterService.getById(reciter!.id)
+              : Promise.resolve(null),
           ]);
 
         setLanguages(langs);
@@ -248,7 +251,7 @@ export default function ReciterFormModal({ reciter, onSave, onClose }: Props) {
               >
                 {imagePreview ? (
                   <Image
-                    src={imagePreview}
+                    src={fullImageUrl(imagePreview)}
                     alt="Preview"
                     className="image-preview"
                     fill
@@ -354,7 +357,10 @@ export default function ReciterFormModal({ reciter, onSave, onClose }: Props) {
                       >
                         {lang.code.toUpperCase()}
                         {lang.isDefault && (
-                          <span className="tab-default-dot" title="Default language" />
+                          <span
+                            className="tab-default-dot"
+                            title="Default language"
+                          />
                         )}
                       </button>
                     ))}
