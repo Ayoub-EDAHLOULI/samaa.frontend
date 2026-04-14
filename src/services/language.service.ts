@@ -1,60 +1,57 @@
-import { apiClient } from "@/api/client";
-import { API_CONFIG } from "@/api/config";
+import apiClient from "@/lib/axios";
 import {
   Language,
   CreateLanguageDto,
   UpdateLanguageDto,
 } from "@/types/languages.types";
 
+function unwrap<T>(responseData: {
+  success: boolean;
+  data: T | null;
+  message?: string;
+}): T {
+  if (!responseData.success || responseData.data == null) {
+    throw new Error(responseData.message || "Request failed");
+  }
+  return responseData.data;
+}
+
 export const languageService = {
-  /**
-   * Get all languages
-   * Public route
-   */
-  async getAll(activeOnly: boolean = false): Promise<Language[]> {
-    const params = activeOnly ? "?activeOnly=true" : "";
-    return apiClient.get<Language[]>(
-      `${API_CONFIG.ENDPOINTS.LANGUAGES}${params}`,
-    );
+  // GET /languages?activeOnly=true  (public)
+  getAll: async (activeOnly = false): Promise<Language[]> => {
+    const response = await apiClient.get("/languages", {
+      params: activeOnly ? { activeOnly: "true" } : {},
+    });
+    return unwrap<Language[]>(response.data);
   },
 
-  /**
-   * Get default language
-   * Public route
-   */
-  async getDefault(): Promise<Language> {
-    return apiClient.get<Language>(`${API_CONFIG.ENDPOINTS.LANGUAGES}/default`);
+  // GET /languages/default  (public)
+  getDefault: async (): Promise<Language> => {
+    const response = await apiClient.get("/languages/default");
+    return unwrap<Language>(response.data);
   },
 
-  /**
-   * Get language by code
-   * Public route
-   */
-  async getByCode(code: string): Promise<Language> {
-    return apiClient.get<Language>(`${API_CONFIG.ENDPOINTS.LANGUAGES}/${code}`);
+  // GET /languages/:code  (public)
+  getByCode: async (code: string): Promise<Language> => {
+    const response = await apiClient.get(`/languages/${code}`);
+    return unwrap<Language>(response.data);
   },
 
-  /**
-   * Create a new language (Admin only)
-   */
-  async create(data: CreateLanguageDto): Promise<Language> {
-    return apiClient.post<Language>(API_CONFIG.ENDPOINTS.LANGUAGES, data);
+  // POST /languages  (admin)
+  create: async (data: CreateLanguageDto): Promise<Language> => {
+    const response = await apiClient.post("/languages", data);
+    return unwrap<Language>(response.data);
   },
 
-  /**
-   * Update a language (Admin only)
-   */
-  async update(code: string, data: UpdateLanguageDto): Promise<Language> {
-    return apiClient.put<Language>(
-      `${API_CONFIG.ENDPOINTS.LANGUAGES}/${code}`,
-      data,
-    );
+  // PUT /languages/:code  (admin)
+  update: async (code: string, data: UpdateLanguageDto): Promise<Language> => {
+    const response = await apiClient.put(`/languages/${code}`, data);
+    return unwrap<Language>(response.data);
   },
 
-  /**
-   * Delete a language (Admin only)
-   */
-  async delete(code: string): Promise<void> {
-    return apiClient.delete(`${API_CONFIG.ENDPOINTS.LANGUAGES}/${code}`);
+  // DELETE /languages/:code  (admin)
+  delete: async (code: string): Promise<void> => {
+    const response = await apiClient.delete(`/languages/${code}`);
+    unwrap<null>(response.data);
   },
 };

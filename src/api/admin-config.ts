@@ -1,6 +1,6 @@
 // api/admin-config.ts
 
-import { type LucideIcon, LayoutDashboard, Users, BookOpen, Mic2 } from "lucide-react";
+import { type LucideIcon, LayoutDashboard, Users, BookOpen, Mic2, Globe } from "lucide-react";
 
 // Define the structure for a sidebar item
 export interface SidebarItem {
@@ -37,6 +37,12 @@ export const ADMIN_NAV_LINKS: SidebarItem[] = [
     name: "Reciters",
     href: "/admin/reciters",
     icon: Mic2,
+  },
+  {
+    id: "languages",
+    name: "Languages",
+    href: "/admin/languages",
+    icon: Globe,
   },
 ];
 
