@@ -6,5 +6,6 @@ export const API_CONFIG = {
     USERS: "/users",
     RECITERS: "/reciters",
     SURAH: "/surahs",
+    LANGUAGES: "/languages",
   },
 };
