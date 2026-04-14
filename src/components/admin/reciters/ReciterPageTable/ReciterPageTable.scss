@@ -162,6 +162,14 @@ $danger-color: #f44336;
   .muted {
     color: $muted-text;
   }
+
+  .country-code {
+    font-family: monospace;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: $primary-color;
+    letter-spacing: 0.5px;
+  }
 }
 
 .stat-cell {
