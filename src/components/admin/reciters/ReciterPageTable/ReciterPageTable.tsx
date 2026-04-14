@@ -5,9 +5,10 @@ import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { reciterService } from "@/services/reciter.service";
 import { Reciter, PaginatedReciters } from "@/types/reciters.types";
-import { Search, Plus, Pencil, Trash2, Mic } from "lucide-react";
+import { Search, Plus, Pencil, Trash2, Mic, Eye } from "lucide-react";
 import Swal from "sweetalert2";
 import ReciterFormModal from "../ReciterFormModal/ReciterFormModal";
+import ReciterViewModal from "../ReciterViewModal/ReciterViewModal";
 import fullImageUrl from "@/utils/fullImageUrl";
 
 function ReciterPageTable() {
@@ -19,8 +20,9 @@ function ReciterPageTable() {
   const [totalReciters, setTotalReciters] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [editingReciter, setEditingReciter] = useState<Reciter | null>(null);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [viewModalOpen, setViewModalOpen] = useState(false);
+  const [activeReciter, setActiveReciter] = useState<Reciter | null>(null);
 
   const fetchReciters = useCallback(
     async (pageNumber: number, search?: string) => {
@@ -57,18 +59,24 @@ function ReciterPageTable() {
   }, [searchTerm, fetchReciters]);
 
   const openCreate = () => {
-    setEditingReciter(null);
-    setModalOpen(true);
+    setActiveReciter(null);
+    setEditModalOpen(true);
   };
 
   const openEdit = (reciter: Reciter) => {
-    setEditingReciter(reciter);
-    setModalOpen(true);
+    setActiveReciter(reciter);
+    setViewModalOpen(false);
+    setEditModalOpen(true);
   };
 
-  const handleModalSave = () => {
-    const wasEdit = editingReciter !== null;
-    setModalOpen(false);
+  const openView = (reciter: Reciter) => {
+    setActiveReciter(reciter);
+    setViewModalOpen(true);
+  };
+
+  const handleEditSave = () => {
+    const wasEdit = activeReciter !== null;
+    setEditModalOpen(false);
     fetchReciters(page, searchTerm || undefined);
     Swal.fire({
       toast: true,
@@ -173,7 +181,11 @@ function ReciterPageTable() {
                   </tr>
                 ) : (
                   reciters.map((reciter) => (
-                    <tr key={reciter.id}>
+                    <tr
+                      key={reciter.id}
+                      className="clickable-row"
+                      onClick={() => openView(reciter)}
+                    >
                       <td className="id-cell" title={reciter.id}>
                         #{shortId(reciter.id)}
                       </td>
@@ -229,8 +241,17 @@ function ReciterPageTable() {
                         {new Date(reciter.createdAt).toLocaleDateString()}
                       </td>
 
-                      <td>
+                      <td
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <div className="actions">
+                          <button
+                            className="btn-view"
+                            onClick={() => openView(reciter)}
+                            title="View reciter"
+                          >
+                            <Eye size={15} />
+                          </button>
                           <button
                             className="btn-edit"
                             onClick={() => openEdit(reciter)}
@@ -276,11 +297,19 @@ function ReciterPageTable() {
         )}
       </div>
 
-      {modalOpen && (
+      {viewModalOpen && activeReciter && (
+        <ReciterViewModal
+          reciter={activeReciter}
+          onClose={() => setViewModalOpen(false)}
+          onEdit={(r) => openEdit(r)}
+        />
+      )}
+
+      {editModalOpen && (
         <ReciterFormModal
-          reciter={editingReciter}
-          onSave={handleModalSave}
-          onClose={() => setModalOpen(false)}
+          reciter={activeReciter}
+          onSave={handleEditSave}
+          onClose={() => setEditModalOpen(false)}
         />
       )}
     </>

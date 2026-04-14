@@ -7,6 +7,7 @@ $muted-text: #a0a0a0;
 $border-color: #3b3b3b;
 $primary-color: #4a90e2;
 $danger-color: #f44336;
+$success-color: #4caf50;
 
 .admin-table-container {
   background-color: $card-bg;
@@ -135,6 +136,10 @@ $danger-color: #f44336;
         background-color: #333;
       }
 
+      &.clickable-row {
+        cursor: pointer;
+      }
+
       td {
         padding: 11px 24px;
         vertical-align: middle;
@@ -228,6 +233,23 @@ $danger-color: #f44336;
   display: flex;
   align-items: center;
   gap: 6px;
+
+  .btn-view {
+    background: none;
+    border: none;
+    color: $muted-text;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s;
+
+    &:hover {
+      color: $success-color;
+      background-color: rgba($success-color, 0.1);
+    }
+  }
 
   .btn-edit {
     background: none;
