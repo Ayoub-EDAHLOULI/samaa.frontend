@@ -13,6 +13,7 @@ import { authService } from "@/services/auth.service";
 import { User, LoginDto, RegisterDto } from "@/types/auth.types";
 import { TOKEN_REFRESHED_EVENT } from "@/api/fetchWithAuth";
 import { getLocaleFromPathname } from "@/api/utils";
+import Cookies from "js-cookie";
 
 interface AuthContextType {
   user: User | null;
@@ -93,6 +94,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // Cookie invalid or missing. User is Guest.
       setAccessToken(null);
       setUser(null);
+      Cookies.remove("accessToken");
     } finally {
       setIsLoading(false);
     }

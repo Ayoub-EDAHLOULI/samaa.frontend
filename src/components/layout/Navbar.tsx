@@ -274,7 +274,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const t = useTranslations("nav");
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, isLoading } = useAuth();
 
   const currentLocale = pathname.match(/^\/(en|fr|es|ary)/)?.[1] ?? "fr";
   const dashboardHref = `/${currentLocale}${user?.role === "ADMIN" ? "/admin" : "/client"}`;
@@ -363,7 +363,11 @@ export default function Navbar() {
             <LangSwitcher />
             <ThemeToggle />
             <div className="w-px h-5 bg-slate-200 dark:bg-white/10 mx-1" />
-            {isAuthenticated ? (
+
+            {isLoading ? (
+              // Show a pulsing skeleton while checking auth state
+              <div className="w-20 h-9 bg-slate-200 dark:bg-slate-800/50 rounded-lg animate-pulse" />
+            ) : isAuthenticated ? (
               <Link
                 href={dashboardHref}
                 className="px-3.5 py-2 rounded-lg text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/25 transition-all duration-200"
@@ -372,7 +376,7 @@ export default function Navbar() {
               </Link>
             ) : (
               <Link
-                href="/login"
+                href={`/${currentLocale}/login`}
                 className="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/8 transition-all duration-200"
               >
                 {t("signIn")}
@@ -444,7 +448,9 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="mt-3 pt-3 border-t border-slate-100 dark:border-white/8 flex flex-col gap-2">
-                {isAuthenticated ? (
+                {isLoading ? (
+                  <div className="w-full h-10 bg-slate-200 dark:bg-slate-800/50 rounded-lg animate-pulse" />
+                ) : isAuthenticated ? (
                   <Link
                     href={dashboardHref}
                     onClick={() => setMobileOpen(false)}
@@ -454,7 +460,7 @@ export default function Navbar() {
                   </Link>
                 ) : (
                   <Link
-                    href="/login"
+                    href={`/${currentLocale}/login`}
                     onClick={() => setMobileOpen(false)}
                     className="px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400"
                   >

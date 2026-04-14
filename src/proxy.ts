@@ -42,20 +42,29 @@ export function proxy(request: NextRequest) {
       const payloadJson = Buffer.from(payloadBase64, "base64").toString("utf8");
       const decoded = JSON.parse(payloadJson);
 
+      // NEW: Check if the token is actually expired!
+      if (decoded.exp && Date.now() >= decoded.exp * 1000) {
+        throw new Error("Token is expired");
+      }
+
       // Backend Prisma enum values are uppercase: "ADMIN", "USER"
       const roleClaim: string = (
         decoded.role ||
-        decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] ||
+        decoded[
+          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+        ] ||
         ""
       ).toUpperCase();
+
       const isAdmin = roleClaim === "ADMIN";
-      const isClient = roleClaim === "CLIENT";
+      // Ensure we check for "USER" since that is what Prisma uses
+      const isClient = roleClaim === "USER" || roleClaim === "CLIENT";
       const isAgent = roleClaim === "AGENT";
 
       const locale =
         pathname.match(/^\/(en|fr|es|ary)/)?.[0] || `/${routing.defaultLocale}`;
 
-      // Strict Route Enforcement — wrong role gets redirected to login with cookie cleared
+      // Strict Route Enforcement
       if (pathWithoutLocale.startsWith("/admin") && !isAdmin) {
         const res = NextResponse.redirect(
           new URL(`${locale}/login`, request.url),
@@ -78,6 +87,7 @@ export function proxy(request: NextRequest) {
         return res;
       }
 
+      // If user is trying to hit /login but they are validly authenticated
       if (isAuthRoute) {
         if (isAdmin)
           return NextResponse.redirect(new URL(`${locale}/admin`, request.url));
@@ -88,7 +98,7 @@ export function proxy(request: NextRequest) {
         if (isAgent)
           return NextResponse.redirect(new URL(`${locale}/agent`, request.url));
 
-        // Invalid role fallback — clear the bad token and show login
+        // Invalid role fallback
         const res = NextResponse.redirect(
           new URL(`${locale}/login`, request.url),
         );
@@ -97,6 +107,7 @@ export function proxy(request: NextRequest) {
         return res;
       }
     } catch {
+      // If token parsing fails OR token is expired, clean up and go to login
       const locale =
         pathname.match(/^\/(en|fr|es|ary)/)?.[0] || `/${routing.defaultLocale}`;
       const res = NextResponse.redirect(
