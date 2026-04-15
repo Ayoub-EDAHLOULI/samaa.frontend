@@ -57,6 +57,12 @@ export const ADMIN_NAV_LINKS: SidebarItem[] = [
     href: "/admin/blog-categories",
     icon: Globe,
   },
+  {
+    id: "blog-posts",
+    name: "Blog Posts",
+    href: "/admin/blog-posts",
+    icon: Globe,
+  },
 ];
 
 export const SLUG_TO_TITLE_MAP = ADMIN_NAV_LINKS.reduce(
