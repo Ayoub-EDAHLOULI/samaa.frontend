@@ -8,8 +8,8 @@ import type { Metadata } from "next";
 import "@/styles/admin/admin-globals.scss";
 
 export const metadata: Metadata = {
-  title: "Admin Dashboard | SHEAIMS",
-  description: "E-commerce Backend Management",
+  title: "Admin Dashboard | Samaa  Backend",
+  description: "",
 };
 
 export default function RootLayout({
