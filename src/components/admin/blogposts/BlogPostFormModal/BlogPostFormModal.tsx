@@ -17,6 +17,7 @@ import { blogCategoryService } from "@/services/blogcategory.service";
 import { languageService } from "@/services/language.service";
 import { X, Upload, Loader2 } from "lucide-react";
 import fullImageUrl from "@/utils/fullImageUrl";
+import RichTextEditor from "@/components/ui/RichTextEditor/RichTextEditor";
 
 // ---------------------------------------------------------------------------
 // Per-language placeholder text
@@ -418,13 +419,17 @@ export default function BlogPostFormModal({ post, onSave, onClose }: Props) {
 
                         <div className="form-group full-width">
                           <label>Content</label>
-                          <textarea
-                            {...register(
-                              `translations.${lang.code}.content` as never,
+                          <Controller
+                            name={`translations.${lang.code}.content` as never}
+                            control={control}
+                            render={({ field }) => (
+                              <RichTextEditor
+                                value={(field.value as string) || ""}
+                                onChange={field.onChange}
+                                placeholder={ph(lang.code).content}
+                                className={lang.code === "ary" ? "rtl" : ""}
+                              />
                             )}
-                            rows={12}
-                            placeholder={ph(lang.code).content}
-                            dir={lang.code === "ary" ? "rtl" : "ltr"}
                           />
                         </div>
 

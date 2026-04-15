@@ -7,6 +7,8 @@ import {
   BookOpen,
   Mic2,
   Globe,
+  FolderOpen,
+  FileText,
 } from "lucide-react";
 
 // Define the structure for a sidebar item
@@ -55,13 +57,13 @@ export const ADMIN_NAV_LINKS: SidebarItem[] = [
     id: "blog-categories",
     name: "Blog Categories",
     href: "/admin/blog-categories",
-    icon: Globe,
+    icon: FolderOpen,
   },
   {
     id: "blog-posts",
     name: "Blog Posts",
     href: "/admin/blog-posts",
-    icon: Globe,
+    icon: FileText,
   },
 ];
 
