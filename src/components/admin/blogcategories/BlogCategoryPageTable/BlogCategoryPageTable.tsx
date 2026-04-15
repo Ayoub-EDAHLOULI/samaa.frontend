@@ -7,9 +7,10 @@ import {
   BlogCategory,
   PaginatedBlogCategoriesResponse,
 } from "@/types/blog-category";
-import { Search, Plus, Pencil, Trash2 } from "lucide-react";
+import { Search, Plus, Pencil, Trash2, Eye } from "lucide-react";
 import Swal from "sweetalert2";
 import BlogCategoryFormModal from "../BlogCategoryFormModal/BlogCategoryFormModal";
+import BlogCategoryViewModal from "../BlogCategoryViewModal/BlogCategoryViewModal";
 
 function BlogCategoryPageTable() {
   const [categories, setCategories] = useState<BlogCategory[]>([]);
@@ -20,6 +21,7 @@ function BlogCategoryPageTable() {
   const [totalItems, setTotalItems] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
 
+  const [viewModalOpen, setViewModalOpen] = useState(false);
   const [formModalOpen, setFormModalOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<BlogCategory | null>(
     null,
@@ -61,6 +63,11 @@ function BlogCategoryPageTable() {
     return () => clearTimeout(timer);
   }, [searchTerm, fetchCategories]);
 
+  const openView = (category: BlogCategory) => {
+    setActiveCategory(category);
+    setViewModalOpen(true);
+  };
+
   const openCreate = () => {
     setActiveCategory(null);
     setFormModalOpen(true);
@@ -68,6 +75,7 @@ function BlogCategoryPageTable() {
 
   const openEdit = (category: BlogCategory) => {
     setActiveCategory(category);
+    setViewModalOpen(false);
     setFormModalOpen(true);
   };
 
@@ -184,7 +192,11 @@ function BlogCategoryPageTable() {
                   </tr>
                 ) : (
                   categories.map((cat) => (
-                    <tr key={cat.id}>
+                    <tr
+                      key={cat.id}
+                      className="clickable-row"
+                      onClick={() => openView(cat)}
+                    >
                       <td>{cat.title}</td>
                       <td className="handle-cell">/blog/{cat.handle}</td>
                       <td>{truncate(cat.description || "", 60)}</td>
@@ -202,6 +214,13 @@ function BlogCategoryPageTable() {
                       </td>
                       <td onClick={(e) => e.stopPropagation()}>
                         <div className="actions">
+                          <button
+                            className="btn-view"
+                            onClick={() => openView(cat)}
+                            title="View category"
+                          >
+                            <Eye size={15} />
+                          </button>
                           <button
                             className="btn-edit"
                             onClick={() => openEdit(cat)}
@@ -246,6 +265,17 @@ function BlogCategoryPageTable() {
           </>
         )}
       </div>
+
+      {viewModalOpen && activeCategory && (
+        <BlogCategoryViewModal
+          category={activeCategory}
+          onClose={() => {
+            setViewModalOpen(false);
+            setActiveCategory(null);
+          }}
+          onEdit={(cat) => openEdit(cat)}
+        />
+      )}
 
       {formModalOpen && (
         <BlogCategoryFormModal

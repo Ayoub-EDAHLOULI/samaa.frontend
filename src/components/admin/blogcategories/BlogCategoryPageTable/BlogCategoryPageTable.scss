@@ -142,9 +142,12 @@ $primary-color: #4a90e2; // Blue for primary actions (if needed)
 
   tbody {
     tr {
-      // Subtle hover effect
       &:hover {
         background-color: #333333;
+      }
+
+      &.clickable-row {
+        cursor: pointer;
       }
 
       td {
@@ -249,6 +252,11 @@ $primary-color: #4a90e2; // Blue for primary actions (if needed)
     transition:
       color 0.2s,
       border-color 0.2s;
+  }
+
+  .btn-view:hover {
+    color: $success-color;
+    border-color: $success-color;
   }
 
   .btn-edit:hover {
