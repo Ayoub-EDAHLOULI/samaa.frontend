@@ -28,7 +28,7 @@ $danger-color: #f44336;
   border-radius: 10px;
   width: 100%;
   max-width: 580px;
-  max-height: 90vh;
+  max-height: calc(100vh - 40px);
   display: flex;
   flex-direction: column;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
@@ -39,6 +39,7 @@ $danger-color: #f44336;
     flex-direction: column;
     flex: 1;
     min-height: 0;
+    height: 100%;
     overflow: hidden;
   }
 }
@@ -50,6 +51,7 @@ $danger-color: #f44336;
   justify-content: space-between;
   padding: 18px 24px;
   border-bottom: 1px solid $border-color;
+  flex-shrink: 0;
 
   h2 {
     font-size: 1.05rem;

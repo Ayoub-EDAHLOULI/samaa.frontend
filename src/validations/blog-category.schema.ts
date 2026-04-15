@@ -3,10 +3,26 @@ import { z } from "zod";
 const handleRegex = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 export const blogCategoryTranslationSchema = z.object({
-  title: z.string().max(200).optional().or(z.literal("")),
-  description: z.string().max(1000).optional().or(z.literal("")),
-  metaTitle: z.string().max(200).optional().or(z.literal("")),
-  metaDescription: z.string().max(500).optional().or(z.literal("")),
+  title: z
+    .string()
+    .max(200, "Title must not exceed 200 characters")
+    .optional()
+    .or(z.literal("")),
+  description: z
+    .string()
+    .max(1000, "Description must not exceed 1000 characters")
+    .optional()
+    .or(z.literal("")),
+  metaTitle: z
+    .string()
+    .max(100, "Meta title must not exceed 100 characters")
+    .optional()
+    .or(z.literal("")),
+  metaDescription: z
+    .string()
+    .max(255, "Meta description must not exceed 255 characters")
+    .optional()
+    .or(z.literal("")),
 });
 
 export type BlogCategoryTranslationFormValues = z.infer<
@@ -19,7 +35,10 @@ export const blogCategoryFormSchema = z
       .string()
       .min(2, "Handle must be at least 2 characters")
       .max(200, "Handle must be at most 200 characters")
-      .regex(handleRegex, "Handle must be lowercase letters, numbers, and hyphens only"),
+      .regex(
+        handleRegex,
+        "Handle must be lowercase letters, numbers, and hyphens only",
+      ),
     isActive: z.boolean(),
     translations: z.record(z.string(), blogCategoryTranslationSchema),
   })
@@ -29,7 +48,8 @@ export const blogCategoryFormSchema = z
         (t) => t?.title && t.title.trim().length >= 2,
       ),
     {
-      message: "At least one translation must include a title (min 2 characters)",
+      message:
+        "At least one translation must include a title (min 2 characters)",
       path: ["translations"],
     },
   );
