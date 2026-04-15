@@ -7,5 +7,7 @@ export const API_CONFIG = {
     RECITERS: "/reciters",
     SURAH: "/surahs",
     LANGUAGES: "/languages",
+    BLOGCATEGORIES: "/blog-categories",
+    BLOGPOSTS: "/blog-posts",
   },
 };
