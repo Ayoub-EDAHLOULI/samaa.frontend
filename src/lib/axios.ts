@@ -1,5 +1,6 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
 import Cookies from "js-cookie";
+import { TOKEN_REFRESHED_EVENT } from "@/api/fetchWithAuth";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -49,8 +50,13 @@ apiClient.interceptors.response.use(
       // Extract the backend message so callers get "Invalid email or password"
       // instead of the generic axios "Request failed with status code 401".
       const url: string = originalRequest.url ?? "";
-      if (url.includes("/auth/login") || url.includes("/auth/register") || url.includes("/auth/refresh-token")) {
-        const backendMessage: string | undefined = error.response?.data?.message;
+      if (
+        url.includes("/auth/login") ||
+        url.includes("/auth/register") ||
+        url.includes("/auth/refresh-token")
+      ) {
+        const backendMessage: string | undefined =
+          error.response?.data?.message;
         return Promise.reject(new Error(backendMessage ?? error.message));
       }
 
@@ -81,13 +87,25 @@ apiClient.interceptors.response.use(
           Cookies.set("accessToken", newAccessToken, { expires: 7 });
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
           processQueue(null, newAccessToken);
+          // Keep AuthContext in sync so in-memory accessToken state stays fresh
+          if (typeof window !== "undefined") {
+            window.dispatchEvent(
+              new CustomEvent(TOKEN_REFRESHED_EVENT, {
+                detail: { accessToken: newAccessToken },
+              }),
+            );
+          }
           return apiClient(originalRequest);
         } else {
           throw new Error("Refresh failed");
         }
       } catch (refreshError) {
         processQueue(refreshError, null);
-        forceLogout();
+        // Dispatch the auth:logout event so AuthContext handles the redirect
+        // with the correct locale, rather than doing a hard redirect here.
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new Event("auth:logout"));
+        }
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
@@ -97,15 +115,5 @@ apiClient.interceptors.response.use(
     return Promise.reject(error);
   },
 );
-
-const forceLogout = () => {
-  Cookies.remove("accessToken");
-  if (typeof window !== "undefined") {
-    const path = window.location.pathname;
-    if (path.includes("/admin") || path.includes("/client") || path.includes("/agent")) {
-      window.location.href = "/login";
-    }
-  }
-};
 
 export default apiClient;

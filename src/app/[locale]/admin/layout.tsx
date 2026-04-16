@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 import "@/styles/admin/admin-globals.scss";
 
 export const metadata: Metadata = {
-  title: "Admin Dashboard | Samaa  Backend",
+  title: "Admin Dashboard | Samaa Backend",
   description: "",
 };
 
