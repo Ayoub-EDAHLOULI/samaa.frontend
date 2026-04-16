@@ -148,6 +148,13 @@
     "readMore": "اقرأ المزيد",
     "noArticles": "لا توجد مقالات في هذه الفئة بعد."
   },
+  "articlePage": {
+    "backToBlog": "العودة إلى المدونة",
+    "publishedOn": "نُشر في",
+    "minRead": "دقيقة قراءة",
+    "notFound": "المقال غير موجود.",
+    "notFoundSub": "المقال الذي تبحث عنه غير موجود أو تم حذفه."
+  },
   "careersPage": {
     "label": "وظائف",
     "title": "ابنِ تقنية لـ",

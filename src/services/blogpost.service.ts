@@ -1,5 +1,5 @@
 import apiClient from "@/lib/axios";
-import { AdminBlogPost, PaginatedBlogPostsResponse } from "@/types/blog-post";
+import { AdminBlogPost, PaginatedBlogPostsResponse, PublicBlogPostDetail } from "@/types/blog-post";
 import { BlogPostFormValues } from "@/validations/blog-post.schema";
 
 function unwrap<T>(responseData: {
@@ -90,6 +90,12 @@ export const blogPostService = {
       headers: { "Content-Type": "multipart/form-data" },
     });
     return unwrap<AdminBlogPost>(res.data);
+  },
+
+  /** GET /blog-posts/handle/:handle — public article detail with full content */
+  getByHandle: async (handle: string, lang = "en"): Promise<PublicBlogPostDetail> => {
+    const res = await apiClient.get(`/blog-posts/handle/${handle}`, { params: { lang } });
+    return unwrap<PublicBlogPostDetail>(res.data);
   },
 
   /** DELETE /blog-posts/:id */

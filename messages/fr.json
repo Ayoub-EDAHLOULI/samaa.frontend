@@ -148,6 +148,13 @@
     "readMore": "Lire la suite",
     "noArticles": "Aucun article dans cette catégorie pour l'instant."
   },
+  "articlePage": {
+    "backToBlog": "Retour au Blog",
+    "publishedOn": "Publié le",
+    "minRead": "min de lecture",
+    "notFound": "Article introuvable.",
+    "notFoundSub": "L'article que vous cherchez n'existe pas ou a été supprimé."
+  },
   "careersPage": {
     "label": "Carrières",
     "title": "Construisez la technologie pour",

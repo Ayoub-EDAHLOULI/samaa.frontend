@@ -148,6 +148,13 @@
     "readMore": "Read more",
     "noArticles": "No articles in this category yet."
   },
+  "articlePage": {
+    "backToBlog": "Back to Blog",
+    "publishedOn": "Published",
+    "minRead": "min read",
+    "notFound": "Article not found.",
+    "notFoundSub": "The article you're looking for doesn't exist or has been removed."
+  },
   "careersPage": {
     "label": "Careers",
     "title": "Build technology for",

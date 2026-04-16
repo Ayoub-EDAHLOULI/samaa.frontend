@@ -95,3 +95,13 @@ export interface PaginatedBlogPostsResponse {
     totalPages: number;
   };
 }
+
+// --------------------
+// Public article detail — single post by handle, includes full content
+// author is the full object { id, displayName } instead of the flattened string
+// --------------------
+
+export interface PublicBlogPostDetail extends Omit<BlogPost, "author"> {
+  content: string;
+  author: { id: string; displayName: string };
+}
