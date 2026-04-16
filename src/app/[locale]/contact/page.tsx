@@ -1,32 +1,21 @@
 "use client";
 
-import { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { contactSchema, ContactFormValues } from "@/validations/contact.schema";
+import { contactService } from "@/services/contact.service";
+import { CONTACT_SUBJECTS } from "@/types/contact";
+import { useState } from "react";
 
-const TOPIC_KEYS = [
-  "general",
-  "support",
-  "reciter",
-  "partnership",
-  "press",
-  "careers",
-] as const;
-
+/* ─── Static contact cards ───────────────────────────────────────────── */
 const contactCards = [
   {
     key: "email",
     icon: (
-      <svg
-        className="w-5 h-5"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.8}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
         <polyline points="22,6 12,13 2,6" />
       </svg>
@@ -37,15 +26,7 @@ const contactCards = [
   {
     key: "support",
     icon: (
-      <svg
-        className="w-5 h-5"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.8}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
       </svg>
     ),
@@ -64,28 +45,52 @@ const contactCards = [
   },
 ];
 
+/* ─── Field wrapper ──────────────────────────────────────────────────── */
+function Field({
+  label,
+  error,
+  children,
+}: {
+  label: string;
+  error?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <label className="block text-slate-700 dark:text-slate-300 text-sm font-medium mb-2">
+        {label}
+      </label>
+      {children}
+      {error && (
+        <p className="mt-1.5 text-xs text-red-500 dark:text-red-400">{error}</p>
+      )}
+    </div>
+  );
+}
+
+/* ─── Page ────────────────────────────────────────────────────────────── */
 export default function ContactPage() {
   const t = useTranslations("contactPage");
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    topic: "general",
-    message: "",
+  const [submitted, setSubmitted] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactFormValues>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: { subject: "general" },
   });
-  const [sent, setSent] = useState(false);
 
-  const topics = TOPIC_KEYS.map((key) => ({
-    value: key,
-    label: t(`topics.${key}`),
-  }));
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSent(true);
+  const onSubmit = async (data: ContactFormValues) => {
+    await contactService.submit(data);
+    setSubmitted(true);
   };
 
   const inputBase =
     "w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0A1628] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/25 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-400 dark:focus:border-emerald-600 transition-all duration-200";
+
+  const errorBorder = "border-red-300 dark:border-red-700 focus:ring-red-400/30 focus:border-red-400 dark:focus:border-red-600";
 
   return (
     <>
@@ -108,18 +113,10 @@ export default function ContactPage() {
           <div className="grid lg:grid-cols-5 gap-12">
             {/* Left — form */}
             <div className="lg:col-span-3">
-              {sent ? (
+              {submitted ? (
                 <div className="rounded-2xl border border-emerald-100 dark:border-emerald-800/30 bg-emerald-50 dark:bg-emerald-900/10 p-10 text-center">
                   <div className="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mx-auto mb-4">
-                    <svg
-                      className="w-6 h-6 text-emerald-500"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={2.5}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
+                    <svg className="w-6 h-6 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
                   </div>
@@ -131,80 +128,63 @@ export default function ContactPage() {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block text-slate-700 dark:text-slate-300 text-sm font-medium mb-2">
-                        {t("form.nameLabel")}
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        placeholder={t("form.namePlaceholder")}
-                        value={form.name}
-                        onChange={(e) =>
-                          setForm({ ...form, name: e.target.value })
-                        }
-                        className={inputBase}
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-slate-700 dark:text-slate-300 text-sm font-medium mb-2">
-                        {t("form.emailLabel")}
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        placeholder="ahmad@example.com"
-                        value={form.email}
-                        onChange={(e) =>
-                          setForm({ ...form, email: e.target.value })
-                        }
-                        className={inputBase}
-                      />
-                    </div>
-                  </div>
+                <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
+                  {/* Name */}
+                  <Field label={t("form.nameLabel")} error={errors.name?.message}>
+                    <input
+                      type="text"
+                      placeholder={t("form.namePlaceholder")}
+                      {...register("name")}
+                      className={`${inputBase} ${errors.name ? errorBorder : ""}`}
+                    />
+                  </Field>
 
-                  <div>
-                    <label className="block text-slate-700 dark:text-slate-300 text-sm font-medium mb-2">
-                      {t("form.topicLabel")}
-                    </label>
+                  {/* Email */}
+                  <Field label={t("form.emailLabel")} error={errors.email?.message}>
+                    <input
+                      type="email"
+                      placeholder="ahmad@example.com"
+                      {...register("email")}
+                      className={`${inputBase} ${errors.email ? errorBorder : ""}`}
+                    />
+                  </Field>
+
+                  {/* Subject */}
+                  <Field label={t("form.topicLabel")} error={errors.subject?.message}>
                     <select
-                      value={form.topic}
-                      onChange={(e) =>
-                        setForm({ ...form, topic: e.target.value })
-                      }
-                      className={inputBase}
+                      {...register("subject")}
+                      className={`${inputBase} ${errors.subject ? errorBorder : ""}`}
                     >
-                      {topics.map((tp) => (
-                        <option key={tp.value} value={tp.value}>
-                          {tp.label}
+                      {CONTACT_SUBJECTS.map((key) => (
+                        <option key={key} value={key}>
+                          {t(`topics.${key}`)}
                         </option>
                       ))}
                     </select>
-                  </div>
+                  </Field>
 
-                  <div>
-                    <label className="block text-slate-700 dark:text-slate-300 text-sm font-medium mb-2">
-                      {t("form.messageLabel")}
-                    </label>
+                  {/* Message */}
+                  <Field label={t("form.messageLabel")} error={errors.message?.message}>
                     <textarea
-                      required
                       rows={6}
                       placeholder={t("form.messagePlaceholder")}
-                      value={form.message}
-                      onChange={(e) =>
-                        setForm({ ...form, message: e.target.value })
-                      }
-                      className={`${inputBase} resize-none`}
+                      {...register("message")}
+                      className={`${inputBase} resize-none ${errors.message ? errorBorder : ""}`}
                     />
-                  </div>
+                  </Field>
 
                   <button
                     type="submit"
-                    className="w-full sm:w-auto px-7 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm transition-colors duration-200 shadow-sm shadow-emerald-200 dark:shadow-emerald-900/30"
+                    disabled={isSubmitting}
+                    className="w-full sm:w-auto px-7 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold text-sm transition-colors duration-200 shadow-sm shadow-emerald-200 dark:shadow-emerald-900/30 flex items-center gap-2"
                   >
-                    {t("form.submit")}
+                    {isSubmitting && (
+                      <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                      </svg>
+                    )}
+                    {isSubmitting ? "Sending…" : t("form.submit")}
                   </button>
                 </form>
               )}
@@ -239,19 +219,11 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Response time note */}
+              {/* Response time */}
               <div className="rounded-2xl border border-slate-100 dark:border-white/8 bg-slate-50 dark:bg-[#0D1525] p-5">
                 <div className="flex gap-3">
                   <div className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-900/25 flex items-center justify-center text-emerald-500 shrink-0 mt-0.5">
-                    <svg
-                      className="w-4 h-4"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
                       <circle cx="12" cy="12" r="10" />
                       <path d="M12 6v6l4 2" />
                     </svg>
